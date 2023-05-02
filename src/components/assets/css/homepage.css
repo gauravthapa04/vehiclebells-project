@@ -68,6 +68,7 @@ ul.feature_list li:nth-child(2) {
     max-height: 245px;
     margin: 0 auto;
     max-width: 90%;
+    object-fit: contain;
 }
 .h_solution_block {
     padding: 40px 0;

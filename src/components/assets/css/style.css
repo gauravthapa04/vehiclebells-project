@@ -69,6 +69,7 @@ a {
 }
 img {
     max-width: 100%;
+    height: auto;
 }
 ol,
 ul {
@@ -582,6 +583,9 @@ ul.social_list li a {
     align-items: center;
     justify-content: center;
     transition: all ease 0.4s;
+}
+.footer_block ul.social_list li a svg {
+    margin: 0;
 }
 .footer_block li a:hover {color: #ec3c3f;}
 ul.social_list li {
