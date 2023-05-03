@@ -4,6 +4,7 @@ import logo from '../assets/images/logo.png'
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Image from 'next/image';
+import Link from 'next/link';
 //import '../assets/css/style.css'
 class Header extends React.Component {
     constructor(props) {
@@ -15,7 +16,9 @@ class Header extends React.Component {
     componentDidMount(){
         setTimeout(() => this.setState({loading: false}), 1000);
     }
-
+    ToggleClass = () => {
+        document.body.classList.toggle('menu_expanded');
+      }; 
     render() {
       return (
         <>
@@ -25,48 +28,53 @@ class Header extends React.Component {
         <header className="main_header">
         <Container>
             <Nav className="navbar navbar-expand-xl">
-                <a className="navbar-brand">
+                <Link href='/' className="navbar-brand">
                     <Image
                         src={logo}
                         className="App-logo"
                         alt="logo"
                     />                    
-                </a>
+                </Link>
                 <div className="header_right d-flex ms-auto">
                 <div className="menu_wrap">
                 <ul className="navbar-nav">
             <li>
-                <Nav.Link>Home</Nav.Link>
+                <Link href='/'>Home</Link>
             </li>
             <li>
             <NavDropdown title="Solutions">
-            <NavDropdown.Item>Solutions one</NavDropdown.Item>
-            <NavDropdown.Item>Solutions two</NavDropdown.Item>
-            <NavDropdown.Item>Solutions three</NavDropdown.Item>
-            <NavDropdown.Item>Solutions four</NavDropdown.Item>
+            <NavDropdown.Item><Link href='/'>Solutions one</Link></NavDropdown.Item>
+            <NavDropdown.Item><Link href='/'>Solutions two</Link></NavDropdown.Item>
+            <NavDropdown.Item><Link href='/'>Solutions three</Link></NavDropdown.Item>
             </NavDropdown>
             </li>
             <li>
             <NavDropdown title="Product">
-            <NavDropdown.Item>Product one</NavDropdown.Item>
-            <NavDropdown.Item>Product two</NavDropdown.Item>
-            <NavDropdown.Item>Product three</NavDropdown.Item>
-            <NavDropdown.Item>Product four</NavDropdown.Item>
+            <NavDropdown.Item><Link href='/'>Product one</Link></NavDropdown.Item>
+            <NavDropdown.Item><Link href='/'>Product two</Link></NavDropdown.Item>
+            <NavDropdown.Item><Link href='/'>Product three</Link></NavDropdown.Item>
             </NavDropdown>
             </li>
             <li>
-                <Nav.Link>Pricing</Nav.Link>
+            <Link href='/pricing'>Pricing</Link>
             </li>
             <li>
-                <Nav.Link>Resources</Nav.Link>  
+            <Link href='/resources'>Resources</Link>  
             </li>
             <li> 
-                <Nav.Link>Login</Nav.Link>
+            <Link href='/login'>Login</Link>
             </li> 
             <li>
-                <Nav.Link className="register_btn btn">Register Now</Nav.Link>
+                <Link href='/register' className="register_btn btn">Register Now</Link>
             </li>  
             </ul> 
+            </div>
+            <div className="menu_right_block">
+            <div className="menuToggle d-xl-none d-xl-none" onClick={this.ToggleClass}>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
             </div>
                 </div>                     
             </Nav>

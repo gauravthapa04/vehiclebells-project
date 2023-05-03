@@ -2,6 +2,7 @@ import '@/styles/globals.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../src/components/assets/css/style.css';
 import '../src/components/assets/css/homepage.css';
+import '../src/components/assets/css/login.css';
 import "@fortawesome/fontawesome-svg-core/styles.css"; 
 import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;

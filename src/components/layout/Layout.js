@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Header from './Header';
 import Footer from './Footer';
-const Layout = ({ children, title }) => {
+const Layout = ({ children, title, showHead=true, showFooter=true }) => {
   return (
     <>
       <Head>
@@ -11,9 +11,9 @@ const Layout = ({ children, title }) => {
         <link rel="icon" href="/favicon.png" />        
       </Head>
       <div>
-        <Header />
+      {showHead==true && <Header />}
         <main>{children}</main>
-        <Footer />
+      {showFooter==true && <Footer />}
       </div>
     </>
   );

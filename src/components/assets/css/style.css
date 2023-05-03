@@ -621,7 +621,6 @@ ul.social_list li a:hover {
     z-index: 99;
     padding: 10px 0;
     text-align: center;
-    display: none;
     background: #0A1C31;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 4px;
