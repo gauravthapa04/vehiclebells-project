@@ -8,6 +8,15 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+import { SessionProvider } from "next-auth/react"
+
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
+  return (
+    <SessionProvider session={session}>
+      <Component {...pageProps} />
+    </SessionProvider>
+  )
 }
