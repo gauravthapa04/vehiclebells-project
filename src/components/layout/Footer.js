@@ -8,9 +8,29 @@ import { faFacebook, faInstagram, faTwitter, faYoutube } from '@fortawesome/free
 class Footer extends React.Component {
     constructor(props) {
       super(props);
-      
+      this.state = {
+        isDisplayed: false
+      };       
     }
+    componentDidMount() {
+      window.addEventListener('scroll', this.handleScroll);
+    }
+  
+    componentWillUnmount() {
+      window.removeEventListener('scroll', this.handleScroll);
+    }
+    handleScroll = () => {
+      if (window.pageYOffset > 100) {
+        this.setState({ isDisplayed: true });
+      } else {
+        this.setState({ isDisplayed: false });
+      }
+    };
+    backToTop = () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };    
     render() {
+      const { isDisplayed } = this.state;
       return (  
         <footer className="main_footer">
         <Container>
@@ -108,6 +128,16 @@ class Footer extends React.Component {
                 </Row>
               </Col>
             </Row>
+            <div className="copyright_block">
+                <p>Copyright 2023 Vehicle Bells</p>
+            </div>
+            {isDisplayed && (
+            <a onClick={this.backToTop} className="backToTop">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                     <path fillRule="evenodd" clipRule="evenodd" d="M10.125 6.09068V15.7499H7.87496V6.09068L4.17034 9.7953L2.57959 8.20456L8.99996 1.78418L15.4203 8.20456L13.8296 9.7953L10.125 6.09068Z" fill="white"></path>
+                </svg>
+            </a>
+            )}            
         </Container>
         </footer>
       );

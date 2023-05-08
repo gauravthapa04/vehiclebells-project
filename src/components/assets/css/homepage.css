@@ -56,6 +56,7 @@ ul.feature_list li:nth-child(2) {
 }
 .home_solutions_wrap {
     padding: 80px 0;
+    background-color: #fff;
 }
 .h_solution_block:nth-child(2n+1) .row {
     flex-direction: row-reverse;
@@ -145,6 +146,7 @@ ul.feature_list li:nth-child(2) {
 ------------------------------------------------ */
 .download_reports_wrap {
     padding: 65px 0;
+    background-color: #fff;
 }
 .page_head.text-left:after, .page_head.text-left:before {
     margin: 0;
@@ -198,6 +200,7 @@ ul.feature_list li:nth-child(2) {
 ---------------------------------------- */
 .testimonials_wrap{
     padding:65px 0;
+    background-color: #fff;
 }
 .testimonial_slider {
     max-width: 922px;
@@ -237,13 +240,20 @@ span.quote_icon {
     display: block;
 }
 .testimonial_slider ul.slick-dots {
+    left: auto;
     position: absolute;
     right: 40px;
     top: 50%;
     transform: translateY(-50%);
+    left: auto;
+    bottom: auto;
+    width: auto;
 }
 .testimonial_slider ul.slick-dots li {
     margin: 0 0 15px;
+    display: block;
+    height: auto;
+    width: auto;
 }
 .testimonial_slider ul.slick-dots li button {
     font-size: 0;
@@ -255,6 +265,10 @@ span.quote_icon {
     margin: 0;
     padding: 0;
     display: block;
+    font-size: 0;
+}
+.testimonial_slider ul.slick-dots li button:before{
+    display: none;
 }
 .testimonial_slider ul.slick-dots li.slick-active button {
     background: #ec3c3f;
