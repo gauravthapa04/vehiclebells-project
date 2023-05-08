@@ -11,7 +11,7 @@ body {
     margin: 0;
     padding: 0;   
     font-weight: 400;
-    background: #fff;
+    background: #F8FAFD;
     overflow-x: hidden;
 }
 
@@ -100,7 +100,9 @@ ul {
     color: #ec3c3f;
 }
 .btn:hover,
-.btn.btn_white:hover {
+.btn.btn_white:hover,
+.btn:focus,
+.btn.btn_white:focus {
     color: #fff;
     background: #0A1C31;
 }
