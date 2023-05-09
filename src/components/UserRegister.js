@@ -178,7 +178,7 @@ export default function UserRegister(){
                                 </form>
                                 <div className="or_text wow fadeInUp"><span>OR</span></div>
                                 <div className="login_buttons_group wow fadeInUp">
-                                    <Link href="#" className="btn">                                           
+                                <button onClick={()=>signIn('google')} className="btn">
                                     <svg
 xmlns="http://www.w3.org/2000/svg"
 xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -204,7 +204,7 @@ height={37}
 />
 </defs>
 </svg>    Sign Up with Google
-                                    </Link>
+                                    </button>
                                     <Link href="/login" className="btn">Already have an account? Sign in</Link>
                                 </div>
                                 <div className="login_bottom_text wow fadeInUp">By signing In, you agree to our <Link href="term-and-conditions">Terms and Conditions</Link> and acknowledge that you have read our <Link href="privacy-policy">Privacy Policy.</Link></div>

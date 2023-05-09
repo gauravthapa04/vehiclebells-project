@@ -3,6 +3,7 @@ import whitelogo from '../assets/images/logo-white.png'
 import { Container, Row, Col } from "react-bootstrap"
 import Image from 'next/image';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from 'next/link';
 import { faFacebook, faInstagram, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 class Footer extends React.Component {
@@ -37,12 +38,12 @@ class Footer extends React.Component {
             <Row>
               <Col lg={4}>
                 <div className="footer_block wow fadeInUp">
-                        <a href="#" className="footer_logo">
+                        <Link href="#" className="footer_logo">
                             <Image
                                 src={whitelogo}
                                 alt="vehicle bells"
                             />
-                            </a>
+                            </Link>
                         <p>Vehicle Bells will help in keeping a record of the distance traveled by a vehicle for business, tax, or personal purposes. This information is often used to calculate the amount of reimbursement for business-related travel expenses or to determine the tax deduction for the use of a personal vehicle for business purposes.</p>
                 </div>                
               </Col>
