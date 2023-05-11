@@ -50,10 +50,9 @@ export default function UserLogin(){
 
   const { data: session } = useSession();
   const router = useRouter();
-  console.log(session);
   if(typeof session != 'undefined' && session != null)
   {
-    router.push('/')
+    router.push('/dashboard')
   }
   return(
     <>

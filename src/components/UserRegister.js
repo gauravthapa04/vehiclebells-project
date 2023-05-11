@@ -67,7 +67,7 @@ export default function UserRegister(){
       console.log(session);
       if(typeof session != 'undefined' && session != null)
       {
-        router.push('/')
+        router.push('/dashboard')
       }
 
       return(
