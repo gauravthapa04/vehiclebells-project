@@ -8,7 +8,6 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome,faCar,faMoneyCheckDollar,faChartPie,faFileExport, faGear,faGauge, faRightFromBracket,faCarSide,faMapLocationDot,faMoneyBillTransfer,faPlus } from '@fortawesome/free-solid-svg-icons';
 
-
 class UserDashboard extends React.Component {
   constructor(props) {
     super(props);

@@ -1,5 +1,5 @@
 import Layout from '@/src/components/layout/Layout';
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { Container, Row, Col } from "react-bootstrap";
 import logo from '../src/components/assets/images/logo.png'
 import Nav from 'react-bootstrap/Nav';
@@ -8,12 +8,202 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear,faGauge, faRightFromBracket,faUser,faUsers,faPerson,faPeopleGroup,faTruck,faTaxi,faBuilding,faVideoCamera,faCheckCircle, faCheck } from '@fortawesome/free-solid-svg-icons';
-
-
-
+import { FormProvider } from '../src/components/UserForm/FormContext';
+import UserSubmitForm from '../src/components/UserForm/UserSubmitForm';
 
 export default function Welcome() {
+
+
   return (
+    <>
+    <style jsx global>
+      {`
+ html {
+  height: 100%;
+}
+body{
+  min-height: 100%;
+}
+
+
+header.d_header {
+  position: fixed;
+  top: 0;
+  z-index: 9990;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 3px 0;
+  width: 100%;
+}
+.d_header a.navbar-brand {
+  padding: 0;
+}
+.d_header ul.navbar-nav > li {
+  padding: 0px 0;
+}
+.d_header .navbar-brand img {
+  max-width: 110px;
+}
+.d_header button.btn {
+  background: transparent!important;
+  color: #000;
+  border: 0;
+  padding: 0;
+  box-shadow: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+}
+.d_header span.user_icon {
+  max-width: 22px;
+  display: inline-block;
+  margin-right: 10px;
+}
+.d_header span.user_icon svg {
+  height: 20px;
+  width: 20px;
+  display: block;
+}
+.d_header span.user_icon svg path {
+  fill: #ef3d44;
+}
+.menu_sidebar {
+  flex: 0 0 250px;
+  max-width: 250px;
+}
+.main_content {
+  flex: 0 0 calc(100% - 250px);
+  max-width: calc(100% - 250px);
+}
+.sidebar_menu {
+  width: 250px;
+  max-width: 250px;
+  border-right: 0;
+  margin: 0px 0 0;
+  background: #ffff;
+  padding: 75px 0 20px;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+.main_content {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% - 250px);
+  max-width: calc(100% - 250px);
+  padding: 20px 30px;
+  margin-left: auto;
+}
+ul.menu_list li {
+  margin: 0 0 1px;
+}
+ul.menu_list li a {
+  display: flex;
+  padding: 12px 15px;
+  align-items: center;
+  transition: all ease 0.4s;
+}
+ul.menu_list li a.active {
+  color: #EC3C3F;
+  background: rgb(236 60 63 / 2%);
+  font-weight: 600;
+}
+span.m_i_icon {
+  margin: 0 10px 0 0;
+  display: block;
+}
+span.m_i_icon svg {
+  width: 20px;
+  height: 20px;
+}
+.main_wrapper {
+  padding: 65px 0 0;
+}
+ul.menu_list {
+  padding: 20px 0 0;
+}
+.f_icon {
+  margin-right: 5px;
+}
+
+.d_page_header {
+  margin: 0 0 20px;
+}
+.d_page_header h2 {
+  margin: 0;
+  font-size: 20px;
+}
+.d_head h4 {
+  font-size: 16px;
+  margin: 0;
+  font-weight: 600;
+}
+.d_block {
+  background: #fff;
+  padding: 15px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 4px rgb(34 38 69 / 5%);
+  margin: 0 0 20px;
+}
+.d_head {
+  margin: 0 0 15px;
+}
+
+.quick_links_list ul li a {
+  display: flex;
+  padding: 20px 60px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.quick_links_list li a > span {
+  height: 100px;
+  width: 100px;
+  background: rgb(248 250 253);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 10px;
+  border-radius: 50px;
+  font-size: 30px;
+}
+.no_data_block {
+  text-align: center;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.small_btn {
+  padding: 6px 15px;
+  line-height: 1.315;
+}
+
+@media (max-width:1199px){
+  .sidebar_menu {
+      transition: all ease 0.4s;
+      transform: translateX(-110%);
+  }
+  .main_content {
+      flex-basis: 100%;
+      max-width: 100%;
+      padding: 20px 15px;
+      transition: all ease 0.4s;
+  }
+}
+
+@media (max-width:767px){
+  .quick_links_list ul li a {
+      padding: 20px 20px;
+  }
+}     
+      
+      `}
+    </style>
+
+
     <Layout title="Vehicle Bells | Welcome" showHead='false' showFooter='false'>
         <header className='d_header'>
             <Container fluid>
@@ -59,300 +249,9 @@ export default function Welcome() {
 
                 <div className='welcome_wrap'>
             
-
-                    <form className='welcome_form'>
-
-                        <div className='welcome_block  app_use_block'>
-                            <div className='text-center welcome_head'>
-                                <h3>Welcome to <span className='c_red'>Vehicle Bells</span></h3>
-                                <p>Tell us about yourself so we can customize the experience for you.</p>
-                                <p className='f_20'>select any one option for which you are going to use Vehicle Bells..</p>
-                            </div>
-                            <div className='select_option_list row justify-content-center'>
-                                <div className='col-sm-6 col-12'>
-                                    <label className='select_option'>
-                                            <input type='radio' name='using-for' checked />
-                                            <div className='select_option_inner'>
-                                                <span className='s_o_icom'>
-                                                    <FontAwesomeIcon icon={faUser} />
-                                                </span>
-                                                <h4>Just Me</h4>
-                                                <p>I need to track <b className='c_red'>my own</b> miles and expenses</p>
-                                                <div class="option_check"><FontAwesomeIcon icon={faCheckCircle} /></div>
-                                            </div>
-                                    </label>
-                                </div>
-                                <div className='col-sm-6 col-12'>
-                                    <label className='select_option'>
-                                            <input type='radio' name='using-for' />
-                                            <div className='select_option_inner'>
-                                                <span className='s_o_icom'>
-                                                <FontAwesomeIcon icon={faUsers} />
-                                                </span>
-                                                <h4>My Team</h4>
-                                                <p>I need to track <b className='c_red'>my team's</b> mileage and expenses</p>
-                                                <div class="option_check"><FontAwesomeIcon icon={faCheckCircle} /></div>
-                                            </div>
-                                    </label>
-                                </div>
-                            </div>
-                            {/* <div className='w_form_btns d-flex justify-content-center  mb-5'>
-                                    <button type='button' className='btn prev_step btn_white'>back</button>
-                                    <button type='button' className='btn next_step'>Next</button>
-                            </div> */}
-                        </div>
-
-
-                        <div className='welcome_block work_mode_block'>
-                            <div className='text-center welcome_head'>
-                                <h3><span className='c_red'>Choose a mode</span> to get started</h3>
-                                <p>We'll optimize the app based on what kind of work you do you can edit this later.</p>
-                            </div>
-                            <div className='select_option_list row justify-content-center'>
-                                <div className='col-sm-6 col-12'>
-                                <label className='select_option'>
-                                        <input type='radio' name='mode-type' checked />
-                                        <div className='select_option_inner'>
-                                            <span className='s_o_icom'>
-                                                <FontAwesomeIcon icon={faPerson} />
-                                            </span>
-                                            <h4>Self-employed</h4>
-                                            <p>Delivery, rideshare, real estate, photography, creator, enterpreeur, etc.</p>
-                                            <div class="option_check"><FontAwesomeIcon icon={faCheckCircle} /></div>
-                                        </div>
-                                </label>
-                                </div>
-                                <div className='col-sm-6 col-12'>
-                                <label className='select_option'>
-                                        <input type='radio' name='mode-type' />
-                                        <div className='select_option_inner'>
-                                            <span className='s_o_icom'>
-                                            <FontAwesomeIcon icon={faPeopleGroup} />
-                                            </span>
-                                            <h4>Employee</h4>
-                                            <p>Taxes are taken out of your payckeck. example: healthcare, distribution, sales.</p>
-                                            <div class="option_check"><FontAwesomeIcon icon={faCheckCircle} /></div>
-                                        </div>
-                                </label>
-                                </div>
-                            </div>
-                            <div className='employee_company_info mb-5'>
-                                <h5 class="mb-3">Get Vehicle Bells for your company</h5>
-                                <div class="mb-3">
-                                    <label class="form-label">what company do you work for?</label>
-                                    <input type="text" class="form-control" placeholder='Company Name' />
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Manager email address</label>
-                                    <input type="email" class="form-control" placeholder='Manager email' />
-                                </div>
-                            </div>
-                            
-                        </div>
-
-
-                        <div className='welcome_block  work_type_block'>
-                            <div className='text-center welcome_head'>
-                                <h3>What do you do for work?</h3>
-                                <p>What is the work purpose for all your drives?</p>
-                            </div>
-                            <div className='c_work_purpose mt-5'>
-                                <div class="mb-3">
-                                    <label class="form-label">+ Add a custom purpose</label>
-                                    <input type="text" class="form-control" placeholder='work purpose' />
-                                </div>
-                            </div>
-                            <div className='p_or_text'>Or select any one from below</div>
-                            <div className='select_option_list'>
-                                <label className='select_option'>
-                                        <input type='radio' name='work-type' value="Delivery" />
-                                        <div className='select_option_inner'>
-                                            <span className='s_o_icom'>
-                                                <FontAwesomeIcon icon={faTruck} />
-                                            </span>
-                                            <h5>Delivery</h5>
-                                            <div class="option_check"><FontAwesomeIcon icon={faCheckCircle} /></div>
-                                        </div>
-                                </label>
-                                <label className='select_option'>
-                                        <input type='radio' name='work-type' value="Ride share" />
-                                        <div className='select_option_inner d-flex'>
-                                            <span className='s_o_icom'>
-                                                <FontAwesomeIcon icon={faTaxi} />
-                                            </span>
-                                            <h5>Ride share</h5>
-                                            <div class="option_check"><FontAwesomeIcon icon={faCheckCircle} /></div>
-                                        </div>
-                                </label>
-                                <label className='select_option'>
-                                        <input type='radio' name='work-type' value="Real estate" />
-                                        <div className='select_option_inner d-flex'>
-                                            <span className='s_o_icom'>
-                                                <FontAwesomeIcon icon={faBuilding} />
-                                            </span>
-                                            <h5>Real estate</h5>
-                                            <div class="option_check"><FontAwesomeIcon icon={faCheckCircle} /></div>
-                                        </div>
-                                </label>
-                                <label className='select_option'>
-                                        <input type='radio' name='work-type' value="Photography" />
-                                        <div className='select_option_inner d-flex'>
-                                            <span className='s_o_icom'>
-                                                <FontAwesomeIcon icon={faVideoCamera} />
-                                            </span>
-                                            <h5>Photography</h5>
-                                            <div class="option_check"><FontAwesomeIcon icon={faCheckCircle} /></div>
-                                        </div>
-                                </label>
-                                <label className='select_option'>
-                                        <input type='radio' name='work-type' value="Creator"  />
-                                        <div className='select_option_inner d-flex'>
-                                            <span className='s_o_icom'>
-                                                <FontAwesomeIcon icon={faUser} />
-                                            </span>
-                                            <h5>Creator</h5>
-                                            <div class="option_check"><FontAwesomeIcon icon={faCheckCircle} /></div>
-                                        </div>
-                                </label>
-                                <label className='select_option'>
-                                        <input type='radio' name='work-type' value="Enterpreeur"  />
-                                        <div className='select_option_inner d-flex'>
-                                            <span className='s_o_icom'>
-                                                <FontAwesomeIcon icon={faUser} />
-                                            </span>
-                                            <h5>Enterpreeur</h5>
-                                            <div class="option_check"><FontAwesomeIcon icon={faCheckCircle} /></div>
-                                        </div>
-                                </label>
-                            </div>
-                        </div>
-
-                        
-                        <div className='welcome_block create_team_block'>
-                            <div className='text-center welcome_head'>
-                                <h3>Create your team with a few short details</h3>
-                            </div>                            
-                            <div className='my-5'>
-                                <div class="mb-3">
-                                    <label class="form-label">What is your name?</label>
-                                    <input type="text" class="form-control" placeholder='Your full name' />
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Where do you work?</label>
-                                    <input type="text" class="form-control" placeholder='company name' />
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">number of employees tracking mileage</label>
-                                    <div className='row'>
-                                        <div className='col-sm-6 col-12'>
-                                            <div class="form-check mb-2">
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="radio" name="team-size" value="1-5"/>
-                                                    <span>1-5</span> 
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div className='col-sm-6 col-12'>
-                                            <div class="form-check mb-2">
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="radio" name="team-size" value="6-20" />
-                                                    <span>6-20</span> 
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div className='col-sm-6 col-12'>
-                                            <div class="form-check mb-2">
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="radio" name="team-size" value="21-50" />
-                                                    <span>21-50</span> 
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div className='col-sm-6 col-12'>
-                                            <div class="form-check mb-2">
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="radio" name="team-size"  value="51-100"/>
-                                                    <span>51-100</span> 
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div className='col-sm-6 col-12'>
-                                            <div class="form-check mb-2">
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="radio" name="team-size"  value="100+"/>
-                                                    <span>100+</span> 
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">what is your phone number?</label>
-                                    <input type="text" class="form-control" placeholder='123-456-7890' />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className='welcome_block create_team_block'>
-                            <div className='text-center welcome_head'>
-                                <h3>Invite your team to record miles with Vehicle Bells</h3>
-                            </div>                            
-                            <div className='my-5'>
-                                <div class="mb-3">
-                                    <label class="form-label">Email addresses</label>
-                                    <textarea class="form-control" placeholder='Enter email addresses'></textarea>
-                                    <small>Separate emails with a comma, or copy and paste from excel or google sheets.</small>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Role</label>
-                                    <select class="form-select">
-                                        <option value="Member">Member</option>
-                                        <option value="Teamleader">Teamleader</option>
-                                        <option value="Manager">Manager</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Program</label>
-                                    <select class="form-select">
-                                        <option value="No Program">No Program</option>
-                                        <option value="Program">Program</option>
-                                        <option value="Program">Program</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div className='welcome_block'>
-                            <div className='text-center welcome_head'>
-                                <span className='completed_icon'>
-                                    <FontAwesomeIcon icon={faCheck} />
-                                </span>
-                                <h3>Lets start with Vehicle Bells</h3>
-                                <p>Now track your mileage and expenses by using Vehicle Bells</p>
-                                <a href='#' className='btn mt-4 mb-5'>Start using Vehicle Bells</a>
-                            </div>
-                        </div>
-
-
-
-
-                        <div className='w_form_btns d-flex justify-content-center  mb-5'>
-                                <button type='button' className='btn prev_step btn_white'>back</button>
-                                <button type='button' className='btn next_step'>Next</button>
-                        </div>
-
-                        <div className='w_form_steps mb-5'>
-                            <ul className='steps_list d-flex justify-content-center'>
-                                <li className='active w_step'>1</li>
-                                <li className='w_step'>2</li>
-                                <li className='w_step'>3</li>
-                                <li className='w_step'>4</li>
-                            </ul>
-                        </div>
-
-                    </form>
-                    
+                <FormProvider>
+                   <UserSubmitForm />
+                </FormProvider>
                 
                 </div>
 
@@ -360,5 +259,6 @@ export default function Welcome() {
 
             </div>
    </Layout>
+   </>
   )
 }
