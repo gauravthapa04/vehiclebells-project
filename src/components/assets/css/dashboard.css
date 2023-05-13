@@ -11,7 +11,7 @@ header.d_header {
     top: 0;
     z-index: 9990;
     background: #FFFFFF;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 10px rgba(1, 17, 39,0.1);
     padding: 3px 0;
     width: 100%;
 }
@@ -66,6 +66,7 @@ header.d_header {
     position: fixed;
     left: 0;
     top: 0;
+    box-shadow: 0px 0px 10px rgba(1, 17, 39,0.1);
 }
 .main_content {
     flex-grow: 0;
@@ -76,13 +77,14 @@ header.d_header {
     margin-left: auto;
 }
 ul.menu_list li {
-    margin: 0 0 1px;
+    margin: 0 0 5px;
 }
 ul.menu_list li a {
     display: flex;
     padding: 12px 15px;
     align-items: center;
     transition: all ease 0.4s;
+    font-weight: 600;
 }
 ul.menu_list li a.active {
     color: #EC3C3F;
