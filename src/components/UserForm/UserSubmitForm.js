@@ -12,9 +12,15 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 const userSubmitForm = () => {
     const { formData } = useContext(FormContext);
     const [currentStep, setCurrentStep] = useState(1);
-    const totalSteps = 5; // Update the total number of steps here
+    const totalSteps = 3; // Update the total number of steps here
 
     const handleNext = () => {
+        console.log(formData.step1Data)
+        console.log(currentStep)
+        if(currentStep === 1 && formData.step1Data == 'undefined'){
+          alert("Please select the Type");
+          return false;
+        }
         if (currentStep < totalSteps) {
           setCurrentStep((prevStep) => prevStep + 1);
         }
@@ -33,20 +39,40 @@ const userSubmitForm = () => {
         console.log(formData);
       };
 
+      const ProgressBar = ({ currentStep, totalSteps }) => {
+        const progress = (currentStep / totalSteps) * 100;
+      
+        return (
+          <div className='progress_bar'>
+            <div
+              style={{
+                width: `${progress}%`,
+                height: '8px',
+                backgroundColor: '#00c700',
+              }}
+            ></div>
+          </div>
+        );
+      };
 
     // Render the current step based on the currentStep state
     const renderStep = () => {
         switch (currentStep) {
         case 1:
             return <UserStep1 />;
+        
         case 2:
-            return <UserStep2 />;
+            if(formData.step1Data === 'just me'){
+              return <UserStep2 />;
+            }else{
+              return <UserStep4 />;
+            }
         case 3:
+          if(formData.step1Data === 'just me'){
             return <UserStep3 />;  
-        case 4:
-            return <UserStep4 />;  
-        case 5:
-            return <UserStep5 />;                            
+          }else{
+            return <UserStep5 />; 
+          }                          
         default:
             return null;
         }
@@ -74,17 +100,11 @@ const userSubmitForm = () => {
 
 
     <div className='w_form_btns d-flex justify-content-center  mb-5'>
+    
     {currentStep > 1 && ( <button type='button' className='btn prev_step btn_white' onClick={handleBack}>Back</button> )}
-    {currentStep < totalSteps && (  <button type='button' onClick={handleNext} className='btn next_step'>Next</button> )}
+    {currentStep < totalSteps && (  <button type='button' onClick={handleNext} className={formData.step1Data ? 'btn next_step' : 'btn next_step disabled'}>Next</button> )}
     </div>
-
-        <div className='w_form_steps mb-5'>
-            <ul className='steps_list d-flex justify-content-center'>
-            {[...Array(totalSteps)].map((_, index) => (
-                <li key={index} className={index + 1 === currentStep ? 'active w_step' : 'w_step'}>{index + 1}</li>
-            ))}
-            </ul>
-        </div>
+    <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
 
     </form>
   );

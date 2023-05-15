@@ -163,3 +163,7 @@ span.completed_icon {
 /* .welcome_block{
     display: none;
 } */
+.progress_bar{
+    border-radius: 50px;
+    overflow:hidden;
+}

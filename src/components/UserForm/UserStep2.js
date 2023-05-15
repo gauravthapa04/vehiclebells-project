@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { FormContext } from './FormContext';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPerson,faPeopleGroup,faCheckCircle} from '@fortawesome/free-solid-svg-icons';
@@ -6,10 +6,17 @@ import { faPerson,faPeopleGroup,faCheckCircle} from '@fortawesome/free-solid-svg
 
 const UserStep2 = () => {
   const { formData, updateFormData } = useContext(FormContext);
+  const [showForm, setShowForm] = useState(false);
 
   const handleChange = (e) => {
     updateFormData({ step2Data: e.target.value });
+    setShowForm(e.target.value === 'employee');
   };
+
+ useEffect(() => {
+    const SelectedValue = formData.step2Data;
+    setShowForm(SelectedValue === 'employee');
+  }, []);
 
   return (
     <div className='welcome_block work_mode_block'>
@@ -45,6 +52,7 @@ const UserStep2 = () => {
         </label>
         </div>
     </div>
+    {showForm && (
     <div className='employee_company_info mb-5'>
         <h5 className="mb-3">Get Vehicle Bells for your company</h5>
         <div className="mb-3">
@@ -56,6 +64,7 @@ const UserStep2 = () => {
             <input type="email" className="form-control" placeholder='Manager email' />
         </div>
     </div>
+    )}
 </div>
   );
 };

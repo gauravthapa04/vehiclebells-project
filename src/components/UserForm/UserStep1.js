@@ -21,7 +21,7 @@ const UserStep1 = () => {
                             <div className='select_option_list row justify-content-center'>
                                 <div className='col-sm-6 col-12'>
                                     <label className='select_option'>
-                                            <input type='radio' name='step1Data' value="just me" checked={formData.step1Data === 'just me'} onChange={handleChange} />
+                                            <input type='radio' name='step1Data' value="just me" checked={formData.step1Data === 'just me'} onChange={handleChange} required />
                                             <div className='select_option_inner'>
                                                 <span className='s_o_icom'>
                                                     <FontAwesomeIcon icon={faUser} />
@@ -34,7 +34,7 @@ const UserStep1 = () => {
                                 </div>
                                 <div className='col-sm-6 col-12'>
                                     <label className='select_option'>
-                                            <input type='radio' name='step1Data' value="my team" checked={formData.step1Data === 'my team'} onChange={handleChange} />
+                                            <input type='radio' name='step1Data' value="my team" checked={formData.step1Data === 'my team'} onChange={handleChange} required />
                                             <div className='select_option_inner'>
                                                 <span className='s_o_icom'>
                                                 <FontAwesomeIcon icon={faUsers} />
