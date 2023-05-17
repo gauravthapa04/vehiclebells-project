@@ -71,10 +71,10 @@ export default function Header(){
                 {!session  ?
                 <>
                 <li> 
-                <Link href='/login'>Login</Link>
+                <Link href='/account/login'>Login</Link>
                 </li> 
                 <li>
-                    <Link href='/register' className="register_btn btn">Register Now</Link>
+                    <Link href='/account/register' className="register_btn btn">Register Now</Link>
                 </li> 
                 </>
                 :

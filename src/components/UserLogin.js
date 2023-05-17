@@ -156,7 +156,7 @@ height={37}
 </svg>                
                     Sign in with Google
                 </button>
-                <Link href="/register" className="btn">No account? Create one</Link>
+                <Link href="/account/register" className="btn">No account? Create one</Link>
             </div>
             <div className="login_bottom_text wow fadeInUp">By signing In, you agree to our <Link href="term-and-conditions">Terms and Conditions</Link> and acknowledge that you have read our <Link href="privacy-policy">Privacy Policy.</Link></div>
         </div>

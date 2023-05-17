@@ -8,6 +8,7 @@ import axios, { AxiosError } from 'axios'
 
 export default function UserRegister(){
     const [loading, setLoading] = useState(true);
+    const [status, setStatus] = useState(null);
     const [formData, setFormData] = useState({
         first_name: "",
         last_name: "",
@@ -57,14 +58,42 @@ export default function UserRegister(){
 
       const handleSubmit = async (event) => {
         event.preventDefault();
-        const apiRes = await axios.post(`/api/register`, formData)
-         if(apiRes?.data?.success) {
-            console.log(success);
-         }
+        console.log(formData);
+        // const apiRes = await axios.post(`/api/register`, formData)
+        //  if(apiRes?.data?.success) {
+        //     console.log(success);
+        //  }
+
+        try {
+            const response = await fetch('/api/auth/userRegister', {
+                method:'POST',
+                headers:{"Content_Type":"application/json"},
+                body: JSON.stringify({formData})
+            })
+            // Set the status based on the response from the API route
+            if (response.status === 200) {
+                setFormData({
+                    first_name: "",
+                    last_name: "",
+                    company: "",
+                    email: "",
+                    password: "",
+                    verify_password:"",
+                })
+                setStatus('success');
+            } else {
+                setStatus('error');
+            }
+
+        }catch (e) {
+            console.log(e)
+        }
+
+
+
       };
       const { data: session } = useSession();
       const router = useRouter();
-      console.log(session);
       if(typeof session != 'undefined' && session != null)
       {
         router.push('/dashboard')
@@ -101,7 +130,7 @@ export default function UserRegister(){
                             <div className="login_right">
                                 <h3 className="wow fadeInUp">Register</h3>
                                 <p className="wow fadeInUp">Create your Account</p>
-                                <form action="/api/register" className="wow fadeInUp" onSubmit={handleSubmit}>
+                                <form action="/api/auth/userRegister" className="wow fadeInUp" onSubmit={handleSubmit}>
                                     <div className="row justify-between">
                                         <div className="col-lg-6">
                                             <div className="mb-4">
@@ -112,6 +141,7 @@ export default function UserRegister(){
                                                 onChange={handleInputChange}
                                                 placeholder='First Name'
                                                 className="form-control"
+                                                required
                                                 />
                                             </div>                                    
                                         </div>
@@ -124,6 +154,7 @@ export default function UserRegister(){
                                                 onChange={handleInputChange}
                                                 placeholder='Last Name'
                                                 className="form-control"
+                                                required
                                             />
                                             </div>
                                         </div>                                    
@@ -146,30 +177,33 @@ export default function UserRegister(){
                                         onChange={handleInputChange}
                                         placeholder='Email'
                                         className="form-control"
+                                        required
                                     />       
                                 </div>     
                                 <div className="row justify-between">
                                         <div className="col-lg-6">
                                             <div className="mb-4">
                                     <input
-                                        type="text"
+                                        type="password"
                                         name="password"
                                         value={formData.password}
                                         onChange={handleInputChange}
                                         placeholder='Password'
                                         className="form-control"
+                                        required
                                     />
                                             </div>
                                         </div>
                                         <div className="col-lg-6">
                                             <div className="mb-4">
                                     <input
-                                        type="text"
+                                        type="password"
                                         name="verify_password"
                                         value={formData.verify_password}
                                         onChange={handleInputChange}
                                         placeholder='Verify Password'
                                         className="form-control"
+                                        required
                                     />
                                             </div>
                                         </div>
@@ -205,7 +239,7 @@ height={37}
 </defs>
 </svg>    Sign Up with Google
                                     </button>
-                                    <Link href="/login" className="btn">Already have an account? Sign in</Link>
+                                    <Link href="/account/login" className="btn">Already have an account? Sign in</Link>
                                 </div>
                                 <div className="login_bottom_text wow fadeInUp">By signing In, you agree to our <Link href="term-and-conditions">Terms and Conditions</Link> and acknowledge that you have read our <Link href="privacy-policy">Privacy Policy.</Link></div>
 </div>

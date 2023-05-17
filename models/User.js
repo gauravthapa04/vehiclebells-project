@@ -1,6 +1,17 @@
 import { Schema, model, models } from "mongoose"
-
 const UserSchema = new Schema({
+    first_name: {
+        type: String,
+        required: true
+    },
+    last_name: {
+        type: String,
+        required: true
+    },
+    company: {
+        type: String,
+        required: false
+    },     
     email: {
         type: String,
         unique: true,
@@ -11,18 +22,6 @@ const UserSchema = new Schema({
         type: String,
         required: [true, "Password is required"],
         select: false
-    },
-    first_name: {
-        type: String,
-        required: false
-    },
-    last_name: {
-        type: String,
-        required: false
-    },
-    company: {
-        type: String,
-        required: false
     }
 })
 

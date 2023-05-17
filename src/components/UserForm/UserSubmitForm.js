@@ -12,7 +12,7 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 const userSubmitForm = () => {
     const { formData } = useContext(FormContext);
     const [currentStep, setCurrentStep] = useState(1);
-    const totalSteps = 3; // Update the total number of steps here
+    const totalSteps = 4; // Update the total number of steps here
 
     const handleNext = () => {
         console.log(formData.step1Data)
