@@ -4,96 +4,56 @@ import Sitelogo from './assets/images/logo.png'
 import Link from 'next/link';
 import { useSession, signIn } from "next-auth/react"
 import { useRouter } from 'next/router'
-import axios, { AxiosError } from 'axios'
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
+import { useForm } from 'react-hook-form';
+import { userService, alertService } from 'services';
+import { Alert } from './Alert';
 
 export default function UserRegister(){
-    const [loading, setLoading] = useState(true);
-    const [status, setStatus] = useState(null);
-    const [formData, setFormData] = useState({
-        first_name: "",
-        last_name: "",
-        company: "",
-        email: "",
-        password: "",
-        verify_password:"",
-      });   
-      useEffect(() => {
-    
-        const timeoutId = setTimeout(() => {
-          setLoading(false);
-        }, 800);
-      
-        // Clear the timeout if the component unmounts or the delay time changes
-        return () => clearTimeout(timeoutId);
-        
-      }, []);
+    const [loading, setLoading] = useState(true);  
+    const router = useRouter();
+    useEffect(() => {
 
-      const handleInputChange = (event) => {
-        const { name, value, type, checked } = event.target;
-        const newValue = type === "checkbox" ? checked : value;
-        setFormData({ ...formData, [name]: newValue });
-      };
+    const timeoutId = setTimeout(() => {
+        setLoading(false);
+    }, 800);
+    // Clear the timeout if the component unmounts or the delay time changes
+    return () => clearTimeout(timeoutId);
+    }, []);
 
-    //   const validateData = () => {
-    //     const err = []
+    // form validation rules 
+    const validationSchema = Yup.object().shape({
+        firstName: Yup.string()
+            .required('First Name is required'),
+        lastName: Yup.string()
+            .required('Last Name is required'),
+        companyName: Yup.string(),
+        email: Yup.string()
+            .required('Username is required'),
+        password: Yup.string()
+            .required('Password is required')
+            .min(6, 'Password must be at least 6 characters')
+    });
+    const formOptions = { resolver: yupResolver(validationSchema) };
 
-    //     if (data.password?.length < 6) {
-    //         err.push({ password: "Password should be atleast 6 characters long" })
-    //     }
-    //     else if (data.password !== data.confirmPassword) {
-    //         err.push({ confirmPassword: "Passwords don't match" })
-    //     }
+    const { register, handleSubmit, formState } = useForm(formOptions);
+    const { errors } = formState;
 
-    //     setValidationErrors(err)
-
-    //     if (err.length > 0) {
-    //         return false
-    //     }
-    //     else {
-    //         return true
-    //     }
-    //   }
-
-
-
-      const handleSubmit = async (event) => {
-        event.preventDefault();
-        console.log(formData);
-        // const apiRes = await axios.post(`/api/register`, formData)
-        //  if(apiRes?.data?.success) {
-        //     console.log(success);
-        //  }
-
-        try {
-            const response = await fetch('/api/auth/userRegister', {
-                method:'POST',
-                headers:{"Content_Type":"application/json"},
-                body: JSON.stringify({formData})
-            })
-            // Set the status based on the response from the API route
-            if (response.status === 200) {
-                setFormData({
-                    first_name: "",
-                    last_name: "",
-                    company: "",
-                    email: "",
-                    password: "",
-                    verify_password:"",
+    function onSubmit(user) {
+        return userService.register(user)
+            .then(() => {
+                alertService.success('Registration successful', true);
+                return userService.login(user.email, user.password)
+                .then(() => {
+                    router.push('/welcome');
                 })
-                setStatus('success');
-            } else {
-                setStatus('error');
-            }
-
-        }catch (e) {
-            console.log(e)
-        }
-
-
-
-      };
+                .catch(alertService.error);
+            })
+            .catch(alertService.error);
+    }
       const { data: session } = useSession();
-      const router = useRouter();
+      
       if(typeof session != 'undefined' && session != null)
       {
         router.push('/dashboard')
@@ -130,85 +90,67 @@ export default function UserRegister(){
                             <div className="login_right">
                                 <h3 className="wow fadeInUp">Register</h3>
                                 <p className="wow fadeInUp">Create your Account</p>
-                                <form action="/api/auth/userRegister" className="wow fadeInUp" onSubmit={handleSubmit}>
+                                <form className="wow fadeInUp" onSubmit={handleSubmit(onSubmit)}>
+                                    <Alert />
                                     <div className="row justify-between">
                                         <div className="col-lg-6">
                                             <div className="mb-4">
                                                 <input
                                                 type="text"
-                                                name="first_name"
-                                                value={formData.first_name}
-                                                onChange={handleInputChange}
+                                                name="firstName"
+                                                {...register('firstName')}
                                                 placeholder='First Name'
-                                                className="form-control"
-                                                required
+                                                className={`form-control ${errors.firstName ? 'is-invalid' : ''}`}
                                                 />
+                                            <div className="invalid-feedback">{errors.firstName?.message}</div>
                                             </div>                                    
                                         </div>
                                         <div className="col-lg-6">
                                             <div className="mb-4">
                                             <input
                                                 type="text"
-                                                name="last_name"
-                                                value={formData.last_name}
-                                                onChange={handleInputChange}
+                                                name="lastName"
+                                                {...register('lastName')}
                                                 placeholder='Last Name'
-                                                className="form-control"
-                                                required
+                                                className={`form-control ${errors.lastName ? 'is-invalid' : ''}`}
                                             />
+                                            <div className="invalid-feedback">{errors.lastName?.message}</div>
                                             </div>
                                         </div>                                    
                                 </div>
                                 <div className="mb-4">
                                     <input
                                         type="text"
-                                        name="company"
-                                        value={formData.company}
-                                        onChange={handleInputChange}
+                                        name="companyName"
+                                        {...register('companyName')}
                                         placeholder='Company Name (Optional)'
                                         className="form-control"
                                     />
                                 </div>
                                 <div className="mb-4">
                                     <input
-                                        type="emai;"
+                                        type="email"
                                         name="email"
-                                        value={formData.email}
-                                        onChange={handleInputChange}
+                                        {...register('email')}
                                         placeholder='Email'
-                                        className="form-control"
-                                        required
-                                    />       
-                                </div>     
-                                <div className="row justify-between">
-                                        <div className="col-lg-6">
-                                            <div className="mb-4">
-                                    <input
-                                        type="password"
-                                        name="password"
-                                        value={formData.password}
-                                        onChange={handleInputChange}
-                                        placeholder='Password'
-                                        className="form-control"
-                                        required
-                                    />
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-6">
-                                            <div className="mb-4">
-                                    <input
-                                        type="password"
-                                        name="verify_password"
-                                        value={formData.verify_password}
-                                        onChange={handleInputChange}
-                                        placeholder='Verify Password'
-                                        className="form-control"
-                                        required
-                                    />
-                                            </div>
-                                        </div>
-                                </div>    
-                                <button type="submit" className="btn">Register</button>                                                  
+                                        className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                                    />   
+                                    <div className="invalid-feedback">{errors.email?.message}</div>    
+                                </div>  
+                                <div className="mb-4">
+<input
+type="password"
+name="password"
+{...register('password')} 
+className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+placeholder='Password'
+/>
+<div className="invalid-feedback">{errors.password?.message}</div>
+</div>                                   
+   
+                                <button disabled={formState.isSubmitting} className="btn">
+                                {formState.isSubmitting && <span className="spinner-border spinner-border-sm me-1"></span>} Register
+                                </button>                                                  
                                 </form>
                                 <div className="or_text wow fadeInUp"><span>OR</span></div>
                                 <div className="login_buttons_group wow fadeInUp">

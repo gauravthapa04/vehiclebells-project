@@ -1,28 +1,28 @@
 import React,{useEffect, useState} from 'react';
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import logo from '../assets/images/logo.png'
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSession, signOut } from "next-auth/react"
+import { userService } from 'services';
 
 export default function Header(){
     const [loading, setLoading] = useState(true);
-    const [isLoggedin, setIsloggedin] = useState(false);
-    //const [session] = useSession();
+    const [user, setUser] = useState(null);
     const { data: session } = useSession(); 
-
     useEffect(() => {
-
         const timeoutId = setTimeout(() => {
-          setLoading(false);
+            setLoading(false);
         }, 800);
-      
         // Clear the timeout if the component unmounts or the delay time changes
         return () => clearTimeout(timeoutId);
+        }, []);
 
-        
+    useEffect(() => {
+        const subscription = userService.user.subscribe(x => setUser(x));
+        return () => subscription.unsubscribe();
       }, []);
 
       const ToggleClass = () => {
@@ -68,7 +68,8 @@ export default function Header(){
                 <li>
                 <Link href='/resources'>Resources</Link>  
                 </li>
-                {!session  ?
+                {!session ? (
+                    !user ? (
                 <>
                 <li> 
                 <Link href='/account/login'>Login</Link>
@@ -77,9 +78,14 @@ export default function Header(){
                     <Link href='/account/register' className="register_btn btn">Register Now</Link>
                 </li> 
                 </>
-                :
-                <li><a className="register_btn btn" onClick={() => signOut()}>Sign out</a></li> 
-                }
+                    ) : <>
+                    <li><a className="register_btn btn" onClick={userService.logout}>Logout</a></li>
+                    </>
+                ) :(
+                    <>
+                         <li><a className="register_btn btn" onClick={() => signOut()}>Logout</a></li>
+                    </>
+                )}
                 </ul> 
                 </div>
                 <div className="menu_right_block">

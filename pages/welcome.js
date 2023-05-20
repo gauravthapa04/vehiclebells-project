@@ -1,5 +1,5 @@
 import Layout from '@/src/components/layout/Layout';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container } from "react-bootstrap";
 import logo from '../src/components/assets/images/logo.png'
 import Nav from 'react-bootstrap/Nav';
@@ -7,14 +7,21 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGear,faGauge, faRightFromBracket,faUser,faUsers,faPerson,faPeopleGroup,faTruck,faTaxi,faBuilding,faVideoCamera,faCheckCircle, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faGear,faGauge, faRightFromBracket} from '@fortawesome/free-solid-svg-icons';
 import { FormProvider } from '../src/components/UserForm/FormContext';
 import UserSubmitForm from '../src/components/UserForm/UserSubmitForm';
 import { useSession, signOut } from "next-auth/react"
+import { userService } from 'services';
+
 
 export default function Welcome() {
   const { data: session } = useSession();
+  const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    const subscription = userService.user.subscribe(x => setUser(x));
+    return () => subscription.unsubscribe();
+  }, []);
   return (
     <>
     <style jsx global>
@@ -232,12 +239,24 @@ ul.menu_list {
                                         </svg>
                                 </span>
                                 { session ? session.user.name : '' }
+                                { user ? user.firstName + user.lastName : '' }
                                 </Dropdown.Toggle>
 
                                 <Dropdown.Menu>
                                     <Dropdown.Item><Link href='/'><FontAwesomeIcon className='f_icon' icon={faGauge} /> Go To Team Dashboard</Link></Dropdown.Item>
                                     <Dropdown.Item><Link href='/'><FontAwesomeIcon className='f_icon' icon={faGear} /> Personal Settings</Link></Dropdown.Item>
-                                    <Dropdown.Item><a onClick={() => signOut()}><FontAwesomeIcon className='f_icon' icon={faRightFromBracket} />Log out</a></Dropdown.Item>
+                                    { session ?
+                                    <>
+                                     <Dropdown.Item><a onClick={() => signOut()}><FontAwesomeIcon className='f_icon' icon={faRightFromBracket} />Logout</a></Dropdown.Item>
+                                    </>
+                                    :
+                                    user ?
+                                    <>
+                                      <Dropdown.Item><a onClick={userService.logout}><FontAwesomeIcon className='f_icon' icon={faRightFromBracket} />Logout</a></Dropdown.Item>
+                                    </>
+                                    :
+                                    <></>
+                                    }
                                 </Dropdown.Menu>
                                 </Dropdown>
                     </div>                     

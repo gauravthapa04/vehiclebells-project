@@ -1,30 +1,20 @@
-import { Schema, model, models } from "mongoose"
-const UserSchema = new Schema({
-    first_name: {
-        type: String,
-        required: true
-    },
-    last_name: {
-        type: String,
-        required: true
-    },
-    company: {
-        type: String,
-        required: false
-    },     
-    email: {
-        type: String,
-        unique: true,
-        required: [true, "Email is required"],
-        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Invalid email address"]
-    },
-    password: {
-        type: String,
-        required: [true, "Password is required"],
-        select: false
-    }
-})
+import mongoose, { model } from "mongoose";
+import bcrypt from "bcryptjs";
 
-const User = models.User || model("User", UserSchema)
+const userSchema = new mongoose.Schema({
+  first_name: String,
+  last_name: String,
+  company: String,
+  email: String,
+  password: String,
+});
 
-export default User
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    next();
+  }
+
+  this.password = await bcrypt.hash(this.password, 10);
+});
+
+export default mongoose.models.User || mongoose.model("User", userSchema);

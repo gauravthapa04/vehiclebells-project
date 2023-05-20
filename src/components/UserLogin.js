@@ -4,55 +4,45 @@ import Sitelogo from './assets/images/logo.png'
 import Link from 'next/link';
 import { useSession, signIn } from "next-auth/react"
 import { useRouter } from 'next/router'
-
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as Yup from 'yup'
+import { userService, alertService } from 'services';
+import { useForm } from 'react-hook-form';
 export default function UserLogin(){
   const [loading, setLoading] = useState(true);
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    rememberMe: false,
+
+  // form validation rules 
+  const validationSchema = Yup.object().shape({
+      email: Yup.string().required('Email is required'),
+      password: Yup.string().required('Password is required')
   });
+  const formOptions = { resolver: yupResolver(validationSchema) };
+  const { register, handleSubmit, formState } = useForm(formOptions);
+  const { errors } = formState;
+  const router = useRouter();
+  function onSubmit({ email, password }) {
+    alertService.clear();
+    return userService.login(email, password)
+        .then(() => {
+            // get return url from query parameters or default to '/'
+            router.push('/welcome');
+        })
+        .catch(alertService.error);
+    }
   useEffect(() => {
-    
     const timeoutId = setTimeout(() => {
       setLoading(false);
     }, 800);
-  
     // Clear the timeout if the component unmounts or the delay time changes
     return () => clearTimeout(timeoutId);
-    
   }, []);
 
-  const handleInputChange = (event) => {
-    const { name, value, type, checked } = event.target;
-    const newValue = type === "checkbox" ? checked : value;
-    setFormData({ ...formData, [name]: newValue });
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    // Send a POST request to the /api/login endpoint with email and password
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
-    if (response.ok) {
-      // Redirect the user to the main page
-      window.location.href = '/';
-    } else {
-      const { message } = await response.json();
-      alert(message);
-    }
-  };
-
   const { data: session } = useSession();
-  const router = useRouter();
+ 
+  console.log(session);
   if(typeof session != 'undefined' && session != null)
   {
-    router.push('/dashboard')
+    router.push('/welcome')
   }
   return(
     <>
@@ -85,26 +75,26 @@ export default function UserLogin(){
         <div className="login_right">
             <h3 className="wow fadeInUp">Login</h3>
             <p className="wow fadeInUp">Welcome back! Please login to your account.</p>
-            <form className="wow fadeInUp" onSubmit={handleSubmit}>
+            <form className="wow fadeInUp" onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-4">
                   <input
                     type="email"
                     name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
+                    {...register('email')}
                     placeholder='Email'
-                    className="form-control"
+                    className={`form-control ${errors.email ? 'is-invalid' : ''}`}
                   />
+                  <div className="invalid-feedback">{errors.email?.message}</div>
                 </div>
                 <div className="mb-4">
                   <input
                     type="password"
                     name="password"
-                    value={formData.password}
-                    onChange={handleInputChange}
+                    {...register('password')}
                     placeholder='Password'
-                    className="form-control"
+                    className={`form-control ${errors.password ? 'is-invalid' : ''}`}
                   />
+                  <div className="invalid-feedback">{errors.password?.message}</div>
                 </div>
                 <div className="row justify-between">
                 <div className="col-6">
@@ -112,8 +102,6 @@ export default function UserLogin(){
                   <input
                     type="checkbox"
                     name="rememberMe"
-                    checked={formData.rememberMe} 
-                    onChange={handleInputChange}
                     className="form-check-input"
                   />
                   <label className="form-check-label">Remember Me</label>
@@ -122,7 +110,8 @@ export default function UserLogin(){
                     <a href="/forgot-password" className="forget_password">forgot password?</a>
                 </div>          
                 </div>
-                <button type="submit" className="btn">
+                <button disabled={formState.isSubmitting} className="btn">
+                 {formState.isSubmitting && <span className="spinner-border spinner-border-sm me-1"></span>}
                   Login
                 </button>
               </form>
