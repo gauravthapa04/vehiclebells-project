@@ -10,19 +10,19 @@ export default function Register() {
   const router = useRouter();
   const { data: session } = useSession();
   const [user, setUser] = useState(null);
-  useEffect(() => {
-    const subscription = userService.user.subscribe(x => setUser(x));
-    return () => subscription.unsubscribe();
-  }, []);
+  // useEffect(() => {
+  //   const subscription = userService.user.subscribe(x => setUser(x));
+  //   return () => subscription.unsubscribe();
+  // }, []);
 
-  { session ? (
-    router.push('/')
-    )
-    :
-    user ? ( router.push('/'))
-    :
-    null
-    }
+  // { session ? (
+  //   router.push('/')
+  //   )
+  //   :
+  //   user ? ( router.push('/'))
+  //   :
+  //   null
+  //   }
 
   return (
     <Layout title="Vehicle Bells | Register" showHead='false' showFooter='false'>
