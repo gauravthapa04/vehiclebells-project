@@ -107,7 +107,7 @@ export default function UserLogin(){
                   <label className="form-check-label">Remember Me</label>
                   </div></div>
                   <div className="col-6 text-end">
-                    <a href="/forgot-password" className="forget_password">forgot password?</a>
+                    <Link href="/forgot-password" className="forget_password">forgot password?</Link>
                 </div>          
                 </div>
                 <button disabled={formState.isSubmitting} className="btn">
@@ -147,7 +147,7 @@ height={37}
                 </button>
                 <Link href="/account/register" className="btn">No account? Create one</Link>
             </div>
-            <div className="login_bottom_text wow fadeInUp">By signing In, you agree to our <Link href="term-and-conditions">Terms and Conditions</Link> and acknowledge that you have read our <Link href="privacy-policy">Privacy Policy.</Link></div>
+            <div className="login_bottom_text wow fadeInUp">By signing In, you agree to our <Link href="/term-and-conditions">Terms and Conditions</Link> and acknowledge that you have read our <Link href="/privacy-policy">Privacy Policy.</Link></div>
         </div>
         </div>
         </div>

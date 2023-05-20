@@ -183,7 +183,7 @@ height={37}
                                     </button>
                                     <Link href="/account/login" className="btn">Already have an account? Sign in</Link>
                                 </div>
-                                <div className="login_bottom_text wow fadeInUp">By signing In, you agree to our <Link href="term-and-conditions">Terms and Conditions</Link> and acknowledge that you have read our <Link href="privacy-policy">Privacy Policy.</Link></div>
+                                <div className="login_bottom_text wow fadeInUp">By signing In, you agree to our <Link href="/term-and-conditions">Terms and Conditions</Link> and acknowledge that you have read our <Link href="/privacy-policy">Privacy Policy.</Link></div>
 </div>
                         </div>
                     </div>
