@@ -239,7 +239,7 @@ ul.menu_list {
                                         </svg>
                                 </span>
                                 { session ? session.user.name : '' }
-                                { user ? user.firstName + user.lastName : '' }
+                                { user ? user.firstName +' '+user.lastName : '' }
                                 </Dropdown.Toggle>
 
                                 <Dropdown.Menu>

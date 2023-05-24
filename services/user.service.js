@@ -9,13 +9,16 @@ const { publicRuntimeConfig } = getConfig();
 const baseUrl = `${publicRuntimeConfig.apiUrl}/users`;
 const userSubject = new BehaviorSubject(typeof window !== 'undefined' && JSON.parse(localStorage.getItem('user')));
 
+
 export const userService = {
     user: userSubject.asObservable(),
     get userValue() { return userSubject.value },
     login,
     logout,
     register,
-    forgotPassword,
+    forgotpassword,
+    resetPassword,
+    validateResetToken,
     getAll,
     getById,
     update,
@@ -28,6 +31,33 @@ async function login(email, password) {
     // publish user to subscribers and store in local storage to stay logged in between page refreshes
     userSubject.next(user);
     localStorage.setItem('user', JSON.stringify(user));
+}
+
+async function forgotpassword(email) {
+
+    const user = await fetchWrapper.post(`${baseUrl}/forgotpassword`, email);
+       //create reset token that expires after 24 hours
+        user.resetToken = new Date().getTime().toString();
+        user.resetTokenExpires = new Date(Date.now() + 24*60*60*1000).toISOString();
+        localStorage.setItem('user', JSON.stringify(user));
+        setTimeout(() => {
+            const resetUrl = `${location.origin}/account/reset-password?token=${user.resetToken}`;
+            alertService.info('<h4>Reset Password Email</h4><p>Please click the below link to reset your password, the link will be valid for 1 day:</p><p><a href="'+resetUrl+'">"'+resetUrl+'"</a></p><div><strong>NOTE:</strong> The fake backend displayed this "email" so you can test without an api. A real backend would send a real email.</div>', { autoClose: false });
+        }, 1000);
+}
+
+async function resetPassword(password) {
+
+        let users = JSON.parse(localStorage.getItem('user')) || [];
+        let id = users.id;
+        return await fetchWrapper.put(`${baseUrl}/reset-password`, {id, password});
+    }
+
+function validateResetToken(token) {
+    let users = JSON.parse(localStorage.getItem('user')) || [];
+    let resetToken = users.resetToken;
+    let resetTokenExpires = users.resetTokenExpires;
+    return fetchWrapper.post(`${baseUrl}/validate-reset-token`, { token, resetToken, resetTokenExpires});
 }
 
 function logout() {
@@ -72,8 +102,4 @@ async function _delete(id) {
     if (id === userSubject.value.id) {
         logout();
     }
-}
-
-function forgotPassword(email) {
-    return fetchWrapper.post(`${baseUrl}/forgot-password`, { email });
 }

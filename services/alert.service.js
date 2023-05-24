@@ -5,6 +5,7 @@ const alertSubject = new BehaviorSubject(null);
 export const alertService = {
     alert: alertSubject.asObservable(),
     success,
+    info,
     error,
     clear
 };
@@ -12,6 +13,14 @@ export const alertService = {
 function success(message, showAfterRedirect = false) {
     alertSubject.next({
         type: 'alert-success',
+        message,
+        showAfterRedirect
+    });
+}
+
+function info(message, showAfterRedirect = false) {
+    alertSubject.next({
+        type: 'alert-info',
         message,
         showAfterRedirect
     });

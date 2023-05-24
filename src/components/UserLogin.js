@@ -24,8 +24,9 @@ export default function UserLogin(){
     alertService.clear();
     return userService.login(email, password)
         .then(() => {
+          router.push('/welcome');
             // get return url from query parameters or default to '/'
-            router.push('/welcome');
+            
         })
         .catch(alertService.error);
     }

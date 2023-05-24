@@ -7,12 +7,16 @@ const { serverRuntimeConfig } = getConfig();
 
 const User = db.User;
 
+
 export const usersRepo = {
     authenticate,
     getAll,
     getById,
     create,
     update,
+    forgotPassword,
+    resetpassword,
+    validateresetroken,
     delete: _delete
 };
 
@@ -32,31 +36,6 @@ async function authenticate({ email, password }) {
     };
 }
 
-// function forgotPassword() {
-//     const { email } = body();
-//     const user = User.find(x => x.email === email);
-    
-//     // always return ok() response to prevent email enumeration
-//     if (!user) return ok();
-    
-//     // create reset token that expires after 24 hours
-//     user.resetToken = new Date().getTime().toString();
-//     user.resetTokenExpires = new Date(Date.now() + 24*60*60*1000).toISOString();
-//     localStorage.setItem(usersKey, JSON.stringify(users));
-
-//     // display password reset email in alert
-//     setTimeout(() => {
-//         const resetUrl = `${location.origin}/account/reset-password?token=${user.resetToken}`;
-//         alertService.info(`
-//             <h4>Reset Password Email</h4>
-//             <p>Please click the below link to reset your password, the link will be valid for 1 day:</p>
-//             <p><a href="${resetUrl}">${resetUrl}</a></p>
-//             <div><strong>NOTE:</strong> The fake backend displayed this "email" so you can test without an api. A real backend would send a real email.</div>
-//         `, { autoClose: false });
-//     }, 1000);
-
-//     return ok();
-// }
 
 async function getAll() {
     return await User.find();
@@ -94,15 +73,55 @@ async function update(id, params) {
 
     // hash password if it was entered
     if (params.password) {
-        params.hash = bcrypt.hashSync(params.password, 10);
+        user.hash = bcrypt.hashSync(params.password, 10);
     }
 
-    // copy params properties to user
-    Object.assign(user, params);
+    // // copy params properties to user
+    Object.assign(user, params.password);
 
     await user.save();
 }
 
 async function _delete(id) {
     await User.findByIdAndRemove(id);
+}
+
+async function forgotPassword(params) {
+
+    const user = await User.findOne({ email: params.email })
+    //return user.email;
+    if (!user) return "Error";
+    return user;
+}
+
+async function resetpassword(params){
+    //return params.id+'---'+params.password;
+    const user = await User.findOne({ _id: params.id });
+
+    if (!user) return "User Not Found";
+    // hash password if it was entered
+    if (params.password) {
+        const password = bcrypt.hashSync(params.password, 10);
+
+        // Update the user's password in the database
+        await User.updateOne(
+            { _id: params.id },
+            { $set: { hash: password } }
+        );
+
+        //User.updateOne({ email: 'testbytecode1@gmail.com' }, { $set: { hash : password } });
+        return 'ok';
+    }
+
+}
+
+function validateresetroken(params) {
+    //return new Date().toISOString() +'----'+ params.resetTokenExpires;
+    if(params.resetToken == params.token && new Date().toISOString() < params.resetTokenExpires)
+    {
+        return true;
+    }
+    else{
+        return 'Invalid token';
+    }
 }

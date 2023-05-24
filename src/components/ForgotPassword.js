@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import { userService, alertService } from 'services';
 import { useForm } from 'react-hook-form';
+import { Alert } from './Alert';
 
 export default function UserForgotPassword(){
   const [loading, setLoading] = useState(true);
@@ -27,10 +28,13 @@ const formOptions = { resolver: yupResolver(validationSchema) };
 const { register, handleSubmit, formState } = useForm(formOptions);
 const { errors } = formState;
 
-function onSubmit({ email}) {
+function onSubmit(email) {
   alertService.clear();
-  return userService.forgotPassword(email)
-    .then(() => alertService.success('Please check your email for password reset'))
+  return userService.forgotpassword(email)
+    .then(() => { 
+      alertService.success('Please check your email for password reset');
+      //console.log()
+    })
     .catch(error => alertService.error(error));
   }
 
@@ -71,10 +75,12 @@ function onSubmit({ email}) {
                     className="wow fadeInUp"
                     onSubmit={handleSubmit(onSubmit)}
                   >
+                    <Alert />
                     <div className="mb-4">
                       <input
                         type="email"
                         name="email"
+                        {...register('email')}
                         placeholder="Your Email Address"
                         className={`form-control ${errors.email ? 'is-invalid' : ''}`}
                       />
