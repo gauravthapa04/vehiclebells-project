@@ -37,7 +37,26 @@ const userSubmitForm = () => {
         e.preventDefault();
         console.log(formData);
 
-        return userService.OwnTracking({userId: formData.userId})
+        // try {
+        //   const response = await fetch('/api/UserOwnTracking', {
+        //     method: 'POST',
+        //     headers: {
+        //       'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(formData),
+        //   });
+    
+        //   if (response.ok) {
+        //     console.log('User created successfully');
+        //   } else {
+        //     console.error('Failed to create user');
+        //   }
+        // } catch (error) {
+        //   console.error('Error creating user', error);
+        // }
+
+
+        return userService.OwnTracking({userId: formData.userId, useType: formData.useType, employeetype: formData.employeetype, CompanyName: formData.CompanyName, Manageremail: formData.Manageremail, custom_occupation: formData.custom_occupation})
         .then((response) => { 
           //alertService.success('Please check your email for password reset');
           console.log(response)
