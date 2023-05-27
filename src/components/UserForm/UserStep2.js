@@ -9,13 +9,17 @@ const UserStep2 = () => {
   const [showForm, setShowForm] = useState(false);
 
   const handleChange = (e) => {
-    updateFormData({ step2Data: e.target.value });
-    setShowForm(e.target.value === 'employee');
+    updateFormData({ employeetype: e.target.value  });
+    setShowForm(e.target.value === 'Employee');
+  };
+
+  const handleTextChange = (e) => {
+    updateFormData({ [e.target.name]: e.target.value });
   };
 
  useEffect(() => {
-    const SelectedValue = formData.step2Data;
-    setShowForm(SelectedValue === 'employee');
+    const SelectedValue = formData.employeetype;
+    setShowForm(SelectedValue === 'Employee');
   }, []);
 
   return (
@@ -26,7 +30,7 @@ const UserStep2 = () => {
     <div className='select_option_list row justify-content-center'>
         <div className='col-sm-6 col-12'>
         <label className='select_option'>
-                <input type='radio' name='mode-type' value="Self-employed" checked={formData.step2Data === 'Self-employed'} onChange={handleChange} />
+                <input type='radio' name='employeetype' value="Self employed" checked={formData.employeetype === 'Self employed'} onChange={handleChange} />
                 <div className='select_option_inner'>
                     <span className='s_o_icom'>
                         <FontAwesomeIcon icon={faPerson} />
@@ -39,7 +43,7 @@ const UserStep2 = () => {
         </div>
         <div className='col-sm-6 col-12'>
         <label className='select_option'>
-                <input type='radio' name='mode-type' value="employee" checked={formData.step2Data === 'employee'} onChange={handleChange} />
+                <input type='radio' name='employeetype' value="Employee" checked={formData.employeetype === 'Employee'} onChange={handleChange} />
                 <div className='select_option_inner'>
                     <span className='s_o_icom'>
                     <FontAwesomeIcon icon={faPeopleGroup} />
@@ -56,11 +60,11 @@ const UserStep2 = () => {
         <h5 className="mb-3">Get Vehicle Bells for your company</h5>
         <div className="mb-3">
             <label className="form-label">what company do you work for?</label>
-            <input type="text" className="form-control" placeholder='Company Name' />
+            <input type="text" name="CompanyName" className="form-control" placeholder='Company Name' onChange={handleTextChange} />
         </div>
         <div className="mb-3">
             <label className="form-label">Manager email address</label>
-            <input type="email" className="form-control" placeholder='Manager email' />
+            <input type="email" name="Manageremail" className="form-control" placeholder='Manager email' onChange={handleTextChange} />
         </div>
     </div>
     )}

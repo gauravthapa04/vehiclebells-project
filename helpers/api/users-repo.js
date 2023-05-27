@@ -6,6 +6,7 @@ import { db } from 'helpers/api';
 const { serverRuntimeConfig } = getConfig();
 
 const User = db.User;
+const OwnTracking = db.OwnTracking
 
 
 export const usersRepo = {
@@ -16,6 +17,7 @@ export const usersRepo = {
     update,
     forgotPassword,
     resetpassword,
+    userowntracking,
     validateresetroken,
     delete: _delete
 };
@@ -124,4 +126,11 @@ function validateresetroken(params) {
     else{
         return 'Invalid token';
     }
+}
+
+async function userowntracking(params) {
+
+    const ownTracking = new OwnTracking(params);
+    await ownTracking.save();
+
 }

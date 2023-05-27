@@ -1,4 +1,4 @@
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, async } from 'rxjs';
 import getConfig from 'next/config';
 import Router from 'next/router';
 
@@ -18,6 +18,7 @@ export const userService = {
     register,
     forgotpassword,
     resetPassword,
+    OwnTracking,
     validateResetToken,
     getAll,
     getById,
@@ -102,4 +103,8 @@ async function _delete(id) {
     if (id === userSubject.value.id) {
         logout();
     }
+}
+
+async function OwnTracking(Formdata){
+    return await fetchWrapper.post(`${baseUrl}/own-tracking`, Formdata); 
 }

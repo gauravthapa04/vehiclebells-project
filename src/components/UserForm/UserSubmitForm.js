@@ -7,7 +7,7 @@ import UserStep4 from '@/src/components/UserForm/UserStep4';
 import UserStep5 from '@/src/components/UserForm/UserStep5';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-
+import { userService, alertService } from 'services';
 
 const userSubmitForm = () => {
     const { formData } = useContext(FormContext);
@@ -15,9 +15,9 @@ const userSubmitForm = () => {
     const totalSteps = 4; // Update the total number of steps here
 
     const handleNext = () => {
-        console.log(formData.step1Data)
-        console.log(currentStep)
-        if(currentStep === 1 && formData.step1Data == 'undefined'){
+       // console.log(formData.useType)
+       // console.log(currentStep)
+        if(currentStep === 1 && formData.useType == 'undefined'){
           alert("Please select the Type");
           return false;
         }
@@ -35,8 +35,16 @@ const userSubmitForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle the final form submission with all form data
         console.log(formData);
+
+        return userService.OwnTracking({userId: formData.userId})
+        .then((response) => { 
+          //alertService.success('Please check your email for password reset');
+          console.log(response)
+        })
+        .catch(error => alertService.error(error));
+
+
       };
 
       const ProgressBar = ({ currentStep, totalSteps }) => {
@@ -62,13 +70,13 @@ const userSubmitForm = () => {
             return <UserStep1 />;
         
         case 2:
-            if(formData.step1Data === 'just me'){
+            if(formData.useType === 'just me'){
               return <UserStep2 />;
             }else{
               return <UserStep4 />;
             }
         case 3:
-          if(formData.step1Data === 'just me'){
+          if(formData.useType === 'just me'){
             return <UserStep3 />;  
           }else{
             return <UserStep5 />; 
@@ -81,7 +89,7 @@ const userSubmitForm = () => {
 
   return (
 
-    <form className='welcome_form' onSubmit={handleSubmit}>
+    <form className='welcome_form' method='post' onSubmit={handleSubmit}>
     {renderStep()}
 
     {currentStep === totalSteps && (
@@ -102,7 +110,7 @@ const userSubmitForm = () => {
     <div className='w_form_btns d-flex justify-content-center  mb-5'>
     
     {currentStep > 1 && ( <button type='button' className='btn prev_step btn_white' onClick={handleBack}>Back</button> )}
-    {currentStep < totalSteps && (  <button type='button' onClick={handleNext} className={formData.step1Data ? 'btn next_step' : 'btn next_step disabled'}>Next</button> )}
+    {currentStep < totalSteps && (  <button type='button' onClick={handleNext} className={formData.useType ? 'btn next_step' : 'btn next_step disabled'}>Next</button> )}
     </div>
     <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
 

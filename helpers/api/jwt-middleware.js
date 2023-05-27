@@ -14,7 +14,8 @@ function jwtMiddleware(req, res) {
             '/api/users/authenticate',
             '/api/users/forgotpassword',
             '/api/users/validate-reset-token',
-            '/api/users/reset-password'
+            '/api/users/reset-password',
+            '/api/users/own-tracking'
         ]
     });
 

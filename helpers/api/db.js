@@ -8,7 +8,8 @@ mongoose.connect(process.env.MONGODB_URI || serverRuntimeConfig.connectionString
 mongoose.Promise = global.Promise;
 
 export const db = {
-    User: userModel()
+    User: userModel(),
+    OwnTracking : ownTrackingModel()
 };
 
 // mongoose models with schema definitions
@@ -35,4 +36,30 @@ function userModel() {
     });
 
     return mongoose.models.User || mongoose.model('User', schema);
+}
+
+function ownTrackingModel(){
+
+    const ownTrackingschema = new Schema({
+        userId: { type: String, required: false },
+        useType: { type: String, required: false },
+        employeetype: { type: String, required: false },
+        CompanyName: { type: String, required: false },
+        Manageremail: { type: String, required: false },
+        employeetype: { type: String, required: false },
+        custom_occupation: {type: String, required: false}
+    }, {
+        // add createdAt and updatedAt timestamps
+        timestamps: true
+    });
+
+    ownTrackingschema.set('toJSON', {
+        virtuals: true,
+        versionKey: false,
+        transform: function (doc, ret) {
+            delete ret._id;
+        }
+    });
+
+    return mongoose.models.OwnTracking || mongoose.model('OwnTracking', ownTrackingschema);
 }

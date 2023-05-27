@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { FormContext } from './FormContext';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser,faUsers,faCheckCircle} from '@fortawesome/free-solid-svg-icons';
@@ -11,8 +11,16 @@ const UserStep1 = () => {
   const { formData, updateFormData } = useContext(FormContext);
 
   const handleChange = (e) => {
-    updateFormData({ step1Data: e.target.value });
+    updateFormData({ useType: e.target.value });
   };
+
+useEffect(() => {
+    // Get the value from LocalStorage
+    const user = JSON.parse(localStorage.getItem('user')) || [];
+    if(user != null){
+        updateFormData({ userId: user.id });
+    }    
+  }, []);
 
   return (
       <div className='welcome_block  app_use_block'>
@@ -22,7 +30,7 @@ const UserStep1 = () => {
                             <div className='select_option_list row justify-content-center'>
                                 <div className='col-sm-6 col-12'>
                                     <label className='select_option'>
-                                            <input type='radio' name='step1Data' value="just me" checked={formData.step1Data === 'just me'} onChange={handleChange} required />
+                                            <input type='radio' name='useType' value="just me" checked={formData.useType === 'just me'} onChange={handleChange} required />
                                             <div className='select_option_inner'>
                                                 <span className='s_o_icom'>
                                                     <Image src={step_user_icon} alt='step_user_icon'/>
@@ -35,7 +43,7 @@ const UserStep1 = () => {
                                 </div>
                                 <div className='col-sm-6 col-12'>
                                     <label className='select_option'>
-                                            <input type='radio' name='step1Data' value="my team" checked={formData.step1Data === 'my team'} onChange={handleChange} required />
+                                            <input type='radio' name='useType' value="my team" checked={formData.useType === 'my team'} onChange={handleChange} required />
                                             <div className='select_option_inner'>
                                                 <span className='s_o_icom'>
                                                     <Image src={step_team_icon} alt='step_team_icon'/>
