@@ -8,12 +8,13 @@ import UserStep5 from '@/src/components/UserForm/UserStep5';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { userService, alertService } from 'services';
+import { useRouter } from 'next/router'
 
 const userSubmitForm = () => {
     const { formData } = useContext(FormContext);
     const [currentStep, setCurrentStep] = useState(1);
     const totalSteps = 4; // Update the total number of steps here
-
+    const router = useRouter();
     const handleNext = () => {
        // console.log(formData.useType)
        // console.log(currentStep)
@@ -59,7 +60,10 @@ const userSubmitForm = () => {
         return userService.OwnTracking({userId: formData.userId, useType: formData.useType, employeetype: formData.employeetype, CompanyName: formData.CompanyName, Manageremail: formData.Manageremail, custom_occupation: formData.custom_occupation})
         .then((response) => { 
           //alertService.success('Please check your email for password reset');
-          console.log(response)
+          //console.log(response)
+          if (response) {
+            router.push('/dashboard');
+          }
         })
         .catch(error => alertService.error(error));
 

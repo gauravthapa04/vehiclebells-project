@@ -6,5 +6,5 @@ export default apiHandler({
 
 async function OwnTracking(req, res) {
     await usersRepo.userowntracking(req.body);
-    return res.status(200).json({});
+    return res.status(200).json(true);
 }

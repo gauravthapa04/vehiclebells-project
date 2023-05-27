@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FormProvider } from '../src/components/UserForm/FormContext';
 import UserSubmitForm from '../src/components/UserForm/UserSubmitForm';
-import { useSession, signOut } from "next-auth/react"
+import { useSession } from "next-auth/react"
 import { userService } from 'services';
 
 
@@ -16,9 +16,12 @@ export default function Welcome() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    //const user = JSON.parse(localStorage.getItem('user')) || [];
     const subscription = userService.user.subscribe(x => setUser(x));
     return () => subscription.unsubscribe();
   }, []);
+
+  //console.log(user)
   return (
     <>
     <style jsx global>
@@ -311,9 +314,17 @@ export default function Welcome() {
                     </div>
                   </div>
                   <div className='welcome_right_block'>
+                    {session == null && user == null ? <>
+                    <div className='empty-loggedin'>
+                     <h2>You'r not logged in. Please login first to viw this page.</h2>
+                    <Link href='/account/login' className='btn next_step'>Login</Link>
+                    </div>
+                    </> : (
                     <FormProvider>
+
                       <UserSubmitForm />
                     </FormProvider>
+                    )}
                   </div>
                 
                 </div>
