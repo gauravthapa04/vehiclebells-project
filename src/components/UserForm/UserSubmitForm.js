@@ -47,7 +47,7 @@ const userSubmitForm = () => {
             <div
               style={{
                 width: `${progress}%`,
-                height: '8px',
+                height: '6px',
                 backgroundColor: '#00c700',
               }}
             ></div>
@@ -86,7 +86,7 @@ const userSubmitForm = () => {
 
     {currentStep === totalSteps && (
 
-    <div className='welcome_block'>
+    <div className='welcome_block completed_step'>
     <div className='text-center welcome_head'>
         <span className='completed_icon'>
             <FontAwesomeIcon icon={faCheck} />

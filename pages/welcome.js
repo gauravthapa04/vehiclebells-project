@@ -1,7 +1,8 @@
 import Layout from '@/src/components/layout/Layout';
 import React, { useEffect, useState } from 'react'
 import { Container } from "react-bootstrap";
-import logo from '../src/components/assets/images/logo.png'
+import logo2 from '../src/components/assets/images/logo-white2.png';
+import userShield from '../src/components/assets/images/user_shield.png';
 import Nav from 'react-bootstrap/Nav';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Image from 'next/image';
@@ -26,193 +27,276 @@ export default function Welcome() {
     <>
     <style jsx global>
       {`
- html {
-  height: 100%;
-}
-body{
-  min-height: 100%;
-}
-
-
-header.d_header {
-  position: fixed;
-  top: 0;
-  z-index: 9990;
-  background: #FFFFFF;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  padding: 3px 0;
-  width: 100%;
-}
-.d_header a.navbar-brand {
-  padding: 0;
-}
-.d_header ul.navbar-nav > li {
-  padding: 0px 0;
-}
-.d_header .navbar-brand img {
-  max-width: 110px;
-}
-.d_header button.btn {
-  background: transparent!important;
-  color: #000;
-  border: 0;
-  padding: 0;
-  box-shadow: none;
-  outline: none;
-  display: flex;
-  align-items: center;
-}
-.d_header span.user_icon {
-  max-width: 22px;
-  display: inline-block;
-  margin-right: 10px;
-}
-.d_header span.user_icon svg {
-  height: 20px;
-  width: 20px;
-  display: block;
-}
-.d_header span.user_icon svg path {
-  fill: #ef3d44;
-}
-.menu_sidebar {
-  flex: 0 0 250px;
-  max-width: 250px;
-}
-.main_content {
-  flex: 0 0 calc(100% - 250px);
-  max-width: calc(100% - 250px);
-}
-.sidebar_menu {
-  width: 250px;
-  max-width: 250px;
-  border-right: 0;
-  margin: 0px 0 0;
-  background: #ffff;
-  padding: 75px 0 20px;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-}
-.main_content {
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: calc(100% - 250px);
-  max-width: calc(100% - 250px);
-  padding: 20px 30px;
-  margin-left: auto;
-}
-ul.menu_list li {
-  margin: 0 0 1px;
-}
-ul.menu_list li a {
-  display: flex;
-  padding: 12px 15px;
-  align-items: center;
-  transition: all ease 0.4s;
-}
-ul.menu_list li a.active {
-  color: #EC3C3F;
-  background: rgb(236 60 63 / 2%);
-  font-weight: 600;
-}
-span.m_i_icon {
-  margin: 0 10px 0 0;
-  display: block;
-}
-span.m_i_icon svg {
-  width: 20px;
-  height: 20px;
-}
-.main_wrapper {
-  padding: 65px 0 0;
-}
-ul.menu_list {
-  padding: 20px 0 0;
-}
-.f_icon {
-  margin-right: 5px;
-}
-
-.d_page_header {
-  margin: 0 0 20px;
-}
-.d_page_header h2 {
-  margin: 0;
-  font-size: 20px;
-}
-.d_head h4 {
-  font-size: 16px;
-  margin: 0;
-  font-weight: 600;
-}
-.d_block {
-  background: #fff;
-  padding: 15px;
-  border-radius: 4px;
-  box-shadow: 2px 2px 4px rgb(34 38 69 / 5%);
-  margin: 0 0 20px;
-}
-.d_head {
-  margin: 0 0 15px;
-}
-
-.quick_links_list ul li a {
-  display: flex;
-  padding: 20px 60px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.quick_links_list li a > span {
-  height: 100px;
-  width: 100px;
-  background: rgb(248 250 253);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 0 10px;
-  border-radius: 50px;
-  font-size: 30px;
-}
-.no_data_block {
-  text-align: center;
-  min-height: 150px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.small_btn {
-  padding: 6px 15px;
-  line-height: 1.315;
-}
-
-@media (max-width:1199px){
-  .sidebar_menu {
-      transition: all ease 0.4s;
-      transform: translateX(-110%);
-  }
-  .main_content {
-      flex-basis: 100%;
-      max-width: 100%;
-      padding: 20px 15px;
-      transition: all ease 0.4s;
-  }
-}
-
-@media (max-width:767px){
-  .quick_links_list ul li a {
-      padding: 20px 20px;
-  }
-}     
+      .f_20 {
+        font-size: 20px;
+    }   
+    .main_wraper {
+        padding: 65px 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .welcome_wrap {
+        max-width: 1000px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 0px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .select_option_list {
+        max-width: 700px;
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+    .select_option_inner {
+        background: #F8FAFD;
+        padding: 20px;
+        border-radius: 4px;
+        min-height: 240px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        border: 1px solid transparent;
+        transition: all ease 0.4s;
+        /* box-shadow: 5px 5px 30px rgb(5, 39, 83,0.1); */
+    }
+    .select_option_inner p {
+        margin: 0;
+    }
+    .select_option input[type="radio"]:checked + .select_option_inner {
+        background: #fff;
+        border: 1px dashed #ec3c3f;
+        box-shadow: 5px 5px 30px rgb(5, 39, 83,0.1);
+    }
+    .select_option {
+        position: relative;
+        display: block;
+        margin-bottom: 20px;
+    }
+    .select_option input[type="radio"] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        opacity: 0;
+        z-index: 1;
+    }
+    span.s_o_icom {
+        display: flex;
+        height: 78px;
+        width: 78px;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border-radius: 50px;
+        margin: 0 auto 20px;
+        font-size: 65px;
+        color: #dc3c3e;
+    }
+    .select_option_inner h4 {
+        text-transform: uppercase;
+        margin: 0 0 10px;
+        font-size: 16px;
+        line-height: 20px;
+    }
+    .welcome_head h3 {
+        margin: 0 0 15px;
+        font-weight: 500;
+        font-size: 18px;
+    }
+    .steps_list li {
+        margin: 0;
+        width: 25%;
+        text-align: center;
+        background: #dde8f8;
+        font-size: 0;
+        height: 8px;
+    }
+    ul.steps_list {
+        margin: 0 auto;
+        border-radius: 50px;
+        overflow: hidden;
+    }
+    .steps_list li.active {
+        background: #00c700;
+    }
+    .w_form_btns .btn:nth-child(2) {
+        margin-left: auto;
+    }
+    .welcome_block  .form-control, .welcome_block .form-select {
+        border-radius: 0;
+        height: 36px;
+        line-height: 1;
+        border: 0;
+        border-radius: 4px;
+        background: #F0F5FD;
+    }
+    .welcome_block input.form-control.bg_white {
+        background: #fff;
+    }
+    .welcome_block textarea.form-control {
+        min-height: 120px;
+    }
+    .work_type_block .select_option {
+        margin-bottom: 10px;
+    }
+    .work_type_block .select_option_inner {
+        min-height: initial;
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 6px 20px;
+    }
+    .work_type_block .select_option_inner h5 {
+        margin: 0;
+        font-weight: 500;
+        font-size: 14px;
+    }
+    .work_type_block .select_option_inner span.s_o_icom {
+        margin: 0 15px 0 0;
+        height: 45px;
+        width: 45px;
+        font-size: 16px;
+    }
+    .c_work_purpose {
+        background: #e0e9f7;
+        padding: 10px 20px;
+        border-radius: 4px;
+    }
+    .p_or_text {
+        text-align: center;
+        margin: 15px 0;
+        position: relative;
+    }
+    .work_type_block  .select_option_list {
+        margin-top: 0;
+    }
+    .option_check {
+        top: 5px;
+        right: 10px;
+        font-size: 24px;
+        color: #e0e9f7;
+        position: absolute;
+    }
+    .work_type_block  .option_check {
+        right: 15px;
+        top: calc(50% - 18px);
+    }
+    .select_option input[type="radio"]:checked + .select_option_inner .option_check {
+        color: #00c700;
+    }
+    span.completed_icon {
+        height: 90px;
+        width: 90px;
+        display: flex;
+        margin: 0 auto 30px;
+        align-items: center;
+        justify-content: center;
+        border: 3px solid;
+        border-radius: 50px;
+        font-size: 40px;
+        color: #00c700;
+    }
+    /* .welcome_block{
+        display: none;
+    } */
+    .progress_bar {
+        border-radius: 0;
+        overflow: hidden;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        z-index: 1;
+    }
+    
+    .welcome_left_block {
+        max-width: 46%;
+        flex: 0 0 46%;
+        background: #0A1C31;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 80px 20px;
+    }
+    .welcome_right_block {
+        flex: 0 0 54%;
+        max-width: 54%;
+        padding: 30px 30px 80px;
+        position: relative;
+    }
+    button.btn.next_step {
+        margin-left: auto;
+    }
+    .welcome_left_block_inner {
+        text-align: center;
+        color: #fff;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+    .welcome_left_block_inner h4 {
+        color: #fff;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 23px;
+        margin: 0 0 15px;
+    }
+    .welcome_left_block_inner p {
+        color: #fff;
+    }
+    a.welcome_logo {
+        max-width: 220px;
+        display: block;
+        margin: 0 auto;
+    }
+    .user_shield {
+        margin: 48px auto 40px;
+        max-width: 100px;
+    }
+    .w_form_btns {
+        position: absolute;
+        bottom: 25px;
+        left: 0;
+        margin: 0!important;
+        width: 100%;
+        padding: 0 30px;
+        justify-content: space-between!important;
+    }
+    .welcome_block.completed_step {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 400px;
+    }
+    
+    @media (max-width:991px){
+        .welcome_left_block {
+            max-width: 100%;
+            flex: 0 0 100%;
+            padding: 40px 20px;
+        }
+        .welcome_right_block {
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding: 30px 30px 80px;
+        }
+        .main_wraper {
+            padding: 40px 0;
+        }
+    }
       
       `}
     </style>
 
 
     <Layout title="Vehicle Bells | Welcome" showHead='false' showFooter='false'>
+<<<<<<< Updated upstream
         <header className='d_header'>
             <Container fluid>
                 <Nav className="navbar navbar-expand-xl">
@@ -263,15 +347,31 @@ ul.menu_list {
                 </Nav>
             </Container>
             </header>
+=======
+        
+>>>>>>> Stashed changes
             <div className='main_wraper'>
 
             <Container>
 
                 <div className='welcome_wrap'>
-            
-                <FormProvider>
-                   <UserSubmitForm />
-                </FormProvider>
+                  <div className='welcome_left_block'>
+                    <div className='welcome_left_block_inner'>
+                      <Link href='/' className='welcome_logo'>
+                          <Image src={logo2} alt='logo'/>
+                      </Link>
+                      <div className='user_shield'>
+                        <Image src={userShield} alt='userShield'/>
+                      </div>
+                      <h4>Let's Setup Your VehicleBells Account</h4>
+                      <p>Tell us about yourself so we can customize the experience for you.</p>
+                    </div>
+                  </div>
+                  <div className='welcome_right_block'>
+                    <FormProvider>
+                      <UserSubmitForm />
+                    </FormProvider>
+                  </div>
                 
                 </div>
 

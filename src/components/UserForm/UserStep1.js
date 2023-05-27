@@ -2,6 +2,9 @@ import { useContext } from 'react';
 import { FormContext } from './FormContext';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser,faUsers,faCheckCircle} from '@fortawesome/free-solid-svg-icons';
+import step_team_icon from '../assets/images/step_team_icon.png';
+import step_user_icon from '../assets/images/step_user_icon.png';
+import Image from 'next/image';
 
 
 const UserStep1 = () => {
@@ -13,10 +16,8 @@ const UserStep1 = () => {
 
   return (
       <div className='welcome_block  app_use_block'>
-                            <div className='text-center welcome_head'>
-                                <h3>Welcome to <span className='c_red'>Vehicle Bells</span></h3>
-                                <p>Tell us about yourself so we can customize the experience for you.</p>
-                                <p className='f_20'>select any one option for which you are going to use Vehicle Bells..</p>
+                            <div className='welcome_head'>
+                                <h3>I'm Using Vehicle Bells For:-</h3>
                             </div>
                             <div className='select_option_list row justify-content-center'>
                                 <div className='col-sm-6 col-12'>
@@ -24,10 +25,10 @@ const UserStep1 = () => {
                                             <input type='radio' name='step1Data' value="just me" checked={formData.step1Data === 'just me'} onChange={handleChange} required />
                                             <div className='select_option_inner'>
                                                 <span className='s_o_icom'>
-                                                    <FontAwesomeIcon icon={faUser} />
+                                                    <Image src={step_user_icon} alt='step_user_icon'/>
                                                 </span>
-                                                <h4>Just Me</h4>
-                                                <p>I need to track <b className='c_red'>my own</b> miles and expenses</p>
+                                                <h4>Personal use</h4>
+                                                <p>I need to track my pesonal miles and expenses.</p>
                                                 <div className="option_check"><FontAwesomeIcon icon={faCheckCircle} /></div>
                                             </div>
                                     </label>
@@ -37,10 +38,10 @@ const UserStep1 = () => {
                                             <input type='radio' name='step1Data' value="my team" checked={formData.step1Data === 'my team'} onChange={handleChange} required />
                                             <div className='select_option_inner'>
                                                 <span className='s_o_icom'>
-                                                <FontAwesomeIcon icon={faUsers} />
+                                                    <Image src={step_team_icon} alt='step_team_icon'/>
                                                 </span>
                                                 <h4>My Team</h4>
-                                                <p>I need to track <b className='c_red'>my team's</b> mileage and expenses</p>
+                                                <p>I need to track my Team’s miles and expenses.</p>
                                                 <div className="option_check"><FontAwesomeIcon icon={faCheckCircle} /></div>
                                             </div>
                                     </label>

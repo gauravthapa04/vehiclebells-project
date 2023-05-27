@@ -14,10 +14,10 @@ const UserStep5 = () => {
 
   return (
     <div className='welcome_block create_team_block'>
-    <div className='text-center welcome_head'>
+    <div className='welcome_head'>
     <h3>Invite your team to record miles with Vehicle Bells</h3>
     </div>                            
-    <div className='my-5'>
+    <div className='my-3'>
     <div className="mb-3">
         <label className="form-label">Email addresses</label>
         <textarea className="form-control" placeholder='Enter email addresses' name="textareaField" value={formData.textareaField || ''} onChange={handleInputChange} />

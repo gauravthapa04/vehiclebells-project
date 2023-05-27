@@ -20,9 +20,8 @@ const UserStep2 = () => {
 
   return (
     <div className='welcome_block work_mode_block'>
-    <div className='text-center welcome_head'>
-        <h3><span className='c_red'>Choose a mode</span> to get started</h3>
-        <p>We'll optimize the app based on what kind of work you do you can edit this later.</p>
+    <div className='welcome_head'>
+        <h3>Choose a mode to get started :-</h3>
     </div>
     <div className='select_option_list row justify-content-center'>
         <div className='col-sm-6 col-12'>
@@ -46,7 +45,7 @@ const UserStep2 = () => {
                     <FontAwesomeIcon icon={faPeopleGroup} />
                     </span>
                     <h4>Employee</h4>
-                    <p>Taxes are taken out of your payckeck. example: healthcare, distribution, sales.</p>
+                    <p>For example: healthcare, distribution, sales.</p>
                     <div className="option_check"><FontAwesomeIcon icon={faCheckCircle} /></div>
                 </div>
         </label>

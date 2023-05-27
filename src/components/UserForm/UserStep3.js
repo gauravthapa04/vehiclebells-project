@@ -18,14 +18,13 @@ const UserStep3 = () => {
   return (
 
     <div className='welcome_block  work_type_block'>
-    <div className='text-center welcome_head'>
+    <div className='welcome_head'>
         <h3>What do you do for work?</h3>
-        <p>What is the work purpose for all your drives?</p>
     </div>
     <div className='c_work_purpose mt-5'>
         <div className="mb-3">
             <label className="form-label">+ Add a custom purpose</label>
-            <input type="text" className="form-control" placeholder='work purpose'name="step1TextData" value={formData.step1TextData || ''} onChange={handleTextChange} />
+            <input type="text" className="form-control bg_white" placeholder='work purpose'name="step1TextData" value={formData.step1TextData || ''} onChange={handleTextChange} />
         </div>
     </div>
     <div className='p_or_text'>Or select any one from below</div>

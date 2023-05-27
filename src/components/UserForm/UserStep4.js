@@ -12,12 +12,16 @@ const UserStep4 = () => {
     updateFormData({ teamSize: e.target.value });
   };
 
+  const handleSelectChange = (e) => {
+    updateFormData({ [e.target.name]: e.target.value });
+  };
+
   return (
     <div className='welcome_block create_team_block'>
-    <div className='text-center welcome_head'>
+    <div className='welcome_head'>
         <h3>Create your team with a few short details</h3>
-    </div>                            
-    <div className='my-5'>
+    </div>                                
+    <div className='my-3'>
         <div className="mb-3">
             <label className="form-label">What is your name?</label>
             <input type="text" name="fullName" value={formData.fullName || ''} onChange={handleTextChange} className="form-control" placeholder='Your full name' />
@@ -27,8 +31,16 @@ const UserStep4 = () => {
             <input type="text" name="companyName" value={formData.companyName || ''} onChange={handleTextChange} className="form-control" placeholder='company name' />
         </div>
         <div className="mb-3">
-            <label className="form-label">number of employees tracking mileage</label>
-            <div className='row'>
+            <label className="form-label">Your Team Size</label>
+            <select className="form-select" name="selectBox1" value={formData.selectBox1 || ''} onChange={handleSelectChange}>
+                <option value="">-- Select an option --</option>
+                <option value="1-5">1-5</option>
+                <option value="6-20">6-20</option>
+                <option value="21-50">21-50</option>
+                <option value="51-100">51-100</option>
+                <option value="100+">100+</option>
+            </select>
+            {/* <div className='row'>
                 <div className='col-sm-6 col-12'>
                     <div className="form-check mb-2">
                         <label className="form-check-label">
@@ -69,7 +81,7 @@ const UserStep4 = () => {
                         </label>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
         <div className="mb-3">
             <label className="form-label">what is your phone number?</label>
