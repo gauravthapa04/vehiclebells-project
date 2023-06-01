@@ -7,6 +7,7 @@ import * as Yup from 'yup'
 import { userService, alertService } from 'services';
 import { useForm } from 'react-hook-form';
 import { Alert } from './Alert';
+import SendEmail from './SendEmail';
 
 export default function UserForgotPassword(){
   const [loading, setLoading] = useState(true);
@@ -32,6 +33,14 @@ function onSubmit(email) {
   alertService.clear();
   return userService.forgotpassword(email)
     .then(() => { 
+      const UserLocal = JSON.parse(localStorage.getItem('user'));
+      //console.log(UserLocal.resetToken);
+      const resetUrl = `${location.origin}/account/reset-password?token=${UserLocal.resetToken}`;
+      SendEmail({
+        to:email,
+        subject:'Reseat Password',
+        text:'<h4>Reset Password Email</h4><p>Please click the below link to reset your password, the link will be valid for 1 day:</p><p><a href="'+resetUrl+'">"'+resetUrl+'"</a></p><div><strong>NOTE:</strong> The fake backend displayed this "email" so you can test without an api. A real backend would send a real email.</div>'
+      });
       alertService.success('Please check your email for password reset');
       //console.log()
     })

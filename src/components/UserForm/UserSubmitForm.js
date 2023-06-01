@@ -37,35 +37,26 @@ const userSubmitForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
+        if(formData.useType == "my team")
+        {
+          return userService.TeamTracking({userId: formData.userId, useType: formData.useType, fullName: formData.fullName, CompanyName: formData.CompanyName, teamEmail: formData.team_email, teamRole: formData.teamRole, teamProgram: formData.teamProgram, phoneNumber: formData.phoneNumber, teamSize: formData.teamSize})
+          .then((response) => { 
+            if (response) {
+              router.push('/dashboard');
+            }
+          })
+          .catch(error => alertService.error(error));
+        }
+        else{
+            return userService.OwnTracking({userId: formData.userId, useType: formData.useType, employeetype: formData.employeetype, CompanyName: formData.CompanyName, Manageremail: formData.Manageremail, custom_occupation: formData.custom_occupation})
+            .then((response) => { 
+              if (response) {
+                router.push('/dashboard');
+              }
+            })
+            .catch(error => alertService.error(error));
+        }
 
-        // try {
-        //   const response = await fetch('/api/UserOwnTracking', {
-        //     method: 'POST',
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(formData),
-        //   });
-    
-        //   if (response.ok) {
-        //     console.log('User created successfully');
-        //   } else {
-        //     console.error('Failed to create user');
-        //   }
-        // } catch (error) {
-        //   console.error('Error creating user', error);
-        // }
-
-
-        return userService.OwnTracking({userId: formData.userId, useType: formData.useType, employeetype: formData.employeetype, CompanyName: formData.CompanyName, Manageremail: formData.Manageremail, custom_occupation: formData.custom_occupation})
-        .then((response) => { 
-          //alertService.success('Please check your email for password reset');
-          //console.log(response)
-          if (response) {
-            router.push('/dashboard');
-          }
-        })
-        .catch(error => alertService.error(error));
 
 
       };

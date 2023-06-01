@@ -19,6 +19,7 @@ export const userService = {
     forgotpassword,
     resetPassword,
     OwnTracking,
+    TeamTracking,
     validateResetToken,
     getAll,
     getById,
@@ -45,6 +46,7 @@ async function forgotpassword(email) {
             const resetUrl = `${location.origin}/account/reset-password?token=${user.resetToken}`;
             alertService.info('<h4>Reset Password Email</h4><p>Please click the below link to reset your password, the link will be valid for 1 day:</p><p><a href="'+resetUrl+'">"'+resetUrl+'"</a></p><div><strong>NOTE:</strong> The fake backend displayed this "email" so you can test without an api. A real backend would send a real email.</div>', { autoClose: false });
         }, 1000);
+        //return resetUrl;
 }
 
 async function resetPassword(password) {
@@ -107,4 +109,8 @@ async function _delete(id) {
 
 async function OwnTracking(Formdata){
     return await fetchWrapper.post(`${baseUrl}/own-tracking`, Formdata); 
+}
+
+async function TeamTracking(FormData){
+    return await fetchWrapper.post(`${baseUrl}/team-tracking`, FormData);
 }

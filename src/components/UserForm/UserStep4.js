@@ -8,9 +8,9 @@ const UserStep4 = () => {
     updateFormData({ [e.target.name]: e.target.value });
   };
 
-  const handleRadioChange = (e) => {
-    updateFormData({ teamSize: e.target.value });
-  };
+//   const handleRadioChange = (e) => {
+//     updateFormData({ teamSize: e.target.value });
+//   };
 
   const handleSelectChange = (e) => {
     updateFormData({ [e.target.name]: e.target.value });
@@ -32,7 +32,7 @@ const UserStep4 = () => {
         </div>
         <div className="mb-3">
             <label className="form-label">Your Team Size</label>
-            <select className="form-select" name="selectBox1" value={formData.selectBox1 || ''} onChange={handleSelectChange}>
+            <select className="form-select" name="teamSize" value={formData.teamSize || ''} onChange={handleSelectChange}>
                 <option value="">-- Select an option --</option>
                 <option value="1-5">1-5</option>
                 <option value="6-20">6-20</option>

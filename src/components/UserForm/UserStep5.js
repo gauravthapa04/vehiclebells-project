@@ -20,12 +20,12 @@ const UserStep5 = () => {
     <div className='my-3'>
     <div className="mb-3">
         <label className="form-label">Email addresses</label>
-        <textarea className="form-control" placeholder='Enter email addresses' name="textareaField" value={formData.textareaField || ''} onChange={handleInputChange} />
+        <textarea className="form-control" placeholder='Enter email addresses' name="team_email" value={formData.team_email || ''} onChange={handleInputChange} />
         <small>Separate emails with a comma, or copy and paste from excel or google sheets.</small>
     </div>
     <div className="mb-3">
         <label className="form-label">Role</label>
-        <select className="form-select" name="selectBox1" value={formData.selectBox1 || ''} onChange={handleSelectChange}>
+        <select className="form-select" name="teamRole" value={formData.teamRole || ''} onChange={handleSelectChange}>
             <option value="">-- Select an option --</option>
             <option value="Member">Member</option>
             <option value="Teamleader">Teamleader</option>
@@ -34,10 +34,9 @@ const UserStep5 = () => {
     </div>
     <div className="mb-3">
         <label className="form-label">Program</label>
-        <select className="form-select" name="selectBox2" value={formData.selectBox2 || ''} onChange={handleSelectChange}>
+        <select className="form-select" name="teamProgram" value={formData.teamProgram || ''} onChange={handleSelectChange}>
             <option value="">-- Select an option --</option>
             <option value="No Program">No Program</option>
-            <option value="Program">Program</option>
             <option value="Program">Program</option>
         </select>
     </div>

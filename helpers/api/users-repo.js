@@ -2,11 +2,13 @@ import getConfig from 'next/config';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { db } from 'helpers/api';
+import { async } from 'rxjs';
 
 const { serverRuntimeConfig } = getConfig();
 
 const User = db.User;
 const OwnTracking = db.OwnTracking
+const TeamTracking = db.TeamTracking
 
 
 export const usersRepo = {
@@ -18,6 +20,7 @@ export const usersRepo = {
     forgotPassword,
     resetpassword,
     userowntracking,
+    userteamtracking,
     validateresetroken,
     delete: _delete
 };
@@ -133,4 +136,9 @@ async function userowntracking(params) {
     const ownTracking = new OwnTracking(params);
     await ownTracking.save();
 
+}
+
+async function userteamtracking(params){
+    const teamTracking = new TeamTracking(params);
+    await teamTracking.save();  
 }

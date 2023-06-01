@@ -9,7 +9,8 @@ mongoose.Promise = global.Promise;
 
 export const db = {
     User: userModel(),
-    OwnTracking : ownTrackingModel()
+    OwnTracking : ownTrackingModel(),
+    TeamTracking : teamTrackingModel(),
 };
 
 // mongoose models with schema definitions
@@ -62,4 +63,32 @@ function ownTrackingModel(){
     });
 
     return mongoose.models.OwnTracking || mongoose.model('OwnTracking', ownTrackingschema);
+}
+    function teamTrackingModel(){
+
+        const teamTrackingschema = new Schema({
+            userId: { type: String, required: false },
+            useType: { type: String, required: false },
+            fullName: { type: String, required: false },
+            CompanyName: { type: String, required: false },
+            teamEmail: { type: String, required: false },
+            teamRole: { type: String, required: false },
+            teamProgram: {type: String, required: false},
+            phoneNumber: {type: String, required: false},
+            teamSize: {type: String, required: false}
+        }, {
+            // add createdAt and updatedAt timestamps
+            timestamps: true
+        });
+    
+        teamTrackingschema.set('toJSON', {
+            virtuals: true,
+            versionKey: false,
+            transform: function (doc, ret) {
+                delete ret._id;
+            }
+        });
+    
+        return mongoose.models.TeamTracking || mongoose.model('TeamTracking', teamTrackingschema);
+
 }
