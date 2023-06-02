@@ -2,6 +2,8 @@ import { BehaviorSubject, async } from 'rxjs';
 import getConfig from 'next/config';
 import Router from 'next/router';
 
+import { useSession, Provider } from "next-auth/react"
+
 import { fetchWrapper } from 'helpers';
 import { alertService } from './alert.service';
 
@@ -32,21 +34,36 @@ async function login(email, password) {
 
     // publish user to subscribers and store in local storage to stay logged in between page refreshes
     userSubject.next(user);
+    useSession(JSON.stringify(user));
     localStorage.setItem('user', JSON.stringify(user));
 }
 
 async function forgotpassword(email) {
 
-    const user = await fetchWrapper.post(`${baseUrl}/forgotpassword`, email);
+       const user = await fetchWrapper.post(`${baseUrl}/forgotpassword`, email);
        //create reset token that expires after 24 hours
         user.resetToken = new Date().getTime().toString();
         user.resetTokenExpires = new Date(Date.now() + 24*60*60*1000).toISOString();
         localStorage.setItem('user', JSON.stringify(user));
-        setTimeout(() => {
-            const resetUrl = `${location.origin}/account/reset-password?token=${user.resetToken}`;
-            alertService.info('<h4>Reset Password Email</h4><p>Please click the below link to reset your password, the link will be valid for 1 day:</p><p><a href="'+resetUrl+'">"'+resetUrl+'"</a></p><div><strong>NOTE:</strong> The fake backend displayed this "email" so you can test without an api. A real backend would send a real email.</div>', { autoClose: false });
-        }, 1000);
-        //return resetUrl;
+
+        const resetUrl = `${location.origin}/account/reset-password?token=${user.resetToken}`;
+        const response = await fetch('/api/sendEmail', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              to: user.email,
+              subject: 'Forgot Password',
+              text: `<h4>Reset Password Email</h4><p>Please click the below link to reset your password, the link will be valid for 1 day:</p><p><a href="${resetUrl}">Click Here</a></p>`,
+            }),
+          });
+          if (response.ok) {
+            console.log('Email sent successfully');
+          } else {
+            console.error('Failed to send email');
+          }
+
 }
 
 async function resetPassword(password) {

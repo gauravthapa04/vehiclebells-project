@@ -48,7 +48,10 @@ function ownTrackingModel(){
         CompanyName: { type: String, required: false },
         Manageremail: { type: String, required: false },
         employeetype: { type: String, required: false },
-        custom_occupation: {type: String, required: false}
+        custom_occupation: {type: String, required: false},
+        phoneNumber: {type: String, required: false},
+        userEmail: { type: String, required: false },
+        fullName: {type: String, required: false}
     }, {
         // add createdAt and updatedAt timestamps
         timestamps: true
