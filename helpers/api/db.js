@@ -21,7 +21,9 @@ function userModel() {
         hash: { type: String, required: true },
         firstName: { type: String, required: true },
         lastName: { type: String, required: true },
-        companyName: { type: String, required: false }
+        companyName: { type: String, required: false },
+        phoneNumber: { type: String, required: false },
+        profileImage: { type: String, required: false } 
     }, {
         // add createdAt and updatedAt timestamps
         timestamps: true

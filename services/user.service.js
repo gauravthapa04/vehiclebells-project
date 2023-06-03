@@ -26,7 +26,8 @@ export const userService = {
     getAll,
     getById,
     update,
-    delete: _delete
+    delete: _delete,
+    editprofile
 };
 
 async function login(email, password) {
@@ -34,7 +35,7 @@ async function login(email, password) {
 
     // publish user to subscribers and store in local storage to stay logged in between page refreshes
     userSubject.next(user);
-    useSession(JSON.stringify(user));
+    //useSession(JSON.stringify(user));
     localStorage.setItem('user', JSON.stringify(user));
 }
 
@@ -64,6 +65,18 @@ async function forgotpassword(email) {
             console.error('Failed to send email');
           }
 
+}
+
+async function editprofile(data){
+    console.log(data);
+    let users = JSON.parse(localStorage.getItem('user')) || [];
+    let id = users.id;
+    let firstName = data.firstName;
+    let lastName = data.lastName;
+    let companyName = data.companyName;
+    let phoneNumber = data.phoneNumber;
+    let profileImage = data.filename;
+    return await fetchWrapper.put(`${baseUrl}/edit-profile`, {id, firstName, lastName, companyName, phoneNumber, profileImage});
 }
 
 async function resetPassword(password) {

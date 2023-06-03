@@ -8,22 +8,11 @@ import path from 'path';
 const UserStep2 = () => {
   const { formData, updateFormData } = useContext(FormContext);
   const [showForm, setShowForm] = useState(false);
-  const [selectedFile, setSelectedFile] = useState(null);
 
   const handleChange = (e) => {
     updateFormData({ employeetype: e.target.value  });
     setShowForm(e.target.value === 'Employee');
   };
-
-  const handleFileChange = (event) => {
-    const fileName = `${Date.now()}_${event.target.files[0].name}`;
-    const uploadPath = path.join(process.cwd(), 'public/assets', 'uploads', fileName);
-        // Save the image to the static folder
-    //fse.move(uploadPath, event.target.files[0].data);
-    updateFormData({ profileImage: event.target.files[0] });
-    setSelectedFile(event.target.files[0]);
-  };
-
 
   const handleTextChange = (e) => {
     updateFormData({ [e.target.name]: e.target.value });
@@ -67,24 +56,12 @@ const UserStep2 = () => {
         </label>
         </div>
     </div>
-    {showForm ? (
+    {showForm && (
     <div className='employee_company_info mb-5'>
         <h5 className="mb-3">Get Vehicle Bells for your company</h5>
         <div className="mb-3">
             <label className="form-label">what company do you work for?</label>
             <input type="text" name="CompanyName" className="form-control" placeholder='Company Name' onChange={handleTextChange} />
-        </div>
-        <div className="mb-3">
-            <label className="form-label">What is your name?</label>
-            <input type="text" name="fullName" value={formData.fullName || ''} onChange={handleTextChange} className="form-control" placeholder='Your full name' />
-        </div>    
-        <div className="mb-3">
-            <label className="form-label">email address</label>
-            <input type="email" name="Useremail" className="form-control" placeholder='email' onChange={handleTextChange} />
-        </div>
-        <div className="mb-3">
-            <label className="form-label">Profile Image</label>
-            <input type="file" onChange={handleFileChange} className="form-control" />
         </div>
 
         <div className="mb-3">
@@ -92,22 +69,6 @@ const UserStep2 = () => {
             <input type="email" name="Manageremail" className="form-control" placeholder='Manager email' onChange={handleTextChange} />
         </div>
     </div>
-    ):(
-        <>
-        <div className="mb-3">
-            <label className="form-label">What is your name?</label>
-            <input type="text" name="fullName" value={formData.fullName || ''} onChange={handleTextChange} className="form-control" placeholder='Your full name' />
-        </div>    
-        <div className="mb-3">
-            <label className="form-label">email address</label>
-            <input type="email" name="Useremail" className="form-control" placeholder='email' onChange={handleTextChange} />
-        </div>
-        <div className="mb-3">
-            <label className="form-label">Profile Image</label>
-            <input type="file" onChange={handleFileChange} className="form-control" />
-        </div>        
-        </>
-
     )}
 
 </div>

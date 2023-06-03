@@ -23,11 +23,8 @@ export default function UserLogin(){
   function onSubmit({ email, password }) {
     alertService.clear();
     return userService.login(email, password)
-        .then(() => {
-          //signIn('credentials', { email, password }); 
+        .then(() => { 
           router.push('/welcome');
-            // get return url from query parameters or default to '/'
-            
         })
         .catch(alertService.error);
     }

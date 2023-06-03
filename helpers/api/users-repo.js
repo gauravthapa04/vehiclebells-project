@@ -22,7 +22,8 @@ export const usersRepo = {
     userowntracking,
     userteamtracking,
     validateresetroken,
-    delete: _delete
+    delete: _delete,
+    editprofile
 };
 
 async function authenticate({ email, password }) {
@@ -113,11 +114,21 @@ async function resetpassword(params){
             { _id: params.id },
             { $set: { hash: password } }
         );
-
         //User.updateOne({ email: 'testbytecode1@gmail.com' }, { $set: { hash : password } });
         return 'ok';
     }
+}
 
+async function editprofile(params)
+{
+    //console.log(params.data)
+    const user = await User.findOne({ _id: params.id });
+    if (!user) return "User Not Found";
+    await User.updateOne(
+        { _id: params.id },
+        { $set: { firstName: params.firstName, lastName: params.lastName, companyName: params.companyName, phoneNumber: params.phoneNumber, profileImage: params.profileImage } }
+    );
+    return params.profileImage;
 }
 
 function validateresetroken(params) {

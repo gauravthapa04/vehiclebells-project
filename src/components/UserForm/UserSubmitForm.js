@@ -37,25 +37,25 @@ const userSubmitForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
-        // if(formData.useType == "my team")
-        // {
-        //   return userService.TeamTracking({userId: formData.userId, useType: formData.useType, fullName: formData.fullName, CompanyName: formData.CompanyName, teamEmail: formData.team_email, teamRole: formData.teamRole, teamProgram: formData.teamProgram, phoneNumber: formData.phoneNumber, teamSize: formData.teamSize})
-        //   .then((response) => { 
-        //     if (response) {
-        //       router.push('/dashboard');
-        //     }
-        //   })
-        //   .catch(error => alertService.error(error));
-        // }
-        // else{
-        //     return userService.OwnTracking({userId: formData.userId, useType: formData.useType, employeetype: formData.employeetype, CompanyName: formData.CompanyName, Manageremail: formData.Manageremail, phoneNumber: formData.phoneNumber, userEmail: formData.userEmail, fullName: formData.fullName, profileImage: formData.profileImage, profileData: formData.profileData})
-        //     .then((response) => { 
-        //       if (response) {
-        //         router.push('/dashboard');
-        //       }
-        //     })
-        //     .catch(error => alertService.error(error));
-        // }
+        if(formData.useType == "my team")
+        {
+          return userService.TeamTracking({userId: formData.userId, useType: formData.useType, fullName: formData.fullName, CompanyName: formData.CompanyName, teamEmail: formData.team_email, teamRole: formData.teamRole, teamProgram: formData.teamProgram, phoneNumber: formData.phoneNumber, teamSize: formData.teamSize})
+          .then((response) => { 
+            if (response) {
+              router.push('/dashboard');
+            }
+          })
+          .catch(error => alertService.error(error));
+        }
+        else{
+            return userService.OwnTracking({userId: formData.userId, useType: formData.useType, employeetype: formData.employeetype, CompanyName: formData.CompanyName, Manageremail: formData.Manageremail})
+            .then((response) => { 
+              if (response) {
+                router.push('/dashboard');
+              }
+            })
+            .catch(error => alertService.error(error));
+        }
 
 
 
