@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Row, Col } from "react-bootstrap";
-import logo from '../assets/images/logo.png'
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import logo from '../assets/images/vehicell-horizontal.png'
+import user_thumb from '../assets/images/user_img.png'
 import Nav from 'react-bootstrap/Nav';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome,faCar,faMoneyCheckDollar,faChartPie,faFileExport, faGear,faGauge, faRightFromBracket,faCarSide,faMapLocationDot,faMoneyBillTransfer,faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faHome,faCar,faMoneyCheckDollar,faChartPie,faFileExport, faGear,faGauge, faRightFromBracket,faCarSide,faMapLocationDot,faMoneyBillTransfer,faPlus,faDollarSign, faLocationDot, faCircleInfo, faChevronRight, faUser, faUsers, faSquareCaretUp } from '@fortawesome/free-solid-svg-icons';
 import { useSession } from "next-auth/react"
 import { userService } from 'services';
 import AdminLayout from './layout/AdminLayout';
@@ -23,7 +25,7 @@ export default function UserDashboard() {
 
     return (
     <>
-    <style jsx global>
+<style jsx global>
       {`
  html {
   height: 100%;
@@ -39,7 +41,7 @@ header.d_header {
   z-index: 9990;
   background: #FFFFFF;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  padding: 3px 0;
+  padding: 5px 0;
   width: 100%;
 }
 .d_header a.navbar-brand {
@@ -49,7 +51,7 @@ header.d_header {
   padding: 0px 0;
 }
 .d_header .navbar-brand img {
-  max-width: 110px;
+  max-width: 200px;
 }
 .d_header button.btn {
   background: transparent!important;
@@ -61,10 +63,17 @@ header.d_header {
   display: flex;
   align-items: center;
 }
-.d_header span.user_icon {
-  max-width: 22px;
-  display: inline-block;
-  margin-right: 10px;
+.d_header span.user_thumb {
+    width: 40px;
+    display: block;
+    margin-right: 0;
+    height: 40px;
+    border-radius: 50px;
+    background: #D9D9D9;
+    border: 1px solid #D9D9D9;
+}
+.user_dropdown.dropdown button:after {
+    display: none;
 }
 .d_header span.user_icon svg {
   height: 20px;
@@ -83,38 +92,62 @@ header.d_header {
   max-width: calc(100% - 250px);
 }
 .sidebar_menu {
-  width: 250px;
-  max-width: 250px;
-  border-right: 0;
-  margin: 0px 0 0;
-  background: #ffff;
-  padding: 75px 0 20px;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
+    width: 265px;
+    max-width: 265px;
+    border-right: 0;
+    margin: 0px 0 0;
+    background: #0a1c31;
+    padding: 0px 0 20px;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9990;
+    transition: all ease 0.4s;
+}
+.sidebar_logo {
+  padding: 10px 20px;
+  margin: 0 0 30px;
+  line-height: 1;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar_logo img {
+    max-width: 200px;
+    margin: 0 auto;
+    display: block;
 }
 .main_content {
   flex-grow: 0;
   flex-shrink: 0;
-  flex-basis: calc(100% - 250px);
-  max-width: calc(100% - 250px);
+  flex-basis: calc(100% - 265px);
+  max-width: calc(100% - 265px);
   padding: 20px 30px;
   margin-left: auto;
 }
 ul.menu_list li {
-  margin: 0 0 1px;
+  margin: 0 0 10px;
 }
 ul.menu_list li a {
   display: flex;
-  padding: 12px 15px;
+  padding: 13px 20px;
   align-items: center;
   transition: all ease 0.4s;
+  color: #fff;
+}
+ul.menu_list > li > a{
+  white-space: nowrap;
+}
+ul.menu_list li:hover > a {
+    background: rgba(238, 244, 253,0.10);
 }
 ul.menu_list li a.active {
-  color: #EC3C3F;
-  background: rgb(236 60 63 / 2%);
-  font-weight: 600;
+    color: #ef3d44;
+    background: #EAEDF7;
+    font-weight: 600;
 }
 span.m_i_icon {
   margin: 0 10px 0 0;
@@ -124,11 +157,26 @@ span.m_i_icon svg {
   width: 20px;
   height: 20px;
 }
+.m_i_arrow {
+    margin-left: auto;
+    height: 20px;
+    width: 20px;
+    text-align: center;
+    font-size: 12px;
+}
+
 .main_wrapper {
   padding: 65px 0 0;
+  background: #EAEDF7;
+}
+.sidebar_menu_inner {
+    height: 100%;
 }
 ul.menu_list {
-  padding: 20px 0 0;
+    padding: 20px 0 0;
+    height: calc(100% - 180px);
+    display: flex;
+    flex-direction: column;
 }
 .f_icon {
   margin-right: 5px;
@@ -167,7 +215,7 @@ ul.menu_list {
 .quick_links_list li a > span {
   height: 100px;
   width: 100px;
-  background: rgb(248 250 253);
+  background: #eaedf7;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -188,6 +236,234 @@ ul.menu_list {
   line-height: 1.315;
 }
 
+.d_header a.navbar-brand {
+  z-index: 1;
+  position: relative;
+  display: none;
+}
+.d_header .container-fluid {
+    padding: 0 30px 0 265px;
+}
+.menu_collapsed .d_header .container-fluid {
+    padding-left: 65px;
+}
+.user_info_block {
+    padding: 0 20px 10px;
+    color: #fff;
+}
+.user_info_block .user_thumb {
+    width: 68px;
+    min-width: 68px;
+    height: 68px;
+    border: 4px solid rgba(255,255,255,0.15);
+    border-radius: 50%;
+    transition: all ease 0.4s;
+}
+.user_info {
+  padding-left:20px;
+}
+.user_info h5 {
+    color: #fff;
+    margin: 0 0 14px;
+}
+.user_info a svg path {
+    fill: #fff;
+}
+.user_info a {
+    display: block;
+    margin: 0 20px 0 0;
+}
+.d_header .header_right {
+    width: 100%;
+    justify-content: flex-start;
+}
+.d_header .user_dropdown.dropdown {
+    margin-left: auto;
+}
+.menu_collapsed .sidebar_menu:not(:hover) {
+    max-width: 65px;
+    width: 65px;
+    overflow: hidden;
+}
+.menu_collapsed .sidebar_menu:not(:hover) ul.menu_list li a span:not(.m_i_icon) {
+    display: none;
+}
+.menu_collapsed .sidebar_menu:not(:hover) .user_info {
+    display: none;
+}
+.menu_collapsed .sidebar_menu:not(:hover) .user_info_block {
+    padding: 0 10px 10px;
+}
+.menu_collapsed .sidebar_menu:not(:hover) .user_info_block .user_thumb {
+    width: 45px;
+    min-width: 45px;
+    height: 45px;
+}
+.menu_collapsed .main_content {
+    max-width: calc(100% - 65px);
+    flex: 0 0 calc(100% - 65px);
+}
+
+
+
+.d_menu_toggle {
+    height: 26px;
+    width: 26px;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+}
+.d_menu_toggle span {
+    display: block;
+    height: 2px;
+    background: rgba(10, 28, 49, 0.5);
+    width: 26px;
+}
+.d_menu_toggle span:nth-child(2) {
+    margin: 6px 0;
+}
+.d_menu_toggle span:first-child {
+    width: 18px;
+}
+.d_menu_toggle span:nth-child(3) {
+    width: 22px;
+}
+.d_header_search {
+    margin: 0 0 0 50px;
+    position: relative;
+    background: #EAEDF7;
+    border-radius: 6px;
+    width: 400px;
+}
+.d_header_search form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.d_header_search input.form-control {
+    height: 40px;
+    background: transparent;
+    border: 0;
+    padding: 5px 20px;
+    color: #0A1C31;
+    font-size: 15px;
+    outline: none;
+    box-shadow: none;
+}
+.d_header_search .search_btn {
+    border: 0;
+    background: transparent;
+    position: absolute;
+    right: 15px;
+    font-size: 17px;
+    color: #808A94;
+}
+
+
+.d_card {
+    padding: 20px;
+    background: linear-gradient(90deg, #0162E8 0%, rgba(1, 98, 232, 0.5) 100%);
+    color: #fff;
+    border-radius: 4px;
+    margin: 0 0 30px;
+    position: relative;
+    box-shadow: 0px 8px 20px rgb(3 99 231 / 15%);
+}
+.d_card.bg_orange {
+    background: linear-gradient(90deg, #F76A2D 0%, #EFA65F 100%);
+    box-shadow: 0px 8px 20px rgb(247 106 45 / 15%);
+}
+.d_card.bg_green {
+    background: linear-gradient(90deg, #029666 -1.73%, #48D6A8 100%);
+    box-shadow: 0px 8px 20px rgb(4 151 103 / 15%);
+}
+.d_card_head h5 {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: #fff;
+}
+.d_card_content {
+
+}
+.d_card_content .card_icon {
+    position: absolute;
+    right: 30px;
+    font-size: 80px;
+    top: auto;
+    opacity: .5;
+    bottom: 20px;
+    line-height: 80px;
+}
+.d_card_head a svg {
+    color: #fff;
+    font-size: 18px;
+}
+.d_card_content {
+    margin: 20px 0;
+}
+.d_card_content .card_value {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    text-transform: uppercase;
+}
+.compare_percentage {
+    margin-right: 10px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+}
+.compare_percentage svg {
+    margin-right: 5px;
+    font-size: 13px;
+}
+.d_card_footer > span {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    opacity: 0.8;
+}
+.notification_block .noti_icon svg {
+    font-size: 24px;
+    color: rgb(10 28 49 / 50%);
+}
+.notification_block {
+    margin-right: 30px;
+}
+.notification_block span.noti_count {
+    height: 10px;
+    width: 10px;
+    display: block;
+    position: absolute;
+    background: #EC3C3F;
+    border-radius: 50px;
+    top: 0;
+    right: -3px;
+}
+.notification_block .noti_icon {
+    position: relative;
+    cursor: pointer;
+}
+ul.menu_list li .dropdown-menu {
+    transform: none!important;
+    display: none;
+    position: static!important;
+}
+ul.menu_list li .dropdown-menu.show {
+    display: block;
+    opacity: 1;
+}
+
+
+/* responsive media queries */
 @media (max-width:1199px){
   .sidebar_menu {
       transition: all ease 0.4s;
@@ -215,13 +491,45 @@ ul.menu_list {
           <div className='d-flex'>
               <div className="sidebar_menu">
                  <div className='sidebar_menu_inner'>
+                    <div className='sidebar_logo'>
+                        <Link href='/'>
+                            <Image
+                            src={logo}
+                            className=""
+                            alt="logo"
+                            />                    
+                        </Link>
+                    </div>
+                    <div className='user_info_block d-flex align-items-center'>
+                      <span className='user_thumb'>
+                        <Image
+                          src={user_thumb}
+                          className=""
+                          alt="user"
+                          /> 
+                      </span>
+                      <div className='user_info'>
+                          <h5>Hi, Sanjay</h5>
+                          <div className='d-flex'>
+                            <Link href='#'>
+                              <FontAwesomeIcon icon={faGear} />
+                            </Link>
+                            <Link href='#'>
+                              <FontAwesomeIcon icon={faUser} />
+                            </Link>
+                            <Link href='#'>
+                              <FontAwesomeIcon icon={faRightFromBracket} />
+                            </Link>
+                          </div>
+                      </div>
+                    </div>
                   <ul className='menu_list'>
                     <li>
                       <Link className='active' href='#'>
                         <span className='m_i_icon'> 
                           <FontAwesomeIcon icon={faHome} />
                         </span>
-                        Dashboard
+                        <span>Dashboard</span>
                       </Link>
                     </li>
                     <li>
@@ -229,15 +537,32 @@ ul.menu_list {
                         <span className='m_i_icon'> 
                           <FontAwesomeIcon icon={faCar} />
                         </span>
-                        Trips
+                        <span>Your Vehicles</span>
+                        <span className='m_i_arrow'> 
+                          <FontAwesomeIcon icon={faChevronRight} />
+                        </span>
                       </Link>
                     </li>
                     <li>
                       <Link href='#'>
                         <span className='m_i_icon'> 
-                          <FontAwesomeIcon icon={faMoneyCheckDollar} />
+                        <FontAwesomeIcon icon={faMapLocationDot} />
                         </span>
-                        Transactions
+                        <span>Your Trips</span>
+                        <span className='m_i_arrow'> 
+                          <FontAwesomeIcon icon={faChevronRight} />
+                        </span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href='#'>
+                        <span className='m_i_icon'> 
+                          <FontAwesomeIcon icon={faDollarSign} />
+                        </span>
+                        <span>Your Expenses</span>
+                        <span className='m_i_arrow'> 
+                          <FontAwesomeIcon icon={faChevronRight} />
+                        </span>
                       </Link>
                     </li>
                     <li>
@@ -245,15 +570,32 @@ ul.menu_list {
                         <span className='m_i_icon'> 
                           <FontAwesomeIcon icon={faChartPie} />
                         </span>
-                        Reports
+                        <span>Reports</span>
+                        <span className='m_i_arrow'> 
+                          <FontAwesomeIcon icon={faChevronRight} />
+                        </span>
                       </Link>
                     </li>
                     <li>
                       <Link href='#'>
                         <span className='m_i_icon'> 
-                          <FontAwesomeIcon icon={faFileExport} />
+                          <FontAwesomeIcon icon={faLocationDot} />
                         </span>
-                        Data Reports
+                        <span>Maps</span>
+                        <span className='m_i_arrow'> 
+                          <FontAwesomeIcon icon={faChevronRight} />
+                        </span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href='#'>
+                        <span className='m_i_icon'> 
+                          <FontAwesomeIcon icon={faCircleInfo} />
+                        </span>
+                        <span>Information</span>
+                        <span className='m_i_arrow'> 
+                          <FontAwesomeIcon icon={faChevronRight} />
+                        </span>
                       </Link>
                     </li>
                     <li>
@@ -261,7 +603,21 @@ ul.menu_list {
                         <span className='m_i_icon'> 
                           <FontAwesomeIcon icon={faGear} spin />
                         </span>
-                        Settings
+                        <span>Settings</span>
+                        <span className='m_i_arrow'> 
+                          <FontAwesomeIcon icon={faChevronRight} />
+                        </span>
+                      </Link>
+                    </li>
+                    <li className='mt-auto'>
+                      <Link href='#'>
+                        <span className='m_i_icon'> 
+                          <FontAwesomeIcon icon={faUsers}  />
+                        </span>
+                        <span>Team Dashboard</span>
+                        <span className='m_i_arrow'> 
+                          <FontAwesomeIcon icon={faChevronRight} />
+                        </span>
                       </Link>
                     </li>
                   </ul>
@@ -270,6 +626,69 @@ ul.menu_list {
               <div className='main_content'>
                 <div className='d_page_header'>
                   <h2>Dashboard</h2>
+                </div>
+                <div class="d_card_list">
+
+                  <Row>
+                    <Col lg={4}>
+                      <div className="d_card bg_blue">
+                        <div className='d_card_head d-flex justify-content-between'>
+                          <h5>Total Trips</h5>
+                          <Link href='#'><FontAwesomeIcon icon={faPlus} /></Link>
+                        </div>
+                        <div className='d_card_content'>
+                          <div className='card_value'>2000 MI</div>
+                          <div className='card_icon'><FontAwesomeIcon icon={faCar} /></div>
+                        </div>
+                        <div className='d_card_footer d-flex'>
+                          <div className='compare_percentage'>
+                            <FontAwesomeIcon icon={faSquareCaretUp} />
+                            <span>20%</span>
+                          </div>
+                          <span>Compared to last week</span>
+                        </div>
+                      </div>
+                    </Col>
+                    <Col lg={4}>
+                      <div className="d_card bg_orange">
+                        <div className='d_card_head d-flex justify-content-between'>
+                          <h5>Total Expenses</h5>
+                          <Link href='#'><FontAwesomeIcon icon={faPlus} /></Link>
+                        </div>
+                        <div className='d_card_content'>
+                          <div className='card_value'>$ 5000</div>
+                          <div className='card_icon'><FontAwesomeIcon icon={faDollarSign} /></div>
+                        </div>
+                        <div className='d_card_footer d-flex'>
+                          <div className='compare_percentage'>
+                            <FontAwesomeIcon icon={faSquareCaretUp} />
+                            <span>20%</span>
+                          </div>
+                          <span>Compared to last week</span>
+                        </div>
+                      </div>
+                    </Col>
+                    <Col lg={4}>
+                      <div className="d_card bg_green">
+                        <div className='d_card_head d-flex justify-content-between'>
+                          <h5>Total Profit</h5>
+                          <Link href='#'><FontAwesomeIcon icon={faPlus} /></Link>
+                        </div>
+                        <div className='d_card_content'>
+                          <div className='card_value'>$ 1000</div>
+                          <div className='card_icon'><FontAwesomeIcon icon={faChartPie} /></div>
+                        </div>
+                        <div className='d_card_footer d-flex'>
+                          <div className='compare_percentage'>
+                            <FontAwesomeIcon icon={faSquareCaretUp} />
+                            <span>20%</span>
+                          </div>
+                          <span>Compared to last week</span>
+                        </div>
+                      </div>
+                    </Col>
+                  </Row>
+
                 </div>
                 <Row>
                   <Col lg={12}>
