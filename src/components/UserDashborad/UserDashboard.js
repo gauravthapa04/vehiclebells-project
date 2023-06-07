@@ -12,6 +12,7 @@ import { faHome,faCar,faMoneyCheckDollar,faChartPie,faFileExport, faGear,faGauge
 import { useSession } from "next-auth/react"
 import { userService } from 'services';
 import AdminLayout from './layout/AdminLayout';
+import AdminSidebar from './layout/AdminSidebar';
 
 export default function UserDashboard() {
 
@@ -489,145 +490,12 @@ ul.menu_list li .dropdown-menu.show {
 
     <div className="main_wrapper">
           <div className='d-flex'>
-              <div className="sidebar_menu">
-                 <div className='sidebar_menu_inner'>
-                    <div className='sidebar_logo'>
-                        <Link href='/'>
-                            <Image
-                            src={logo}
-                            className=""
-                            alt="logo"
-                            />                    
-                        </Link>
-                    </div>
-                    <div className='user_info_block d-flex align-items-center'>
-                      <span className='user_thumb'>
-                        <Image
-                          src={user_thumb}
-                          className=""
-                          alt="user"
-                          /> 
-                      </span>
-                      <div className='user_info'>
-                          <h5>Hi, Sanjay</h5>
-                          <div className='d-flex'>
-                            <Link href='#'>
-                              <FontAwesomeIcon icon={faGear} />
-                            </Link>
-                            <Link href='#'>
-                              <FontAwesomeIcon icon={faUser} />
-                            </Link>
-                            <Link href='#'>
-                              <FontAwesomeIcon icon={faRightFromBracket} />
-                            </Link>
-                          </div>
-                      </div>
-                    </div>
-                  <ul className='menu_list'>
-                    <li>
-                      <Link className='active' href='#'>
-                        <span className='m_i_icon'> 
-                          <FontAwesomeIcon icon={faHome} />
-                        </span>
-                        <span>Dashboard</span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href='#'>
-                        <span className='m_i_icon'> 
-                          <FontAwesomeIcon icon={faCar} />
-                        </span>
-                        <span>Your Vehicles</span>
-                        <span className='m_i_arrow'> 
-                          <FontAwesomeIcon icon={faChevronRight} />
-                        </span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href='#'>
-                        <span className='m_i_icon'> 
-                        <FontAwesomeIcon icon={faMapLocationDot} />
-                        </span>
-                        <span>Your Trips</span>
-                        <span className='m_i_arrow'> 
-                          <FontAwesomeIcon icon={faChevronRight} />
-                        </span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href='#'>
-                        <span className='m_i_icon'> 
-                          <FontAwesomeIcon icon={faDollarSign} />
-                        </span>
-                        <span>Your Expenses</span>
-                        <span className='m_i_arrow'> 
-                          <FontAwesomeIcon icon={faChevronRight} />
-                        </span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href='#'>
-                        <span className='m_i_icon'> 
-                          <FontAwesomeIcon icon={faChartPie} />
-                        </span>
-                        <span>Reports</span>
-                        <span className='m_i_arrow'> 
-                          <FontAwesomeIcon icon={faChevronRight} />
-                        </span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href='#'>
-                        <span className='m_i_icon'> 
-                          <FontAwesomeIcon icon={faLocationDot} />
-                        </span>
-                        <span>Maps</span>
-                        <span className='m_i_arrow'> 
-                          <FontAwesomeIcon icon={faChevronRight} />
-                        </span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href='#'>
-                        <span className='m_i_icon'> 
-                          <FontAwesomeIcon icon={faCircleInfo} />
-                        </span>
-                        <span>Information</span>
-                        <span className='m_i_arrow'> 
-                          <FontAwesomeIcon icon={faChevronRight} />
-                        </span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href='#'>
-                        <span className='m_i_icon'> 
-                          <FontAwesomeIcon icon={faGear} spin />
-                        </span>
-                        <span>Settings</span>
-                        <span className='m_i_arrow'> 
-                          <FontAwesomeIcon icon={faChevronRight} />
-                        </span>
-                      </Link>
-                    </li>
-                    <li className='mt-auto'>
-                      <Link href='#'>
-                        <span className='m_i_icon'> 
-                          <FontAwesomeIcon icon={faUsers}  />
-                        </span>
-                        <span>Team Dashboard</span>
-                        <span className='m_i_arrow'> 
-                          <FontAwesomeIcon icon={faChevronRight} />
-                        </span>
-                      </Link>
-                    </li>
-                  </ul>
-                 </div>
-              </div>
+              <AdminSidebar />
               <div className='main_content'>
                 <div className='d_page_header'>
                   <h2>Dashboard</h2>
                 </div>
-                <div class="d_card_list">
+                <div className="d_card_list">
 
                   <Row>
                     <Col lg={4}>

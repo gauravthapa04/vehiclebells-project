@@ -1,8 +1,8 @@
+'use client';
+
 import { BehaviorSubject, async } from 'rxjs';
 import getConfig from 'next/config';
 import Router from 'next/router';
-
-import { useSession, Provider } from "next-auth/react"
 
 import { fetchWrapper } from 'helpers';
 import { alertService } from './alert.service';
@@ -29,14 +29,15 @@ export const userService = {
     delete: _delete,
     editprofile
 };
-
 async function login(email, password) {
+    
     const user = await fetchWrapper.post(`${baseUrl}/authenticate`, { email, password });
 
     // publish user to subscribers and store in local storage to stay logged in between page refreshes
     userSubject.next(user);
+    return user;
     //useSession(JSON.stringify(user));
-    localStorage.setItem('user', JSON.stringify(user));
+    ///localStorage.setItem('user', JSON.stringify(user));
 }
 
 async function forgotpassword(email) {

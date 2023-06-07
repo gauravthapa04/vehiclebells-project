@@ -4,7 +4,7 @@ const AdminLayout = ({ children}) => {
         <>
           <AdminHeader />
           {children}
-          </>
+        </>
     );
   };
   

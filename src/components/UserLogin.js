@@ -8,8 +8,11 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import { userService, alertService } from 'services';
 import { useForm } from 'react-hook-form';
+import { Alert } from './Alert';
+//import { getSession } from "next-auth/client";
 export default function UserLogin(){
   const [loading, setLoading] = useState(true);
+  const { data: session } = useSession();
 
   // form validation rules 
   const validationSchema = Yup.object().shape({
@@ -20,13 +23,18 @@ export default function UserLogin(){
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
   const router = useRouter();
-  function onSubmit({ email, password }) {
+  async function onSubmit({ email, password }) {
     alertService.clear();
-    return userService.login(email, password)
-        .then(() => { 
-          router.push('/welcome');
-        })
-        .catch(alertService.error);
+
+  const LoginRes = await signIn("credentials", {
+      redirect: false,
+      email,
+      password
+  });
+    if (LoginRes && !LoginRes.ok) {
+      alertService.error(LoginRes.error);
+      console.log(LoginRes.error)
+    }
     }
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -36,9 +44,7 @@ export default function UserLogin(){
     return () => clearTimeout(timeoutId);
   }, []);
 
-  const { data: session } = useSession();
- 
-  console.log(session);
+  
   if(typeof session != 'undefined' && session != null)
   {
     router.push('/welcome')
@@ -75,6 +81,7 @@ export default function UserLogin(){
             <h3 className="wow fadeInUp">Login</h3>
             <p className="wow fadeInUp">Welcome back! Please login to your account.</p>
             <form className="wow fadeInUp" onSubmit={handleSubmit(onSubmit)}>
+              <Alert />
                 <div className="mb-4">
                   <input
                     type="email"

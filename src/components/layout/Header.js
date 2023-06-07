@@ -10,8 +10,9 @@ import { userService } from 'services';
 
 export default function Header(){
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState(null);
+    //const [user, setUser] = useState(null);
     const { data: session } = useSession(); 
+    //console.log(session);
     useEffect(() => {
         const timeoutId = setTimeout(() => {
             setLoading(false);
@@ -20,10 +21,10 @@ export default function Header(){
         return () => clearTimeout(timeoutId);
         }, []);
 
-    useEffect(() => {
-        const subscription = userService.user.subscribe(x => setUser(x));
-        return () => subscription.unsubscribe();
-      }, []);
+    // useEffect(() => {
+    //     const subscription = userService.user.subscribe(x => setUser(x));
+    //     return () => subscription.unsubscribe();
+    //   }, []);
 
       const ToggleClass = () => {
         document.body.classList.toggle('menu_expanded');
@@ -69,7 +70,6 @@ export default function Header(){
                 <Link href='/resources'>Resources</Link>  
                 </li>
                 {!session ? (
-                    !user ? (
                 <>
                 <li> 
                 <Link href='/account/login'>Login</Link>
@@ -78,10 +78,7 @@ export default function Header(){
                     <Link href='/account/register' className="register_btn btn">Register Now</Link>
                 </li> 
                 </>
-                    ) : <>
-                    <li><a className="register_btn btn" onClick={userService.logout}>Logout</a></li>
-                    </>
-                ) :(
+                    ) :(
                     <>
                          <li><a className="register_btn btn" onClick={() => signOut()}>Logout</a></li>
                     </>

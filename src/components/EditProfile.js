@@ -13,11 +13,6 @@ export default function EditProfile(){
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
-    // const [userfirstname, setUserfirstname] = useState();
-    // const [userlastname, setUserlastname] = useState();
-    // const [usercompanyname, setUsercompanyname] = useState();
-    // const [userphonenumber, setUserphonenumber] = useState();
-    // const [userprofileimage, setUserprofileimage] = useState();
     useEffect(() => {
         const timeoutId = setTimeout(() => {
             setLoading(false);

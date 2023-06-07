@@ -18,6 +18,11 @@ export default function AdminHeader(){
         const subscription = userService.user.subscribe(x => setUser(x));
         return () => subscription.unsubscribe();
       }, []);   
+
+      const ToggleClass = () => {
+        document.body.classList.toggle('menu_collapsed');
+      };
+
     return(
         <>
 
@@ -32,7 +37,7 @@ export default function AdminHeader(){
                   />                    
               </Link>
               <div className="header_right d-flex ms-auto">
-                        <div className='d_menu_toggle'>
+                        <div className='d_menu_toggle' onClick={ToggleClass}>
                           <span></span>
                           <span></span>
                           <span></span>
@@ -43,7 +48,7 @@ export default function AdminHeader(){
                             <button type='submit' className='search_btn'><FontAwesomeIcon icon={faSearch} /></button>
                           </form>
                         </div>
-                        <div class="d_header_right d-flex align-items-center ms-auto">
+                        <div className="d_header_right d-flex align-items-center ms-auto">
                           <div className='notification_block'>
                             <div className='noti_icon'>
                               <FontAwesomeIcon icon={faBell} />

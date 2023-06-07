@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { db } from 'helpers/api';
 import { async } from 'rxjs';
+import { alertService } from '@/services';
 
 const { serverRuntimeConfig } = getConfig();
 
@@ -30,7 +31,9 @@ async function authenticate({ email, password }) {
     const user = await User.findOne({ email });
 
     if (!(user && bcrypt.compareSync(password, user.hash))) {
+        alertService.error('Email or password is incorrect');
         throw 'Email or password is incorrect';
+        
     }
 
     // create a jwt token that is valid for 7 days
