@@ -6,8 +6,6 @@ import { userService, alertService } from 'services';
 import { useRouter } from 'next/router'
 export default function Login() {
   const router = useRouter();
-  const { data: session } = useSession();
-  const [user, setUser] = useState(null);
 
   return (
     <Layout title="Vehicle Bells | Login" showHead='false' showFooter='false'>

@@ -39,8 +39,6 @@ export const authOptions = {
           return user
       }
   })
-
-
     // ...add more providers here
   ]
 }

@@ -67,7 +67,7 @@ return(
 
 
                     <li>
-                      <Link className='active' href='#'>
+                      <Link className='active' href='/dashboard'>
                         <span className='m_i_icon'> 
                           <FontAwesomeIcon icon={faHome} />
                         </span>
