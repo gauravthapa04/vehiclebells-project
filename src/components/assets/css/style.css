@@ -11,7 +11,7 @@ body {
     margin: 0;
     padding: 0;
     font-weight: 400;
-    background: #eef4fd;
+    background: #eaedf7;
     overflow-x: hidden;
 }
 
@@ -931,3 +931,267 @@ ul.browsersList li {
 }
 
 
+
+
+/* Dashboard css start here
+---------------------------------------------------- */
+.form-group {
+    margin: 0 0 20px 0px;
+}
+.form-group .form-control {
+    background: #fff;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.03);
+    border-radius: 4px;
+    min-height: 40px;
+    padding: 4px 15px;
+    color: #0a1c31;
+}
+.form-group .form-control.input_error,
+.form-group .form-control.input_error:focus {
+    border-color: #ef3a42;
+    color: #ef3a42;
+    box-shadow: 4px 4px 10px rgb(239 58 66 / 3%);
+    background-image: url('../images/error-icon.svg');   
+     background-repeat: no-repeat;
+    background-position: calc(100% - 12px) center;
+    background-size: 22px;
+}
+.form-group label {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 18px;
+    text-transform: capitalize;
+    margin: 0 0 3px;
+    color:#0a1c31;
+}
+.form-group select.form-control {
+    background-image: url(/_next/static/media/select-arrow.40ed339f.svg);
+    background-position: calc(100% - 12px) center;
+    background-repeat: no-repeat;
+}
+.form-group .form-control:focus{
+    border-color: #0a1c31;
+}
+label.c_radio input[type="radio"],
+label.c_checkbox input[type="checkbox"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+label.c_checkbox,
+label.c_radio {
+    position: relative;
+    margin: 0 20px 5px 0!important;
+    cursor: pointer;
+}
+label.c_radio span,
+label.c_checkbox span {
+    padding-left: 30px;
+    position: relative;
+    display: block;
+    padding-top: 1px;
+}
+label.c_radio span:before, label.c_checkbox span:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 20px;
+    width: 20px;
+    border-radius: 50px;
+    background: #dddddd;
+}
+label.c_radio input[type="radio"]:checked + span:before, label.c_checkbox input[type="checkbox"]:checked + span:before {
+    border: 5px solid #3b4046;
+    background: #dbdee7;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.12);
+}
+label.c_checkbox span:before {
+    border-radius: 4px;
+}
+label.c_checkbox input[type="checkbox"]:checked + span:before {
+    border: 0px solid #dbdee7;
+    background-color: #f13c41;
+    background-image: url(/_next/static/media/checkbox-check.9ff4851e.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.d_head h4 {
+    position: relative;
+    padding-bottom: 10px;
+}
+.d_head h4:after {
+    display: block;
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 1px;
+    background: #ef3d43;
+}
+
+/* Table and Data table style
+===================================================== */  
+table.dataTable {
+    margin: 0px 0 10px;
+    position: relative;
+    background: rgb(59,64,70);
+    background: -moz-linear-gradient(top, rgba(59,64,70,1) 0%, rgba(45,48,55,1) 100%);
+    background: -webkit-linear-gradient(top, rgba(59,64,70,1) 0%,rgba(45,48,55,1) 100%);
+    background: linear-gradient(to bottom, rgba(59,64,70,1) 0%,rgba(45,48,55,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b4046', endColorstr='#2d3037',GradientType=0 );
+    box-shadow: none!important;
+}
+.table-responsive {
+    box-shadow: 0px 4px 15px rgb(10 28 49 / 15%);
+}
+.table > thead {
+    vertical-align: bottom;
+    background: #0a1c31;
+    color: #fff;
+}
+.table-striped>tbody>tr:nth-of-type(odd) {
+    --bs-table-accent-bg: #F0F5FC;
+    color: #555555;
+}
+.table thead tr th {
+    font-weight: 500;
+    /* font-size: 13px; */
+    line-height: 18px;
+    border: 0px;
+    padding: 13px 18px;
+    white-space: nowrap;
+    border-bottom: 1px solid rgb(255 255 255 / 7%)!important;
+    background-size: 16px 16px;
+    background: transparent;
+    color: #fff;
+}
+.table tbody tr td {
+    color: #0a1c31;
+    border: 0px;
+    font-weight: 400;
+    /* font-size: 13px; */
+    line-height: 18px;
+    text-transform: capitalize;
+    vertical-align: middle;
+    padding: 8px 15px;
+    border-right: 1px solid rgb(222 226 230);
+    /* border-bottom: 1px solid rgb(222 226 230); */
+}
+.table tbody tr td:last-child {
+    border-right: 0;
+}
+.table tbody tr td a {
+    color: #0a1c31;
+    text-decoration: underline;
+    white-space: nowrap;
+}
+.table_btn_sm {
+    background: #0a1c31;
+    border-radius: 4px;
+    height: 26px;
+    width: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none!important;
+    margin: 0 2px;
+    font-size: 14px;
+    color: #ffffff!important;
+    transition: all ease 0.4s;
+}
+table.dataTable.no-footer{
+    border: 0px;
+}
+table.dataTable tbody tr {
+    background-color:transparent;
+}
+.dataTables_length,.dataTables_filter {
+    margin: 0 0 10px;
+}
+.dataTables_wrapper .dataTables_length select, .dataTables_wrapper .dataTables_filter input {
+    background: #3B4046;
+    height: 32px;
+    border: 0px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 20px;
+    color: #bdbfc5;
+    outline: none;
+    padding: 0 12px;
+    box-sizing: border-box;
+}
+.table-hover.table-striped>tbody>tr:hover {
+    --bs-table-accent-bg: rgb(233 238 245)!important;
+    color: #555;
+}
+.dataTables_wrapper .dataTables_length label,
+.dataTables_wrapper .dataTables_filter label {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: right;
+    color: #bdbfc5;
+}
+.dataTables_wrapper .dataTables_filter input {
+    margin-left: 15px;
+}
+.dataTables_wrapper .dataTables_length select {
+    margin: 0 10px;
+}
+table.table {
+    box-shadow: 0px 4px 20px rgba(12, 15, 52, 0.08);
+}
+.dataTables_wrapper .dataTables_info {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #bdbfc5;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled, 
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+    color: #bdbfc5 !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 2px 10px;
+    border: 0!important;
+    background: rgb(59,64,70); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(59,64,70,1) 0%, rgba(45,48,55,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(59,64,70,1) 0%,rgba(45,48,55,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(59,64,70,1) 0%,rgba(45,48,55,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b4046', endColorstr='#2d3037',GradientType=0 ); /* IE6-9 */
+    box-shadow: 0 0px 15px rgb(0 0 0 / 18%);
+    border-radius: 4px;
+    margin: 0 2px;
+    color: #bdbfc5!important;
+    display: inline-block;
+    transition: all ease 0.4s;
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+body .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover,
+body .dataTables_wrapper .dataTables_paginate .paginate_button.current, 
+body .dataTables_wrapper .dataTables_paginate .paginate_button:hover, 
+body .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    background: rgb(59,64,70); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(59,64,70,1) 0%, rgba(45,48,55,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(59,64,70,1) 0%,rgba(45,48,55,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(59,64,70,1) 0%,rgba(45,48,55,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b4046', endColorstr='#2d3037',GradientType=0 ); /* IE6-9 */
+    box-shadow: 0 0px 15px rgb(0 0 0 / 18%);
+    color: #fff!important;
+}
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+    --bs-table-bg-type: rgb(234 237 247 / 65%);
+}
+.table-hover>tbody>tr:hover>* {
+    --bs-table-color-state: var(--bs-table-hover-color);
+    --bs-table-bg-state: rgb(234 237 247);
+}

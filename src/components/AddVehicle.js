@@ -16,6 +16,7 @@ import {
   faUser,
   faUsers,
   faSquareCaretUp,
+  faCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import { useSession } from "next-auth/react";
 import { userService } from "services";
@@ -493,9 +494,202 @@ ul.menu_list li .dropdown-menu.show {
           <AdminSidebar />
           <div className="main_content">
             <div className="d_page_header">
-              <h2>Add Vehicle</h2>
+              <h2>Add New Vehicle</h2>
             </div>
-            <div className="d_card_list">Add Vehicle Form</div>
+            <div className="d_page_content">
+
+              <div className="d_block">
+                <div className="d_head">
+                  <h4>Vehicle Information</h4>
+                </div>      
+                <form>
+                  <div className="form-group">
+                    <label>Vehicle type</label>
+                    <select className="form-control">
+                      <option value="Bike">Bike</option>
+                      <option value="Scooty">Scooty</option>
+                      <option value="Car">Car</option>
+                      <option value="Van">Van</option>
+                      <option value="Jeep">Jeep</option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label>Manufacturer company</label>
+                    <input className="form-control" placeholder="Manufacturer company" name="Manufacturer-company" />
+                  </div>
+                  <div className="form-group">
+                    <label>Fuel type</label>
+                    <select className="form-control">
+                      <option value="petrol">petrol</option>
+                      <option value="diesel">diesel</option>
+                      <option value="CNG">CNG</option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label>Model(optional)</label>
+                    <input className="form-control input_error" placeholder="Model" name="Model" />
+                  </div>
+                  <div className="form-group">
+                    <label>Average (optional/manual/by default)</label>
+                    <input className="form-control" placeholder="Average" name="Average" />
+                  </div>
+                  <div className="form-group">
+                    <label>Insurance Company</label>
+                    <input className="form-control input_error" placeholder="Insurance Company " name="Insurance-Company " />
+                  </div>
+                  <div className="form-group">
+                    <label>Monthly Insurance Rate</label>
+                    <input className="form-control" placeholder="Monthly Insurance Rate" name="Monthly-Insurance-Rate" />
+                  </div>
+                  <div className="form-group">
+                    <label>Odometer Reading</label>
+                    <input className="form-control" placeholder="Odometer Reading" name="Odometer-Reading" />
+                  </div>
+                  
+                  <div className="form-group">
+                      <div className="c_checkbox_buttons">                        
+                          <label className="c_checkbox">
+                              <input type="checkbox" className="checkboxBtn" value="NE" name="quarter-section" />
+                              <span>Make this Vehicle Default</span>
+                          </label>
+                      </div>
+                  </div>
+                  <button type="submit" className="btn">Save Vehicle</button>
+                </form>        
+              </div>
+
+              <div className="d_block">
+              <div className="d_head d-flex justify-content-between align-items-start">
+                  <h4>Vehicles list</h4>
+                  <a className="btn small_btn" href="/dashboard">
+                    <svg height='14px' width='12px' aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" className="svg-inline--fa fa-plus f_icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path></svg>
+                    Add Vehicle
+                  </a>
+                </div>
+              <div className="table-responsive">
+                    <table className="dataTable table table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th>Vehicle Type</th>
+                            <th>Manufacturer Company</th>
+                            <th>Fuel Type</th>
+                            <th>Model</th>
+                            <th>Average</th>
+                            <th>Insurance Company</th>
+                            <th>Monthly Insurance Rate</th>
+                            <th>Odometer Reading</th>
+                            <th>Default Vehicle</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                              <td>Bike</td>
+                              <td>Honda</td>
+                              <td>Petrol</td>
+                              <td>2020</td>
+                              <td>20km/L</td>
+                              <td>Bajaj</td>
+                              <td>5000</td>
+                              <td>5500km</td>
+                              <td></td>
+                          </tr>
+                          <tr>
+                              <td>Bike</td>
+                              <td>Tata</td>
+                              <td>Petrol</td>
+                              <td>2020</td>
+                              <td>20km/L</td>
+                              <td>Bajaj</td>
+                              <td>5000</td>
+                              <td>5500km</td>
+                              <td></td>
+                          </tr>
+                          <tr>
+                              <td>Bike</td>
+                              <td>Mahindra</td>
+                              <td>Petrol</td>
+                              <td>2020</td>
+                              <td>20km/L</td>
+                              <td>Bajaj</td>
+                              <td>5000</td>
+                              <td>5500km</td>
+                              <td></td>
+                          </tr>
+                          <tr>
+                            <td>Bike</td>
+                            <td>Honda</td>
+                            <td>Petrol</td>
+                            <td>2020</td>
+                            <td>20km/L</td>
+                            <td>Bajaj</td>
+                            <td>5000</td>
+                            <td>5500km</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Bike</td>
+                            <td>Tata</td>
+                            <td>Petrol</td>
+                            <td>2020</td>
+                            <td>20km/L</td>
+                            <td>Bajaj</td>
+                            <td>5000</td>
+                            <td>5500km</td>
+                            <td><span className="table_btn_sm"><FontAwesomeIcon icon={faCheck} /></span></td>
+                        </tr>
+                        <tr>
+                            <td>Bike</td>
+                            <td>Mahindra</td>
+                            <td>Petrol</td>
+                            <td>2020</td>
+                            <td>20km/L</td>
+                            <td>Bajaj</td>
+                            <td>5000</td>
+                            <td>5500km</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Bike</td>
+                            <td>Honda</td>
+                            <td>Petrol</td>
+                            <td>2020</td>
+                            <td>20km/L</td>
+                            <td>Bajaj</td>
+                            <td>5000</td>
+                            <td>5500km</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Bike</td>
+                            <td>Tata</td>
+                            <td>Petrol</td>
+                            <td>2020</td>
+                            <td>20km/L</td>
+                            <td>Bajaj</td>
+                            <td>5000</td>
+                            <td>5500km</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Bike</td>
+                            <td>Mahindra</td>
+                            <td>Petrol</td>
+                            <td>2020</td>
+                            <td>20km/L</td>
+                            <td>Bajaj</td>
+                            <td>5000</td>
+                            <td>5500km</td>
+                            <td></td>
+                        </tr>
+                        
+                                     
+                        
+                        </tbody>
+                    </table>
+                    </div>
+              </div>
+
+            </div>
           </div>
         </div>
       </div>
