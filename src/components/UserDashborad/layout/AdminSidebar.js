@@ -6,6 +6,8 @@ import Link from 'next/link';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome,faCar,faMoneyCheckDollar,faChartPie,faFileExport, faGear,faGauge, faRightFromBracket,faCarSide,faMapLocationDot,faMoneyBillTransfer,faPlus,faDollarSign, faLocationDot, faCircleInfo, faChevronRight, faUser, faUsers, faSquareCaretUp } from '@fortawesome/free-solid-svg-icons';
+
+
 export default function AdminSidebar(){
 
 return(
@@ -45,27 +47,6 @@ return(
                       </div>
                     </div>
                   <ul className='menu_list'>
-
-                  <li>
-                        <NavDropdown
-                          id="nav-dropdown-dark-example"
-                          title={<span><FontAwesomeIcon icon={faCircleInfo} /> Dropdown Title</span>}
-                          menuVariant="dark"
-                          //before={<span><FontAwesomeIcon icon={faCircleInfo} />Dropdown Title</span>}
-                        >
-                          <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                          <NavDropdown.Item href="#action/3.2">
-                            Another action
-                          </NavDropdown.Item>
-                          <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                          <NavDropdown.Divider />
-                          <NavDropdown.Item href="#action/3.4">
-                            Separated link
-                          </NavDropdown.Item>
-                        </NavDropdown>
-                    </li>
-
-
                     <li>
                       <Link className='active' href='/dashboard'>
                         <span className='m_i_icon'> 
@@ -75,27 +56,49 @@ return(
                       </Link>
                     </li>
                     <li>
-                      <Link href='#'>
-                        <span className='m_i_icon'> 
-                          <FontAwesomeIcon icon={faCar} />
-                        </span>
-                        <span>Your Vehicles</span>
-                        <span className='m_i_arrow'> 
-                          <FontAwesomeIcon icon={faChevronRight} />
-                        </span>
-                      </Link>
+                        <NavDropdown
+                          id="nav-dropdown-dark-example"
+                          title={
+                            <>
+                              <span className='m_i_icon'> 
+                                <FontAwesomeIcon icon={faCar} />
+                              </span>
+                              <span>Your Vehicles</span>
+                              <span className='m_i_arrow'> 
+                                <FontAwesomeIcon icon={faChevronRight} />
+                              </span>
+                            </>
+                          }
+                          menuVariant="dark"
+                          autoClose={false}
+                        >
+                          <NavDropdown.Item href="#">Add New Vehicle</NavDropdown.Item>
+                          <NavDropdown.Item href="#action/3.2">Vehicles List</NavDropdown.Item>
+                        </NavDropdown>
                     </li>
+
                     <li>
-                      <Link href='#'>
-                        <span className='m_i_icon'> 
-                        <FontAwesomeIcon icon={faMapLocationDot} />
-                        </span>
-                        <span>Your Trips</span>
-                        <span className='m_i_arrow'> 
-                          <FontAwesomeIcon icon={faChevronRight} />
-                        </span>
-                      </Link>
+                        <NavDropdown
+                          id="nav-dropdown-dark-example"
+                          title={
+                            <>
+                              <span className='m_i_icon'> 
+                              <FontAwesomeIcon icon={faMapLocationDot} />
+                              </span>
+                              <span>Your Trips</span>
+                              <span className='m_i_arrow'> 
+                                <FontAwesomeIcon icon={faChevronRight} />
+                              </span>
+                            </>
+                          }
+                          menuVariant="dark"
+                          autoClose={false}
+                        >
+                          <NavDropdown.Item href="#">Add New Trip</NavDropdown.Item>
+                          <NavDropdown.Item href="#action/3.2">Trips List</NavDropdown.Item>
+                        </NavDropdown>
                     </li>
+
                     <li>
                       <Link href='#'>
                         <span className='m_i_icon'> 
@@ -140,17 +143,30 @@ return(
                         </span>
                       </Link>
                     </li>
+
                     <li>
-                      <Link href='#'>
-                        <span className='m_i_icon'> 
-                          <FontAwesomeIcon icon={faGear} spin />
-                        </span>
-                        <span>Settings</span>
-                        <span className='m_i_arrow'> 
-                          <FontAwesomeIcon icon={faChevronRight} />
-                        </span>
-                      </Link>
+                        <NavDropdown
+                          id="nav-dropdown-dark-example"
+                          title={
+                            <>
+                              <span className='m_i_icon'> 
+                                <FontAwesomeIcon icon={faGear} spin />
+                              </span>
+                              <span>Settings</span>
+                              <span className='m_i_arrow'> 
+                                <FontAwesomeIcon icon={faChevronRight} />
+                              </span>
+                            </>
+                          }
+                          menuVariant="dark"
+                          autoClose={false}
+                        >
+                          <NavDropdown.Item href="#">Profile Setting</NavDropdown.Item>
+                          <NavDropdown.Item href="#action/3.2">Tracker Settings</NavDropdown.Item>
+                          <NavDropdown.Item href="#action/3.2">Your Working Hours</NavDropdown.Item>
+                        </NavDropdown>
                     </li>
+
                     <li className='mt-auto'>
                       <Link href='#'>
                         <span className='m_i_icon'> 

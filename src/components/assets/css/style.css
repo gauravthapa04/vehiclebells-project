@@ -1036,7 +1036,58 @@ label.c_checkbox input[type="checkbox"]:checked + span:before {
 }
 
 /* Table and Data table style
-===================================================== */  
+===================================================== */ 
+ul.menu_list{
+    overflow: auto;
+} 
+ul.menu_list li .dropdown-toggle::after {
+    display: none;
+}
+ul.menu_list li a.nav-link {
+    color: #fff;
+}
+ul.menu_list li .dropdown-menu {
+    width: 100%;
+    border-radius: 0;
+    background: rgba(255,255,255,.07);
+    padding:0 0 10px;
+}
+ul.menu_list li .dropdown-menu .dropdown-item {
+    padding: 8px 20px 8px 50px;
+    display: block;
+    position: relative;
+}
+ul.menu_list li .dropdown-menu .dropdown-item:after {
+    display: block;
+    content: "";
+    position: absolute;
+    left: 25px;
+    height: 8px;
+    width: 8px;
+    border: 2px solid rgba(255,255,255,0.8);
+    border-radius: 50px;
+    top: 14px;
+}
+.m_i_arrow{
+    transition: all ease 0.4s;
+}
+ul.menu_list li a.nav-link.show .m_i_arrow {
+    transform: rotate(-90deg);
+}
+ul.menu_list li a.nav-link.show {
+    background: rgba(255,255,255,.07);
+}
+.menu_collapsed .sidebar_menu:not(:hover) ul.menu_list li .dropdown-menu.show {
+    display: none;
+}
+@media (max-width:1199px){
+body.menu_collapsed .main_content {
+    max-width: calc(100%);
+    flex: 0 0 calc(100%);
+}
+}
+
+
 table.dataTable {
     margin: 0px 0 10px;
     position: relative;
@@ -1195,3 +1246,24 @@ body .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
     --bs-table-color-state: var(--bs-table-hover-color);
     --bs-table-bg-state: rgb(234 237 247);
 }
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #555; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #333; 
+  }
