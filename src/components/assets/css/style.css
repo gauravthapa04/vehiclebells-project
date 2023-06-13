@@ -965,7 +965,7 @@ ul.browsersList li {
     color:#0a1c31;
 }
 .form-group select.form-control {
-    background-image: url(/_next/static/media/select-arrow.40ed339f.svg);
+    background-image: url('../images/select-arrow.svg');
     background-position: calc(100% - 12px) center;
     background-repeat: no-repeat;
 }
@@ -1016,7 +1016,7 @@ label.c_checkbox span:before {
 label.c_checkbox input[type="checkbox"]:checked + span:before {
     border: 0px solid #dbdee7;
     background-color: #f13c41;
-    background-image: url(/_next/static/media/checkbox-check.9ff4851e.svg);
+    background-image: url('../images/checkbox-check.svg');
     background-repeat: no-repeat;
     background-position: center;
 }

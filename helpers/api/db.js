@@ -11,6 +11,7 @@ export const db = {
     User: userModel(),
     OwnTracking : ownTrackingModel(),
     TeamTracking : teamTrackingModel(),
+    UserVehicleInfo: userVehicleModel(),
 };
 
 // mongoose models with schema definitions
@@ -95,5 +96,33 @@ function ownTrackingModel(){
         });
     
         return mongoose.models.TeamTracking || mongoose.model('TeamTracking', teamTrackingschema);
+
+}
+
+function userVehicleModel(){
+
+    const userVehiclechema = new Schema({
+        userId: { type: String, required: false },
+        vehicleType: { type: String, required: false },
+        ManufacturerCompany: { type: String, required: false },
+        fuelType: { type: String, required: false },
+        OdometerReading: { type: String, required: false },
+        vehicleModel: { type: String, required: false },
+        vehicleAverage: {type: String, required: false},
+        vehicleDefault: {type: String, required: false}
+    }, {
+        // add createdAt and updatedAt timestamps
+        timestamps: true
+    });
+
+    userVehiclechema.set('toJSON', {
+        virtuals: true,
+        versionKey: false,
+        transform: function (doc, ret) {
+            delete ret._id;
+        }
+    });
+
+    return mongoose.models.UserVehicleInfo || mongoose.model('UserVehicleInfo', userVehiclechema);
 
 }

@@ -10,7 +10,7 @@ const { serverRuntimeConfig } = getConfig();
 const User = db.User;
 const OwnTracking = db.OwnTracking
 const TeamTracking = db.TeamTracking
-
+const UserVehicleInfo = db.UserVehicleInfo
 
 export const usersRepo = {
     authenticate,
@@ -24,7 +24,8 @@ export const usersRepo = {
     userteamtracking,
     validateresetroken,
     delete: _delete,
-    editprofile
+    editprofile,
+    useraddvehicle,
 };
 
 async function authenticate({ email, password }) {
@@ -155,4 +156,9 @@ async function userowntracking(params) {
 async function userteamtracking(params){
     const teamTracking = new TeamTracking(params);
     await teamTracking.save();  
+}
+
+async function useraddvehicle(params){
+    const UserAddVehicle = new UserVehicleInfo(params);
+    await UserAddVehicle.save();
 }

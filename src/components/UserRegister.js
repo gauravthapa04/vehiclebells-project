@@ -40,7 +40,7 @@ export default function UserRegister(){
     const { register, handleSubmit, formState } = useForm(formOptions);
     const { errors } = formState;
 
-    function onSubmit(user) {
+    async function onSubmit(user) {
         return userService.register(user)
             .then(() => {
                 alertService.success('Registration successful', true);

@@ -9,9 +9,10 @@ import * as Yup from 'yup'
 import { userService, alertService } from 'services';
 import { useForm } from 'react-hook-form';
 import { Alert } from './Alert';
-//import { getSession } from "next-auth/client";
+
 export default function UserLogin(){
-  const [loading, setLoading] = useState(true);
+  const[loading, setLoading] = useState(true);
+  const[havedata, setHavedata] = useState();
   const { data: session } = useSession();
 
   // form validation rules 
@@ -24,8 +25,7 @@ export default function UserLogin(){
   const { errors } = formState;
   const router = useRouter();
   async function onSubmit({ email, password }) {
-    alertService.clear();
-
+  alertService.clear();
   const LoginRes = await signIn("credentials", {
       redirect: false,
       email,
@@ -44,7 +44,9 @@ export default function UserLogin(){
     return () => clearTimeout(timeoutId);
   }, []);
 
-  
+  useEffect(() => {
+    console.log(session);
+  }, []);
   if(typeof session != 'undefined' && session != null)
   {
     router.push('/welcome')

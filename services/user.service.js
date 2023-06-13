@@ -3,7 +3,7 @@
 import { BehaviorSubject, async } from 'rxjs';
 import getConfig from 'next/config';
 import Router from 'next/router';
-
+import { useSession, signIn } from "next-auth/react"
 import { fetchWrapper } from 'helpers';
 import { alertService } from './alert.service';
 
@@ -27,15 +27,25 @@ export const userService = {
     getById,
     update,
     delete: _delete,
-    editprofile
+    editprofile,
+    Useraddvehicle,
 };
 async function login(email, password) {
     
-    const user = await fetchWrapper.post(`${baseUrl}/authenticate`, { email, password });
+    //const user = await fetchWrapper.post(`${baseUrl}/authenticate`, { email, password });
 
     // publish user to subscribers and store in local storage to stay logged in between page refreshes
-    userSubject.next(user);
-    return user;
+    //userSubject.next(user);
+
+    const LoginRes = await signIn("credentials", {
+        redirect: false,
+        email,
+        password
+    });
+      if (LoginRes && !LoginRes.ok) {
+        alertService.error(LoginRes.error);
+        console.log(LoginRes.error)
+      }
     //useSession(JSON.stringify(user));
     ///localStorage.setItem('user', JSON.stringify(user));
 }
@@ -106,6 +116,7 @@ async function register(user) {
     await fetchWrapper.post(`${baseUrl}/register`, user);
 }
 
+
 async function getAll() {
     return await fetchWrapper.get(baseUrl);
 }
@@ -144,4 +155,8 @@ async function OwnTracking(Formdata){
 
 async function TeamTracking(FormData){
     return await fetchWrapper.post(`${baseUrl}/team-tracking`, FormData);
+}
+
+async function Useraddvehicle(info){
+    return await fetchWrapper.post(`${baseUrl}/add-vehicle`, info);
 }

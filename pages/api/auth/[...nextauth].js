@@ -8,6 +8,7 @@ import { alertService } from "@/services"
 const User = db.User;
 export const authOptions = {
   // Configure one or more authentication providers
+  secret: "say_lalisa_love_me_lalisa_love_me_hey",
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
@@ -40,7 +41,22 @@ export const authOptions = {
       }
   })
     // ...add more providers here
-  ]
+  ],
+  session: {
+    strategy: "jwt"
+  },
+  callbacks: {
+    jwt: async ({ token, user }) => {
+        user && (token.user = user)
+        return token
+    },
+    session: async ({ session, token }) => {
+        const user = token.user 
+        session.user = user
+
+        return session
+    }
+} 
 }
 
 export default NextAuth(authOptions)  

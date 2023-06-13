@@ -8,10 +8,11 @@ import { userService, alertService } from 'services';
 import { useForm } from 'react-hook-form';
 import { Alert } from './Alert';
 import { async } from 'rxjs';
+import { useSession } from "next-auth/react"
 
 export default function EditProfile(){
+    const { data: session } = useSession();
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
     useEffect(() => {
         const timeoutId = setTimeout(() => {
@@ -21,10 +22,7 @@ export default function EditProfile(){
         return () => clearTimeout(timeoutId);
       }, []);
 
-      useEffect(() => {
-        const subscription = userService.user.subscribe(x => setUser(x));
-        return () => subscription.unsubscribe();
-      }, []);
+       console.log(session)
 
 
         const handleFileChange = (event) => {
@@ -119,7 +117,7 @@ export default function EditProfile(){
                                  type="text"
                                  name="firstName"
                                  {...register('firstName')}
-                                 defaultValue={user.firstName}
+                                 defaultValue={session.user.firstName}
                                  className={`form-control ${errors.firstName ? 'is-invalid' : ''}`}
                                />
                                <div className="invalid-feedback">{errors.firstName?.message}</div>
@@ -129,7 +127,7 @@ export default function EditProfile(){
                             type="text"
                             name="lastName"
                             {...register('lastName')}
-                            defaultValue={user.lastName}
+                            defaultValue={session.user.lastName}
                             className={`form-control ${errors.lastName ? 'is-invalid' : ''}`}
                             />
                             <div className="invalid-feedback">{errors.lastName?.message}</div>
@@ -139,7 +137,7 @@ export default function EditProfile(){
                                 type="text"
                                 name="companyName"
                                 {...register('companyName')}
-                                defaultValue={user.companyName}
+                                defaultValue={session.user.companyName}
                                 className="form-control"
                             />
                             </div>
@@ -148,7 +146,7 @@ export default function EditProfile(){
                                 type="text"
                                 name="phoneNumber"
                                 {...register('phoneNumber')}
-                                defaultValue={user.phoneNumber}
+                                defaultValue={session.user.phoneNumber}
                                 placeholder='Phone Number'
                                 className="form-control"
                             />

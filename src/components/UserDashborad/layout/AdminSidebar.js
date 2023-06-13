@@ -6,10 +6,14 @@ import Link from 'next/link';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome,faCar,faMoneyCheckDollar,faChartPie,faFileExport, faGear,faGauge, faRightFromBracket,faCarSide,faMapLocationDot,faMoneyBillTransfer,faPlus,faDollarSign, faLocationDot, faCircleInfo, faChevronRight, faUser, faUsers, faSquareCaretUp } from '@fortawesome/free-solid-svg-icons';
+<<<<<<< Updated upstream
 
 
+=======
+import { useSession } from "next-auth/react"
+>>>>>>> Stashed changes
 export default function AdminSidebar(){
-
+  const { data: session } = useSession();
 return(
     <>
 <div className="sidebar_menu">
@@ -25,14 +29,25 @@ return(
                     </div>
                     <div className='user_info_block d-flex align-items-center'>
                       <span className='user_thumb'>
+                        { session && session.user.profileImage ?
+                        (<>
+                        
                         <Image
                           src={user_thumb}
                           className=""
                           alt="user"
-                          /> 
+                          />
+                        </>): (<>
+                        
+                        <Image
+                          src={user_thumb}
+                          className=""
+                          alt="user"
+                          />
+                          </>)} 
                       </span>
                       <div className='user_info'>
-                          <h5>Hi, Sanjay</h5>
+                          <h5>Hi, {session && session.user.firstName ? session.user.firstName : ''}</h5>
                           <div className='d-flex'>
                             <Link href='#'>
                               <FontAwesomeIcon icon={faGear} />

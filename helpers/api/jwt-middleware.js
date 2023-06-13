@@ -17,7 +17,8 @@ function jwtMiddleware(req, res) {
             '/api/users/reset-password',
             '/api/users/own-tracking',
             '/api/users/team-tracking',
-            '/api/users/edit-profile'
+            '/api/users/edit-profile',
+            '/api/users/add-vehicle'
         ]
     });
 
