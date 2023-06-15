@@ -12,7 +12,7 @@ export default function Header(){
     const [loading, setLoading] = useState(true);
     //const [user, setUser] = useState(null);
     const { data: session } = useSession(); 
-    //console.log(session);
+    console.log(session);
     useEffect(() => {
         const timeoutId = setTimeout(() => {
             setLoading(false);
@@ -20,11 +20,6 @@ export default function Header(){
         // Clear the timeout if the component unmounts or the delay time changes
         return () => clearTimeout(timeoutId);
         }, []);
-
-    // useEffect(() => {
-    //     const subscription = userService.user.subscribe(x => setUser(x));
-    //     return () => subscription.unsubscribe();
-    //   }, []);
 
       const ToggleClass = () => {
         document.body.classList.toggle('menu_expanded');

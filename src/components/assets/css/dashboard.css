@@ -1,5 +1,4 @@
-
- html {
+html {
   height: 100%;
 }
 body{
@@ -453,6 +452,4 @@ ul.menu_list li .dropdown-menu.show {
   .quick_links_list ul li a {
       padding: 20px 20px;
   }
-}     
-      
-
+}

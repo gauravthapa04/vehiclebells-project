@@ -6,12 +6,9 @@ import Link from 'next/link';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome,faCar,faMoneyCheckDollar,faChartPie,faFileExport, faGear,faGauge, faRightFromBracket,faCarSide,faMapLocationDot,faMoneyBillTransfer,faPlus,faDollarSign, faLocationDot, faCircleInfo, faChevronRight, faUser, faUsers, faSquareCaretUp } from '@fortawesome/free-solid-svg-icons';
-<<<<<<< Updated upstream
 
 
-=======
 import { useSession } from "next-auth/react"
->>>>>>> Stashed changes
 export default function AdminSidebar(){
   const { data: session } = useSession();
 return(
@@ -87,8 +84,8 @@ return(
                           menuVariant="dark"
                           autoClose={false}
                         >
-                          <NavDropdown.Item href="#">Add New Vehicle</NavDropdown.Item>
-                          <NavDropdown.Item href="#action/3.2">Vehicles List</NavDropdown.Item>
+                          <Link data-rr-ui-dropdown-item href="/add-vehicle" className='dropdown-item'>Add New Vehicle</Link>
+                          <Link data-rr-ui-dropdown-item href="/all-vehicle" className='dropdown-item'>Vehicles List</Link>
                         </NavDropdown>
                     </li>
 
@@ -109,53 +106,53 @@ return(
                           menuVariant="dark"
                           autoClose={false}
                         >
-                          <NavDropdown.Item href="#">Add New Trip</NavDropdown.Item>
-                          <NavDropdown.Item href="#action/3.2">Trips List</NavDropdown.Item>
+                        <Link data-rr-ui-dropdown-item href="/add-trip" className='dropdown-item'>Add New Trip</Link>
+                        <Link data-rr-ui-dropdown-item href="/all-trip" className='dropdown-item'>Trips List</Link>
                         </NavDropdown>
                     </li>
 
                     <li>
-                      <Link href='#'>
+                      <Link href='/your-expenses'>
                         <span className='m_i_icon'> 
                           <FontAwesomeIcon icon={faDollarSign} />
                         </span>
                         <span>Your Expenses</span>
-                        <span className='m_i_arrow'> 
+                        {/* <span className='m_i_arrow'> 
                           <FontAwesomeIcon icon={faChevronRight} />
-                        </span>
+                        </span> */}
                       </Link>
                     </li>
                     <li>
-                      <Link href='#'>
+                      <Link href='/reports'>
                         <span className='m_i_icon'> 
                           <FontAwesomeIcon icon={faChartPie} />
                         </span>
                         <span>Reports</span>
-                        <span className='m_i_arrow'> 
+                        {/* <span className='m_i_arrow'> 
                           <FontAwesomeIcon icon={faChevronRight} />
-                        </span>
+                        </span> */}
                       </Link>
                     </li>
                     <li>
-                      <Link href='#'>
+                      <Link href='/maps'>
                         <span className='m_i_icon'> 
                           <FontAwesomeIcon icon={faLocationDot} />
                         </span>
                         <span>Maps</span>
-                        <span className='m_i_arrow'> 
+                        {/* <span className='m_i_arrow'> 
                           <FontAwesomeIcon icon={faChevronRight} />
-                        </span>
+                        </span> */}
                       </Link>
                     </li>
                     <li>
-                      <Link href='#'>
+                      <Link href='/information'>
                         <span className='m_i_icon'> 
                           <FontAwesomeIcon icon={faCircleInfo} />
                         </span>
                         <span>Information</span>
-                        <span className='m_i_arrow'> 
+                        {/* <span className='m_i_arrow'> 
                           <FontAwesomeIcon icon={faChevronRight} />
-                        </span>
+                        </span> */}
                       </Link>
                     </li>
 
@@ -176,21 +173,21 @@ return(
                           menuVariant="dark"
                           autoClose={false}
                         >
-                          <NavDropdown.Item href="#">Profile Setting</NavDropdown.Item>
-                          <NavDropdown.Item href="#action/3.2">Tracker Settings</NavDropdown.Item>
-                          <NavDropdown.Item href="#action/3.2">Your Working Hours</NavDropdown.Item>
+                        <Link data-rr-ui-dropdown-item href="/" className='dropdown-item'>Profile Setting</Link>
+                        <Link data-rr-ui-dropdown-item href="/" className='dropdown-item'>Tracker Settings</Link>
+                        <Link data-rr-ui-dropdown-item href="/" className='dropdown-item'>Your Working Hours</Link>
                         </NavDropdown>
                     </li>
 
                     <li className='mt-auto'>
-                      <Link href='#'>
+                      <Link href='/'>
                         <span className='m_i_icon'> 
                           <FontAwesomeIcon icon={faUsers}  />
                         </span>
                         <span>Team Dashboard</span>
-                        <span className='m_i_arrow'> 
+                        {/* <span className='m_i_arrow'> 
                           <FontAwesomeIcon icon={faChevronRight} />
-                        </span>
+                        </span> */}
                       </Link>
                     </li>
                   </ul>
