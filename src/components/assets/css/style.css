@@ -942,7 +942,7 @@ ul.browsersList li {
     background: #fff;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.03);
     border-radius: 4px;
-    min-height: 40px;
+    min-height: 38px;
     padding: 4px 15px;
     color: #0a1c31;
 }
@@ -957,20 +957,20 @@ ul.browsersList li {
     background-size: 22px;
 }
 .form-group label {
-    font-weight: 500;
-    font-size: 13px;
+    font-weight: 400;
+    font-size: 14px;
     line-height: 18px;
     text-transform: capitalize;
-    margin: 0 0 3px;
-    color:#0a1c31;
+    margin: 0px 0 5px;
+    color: #0a1c31;
 }
 .form-group select.form-control {
     background-image: url('../images/select-arrow.svg');
     background-position: calc(100% - 12px) center;
     background-repeat: no-repeat;
 }
-.form-group .form-control:focus{
-    border-color: #0a1c31;
+.form-group .form-control:focus {
+    border-color: #5f99e4;
 }
 label.c_radio input[type="radio"],
 label.c_checkbox input[type="checkbox"] {
@@ -1267,3 +1267,24 @@ body .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
   ::-webkit-scrollbar-thumb:hover {
     background: #333; 
   }
+
+
+
+  .trip_map {
+    height: 100%;
+}
+
+.trip_map iframe {
+    height: 100%;
+    width: 100%;
+}
+span.input-group-text {
+    color: #ef3d44;
+    font-size: 16px;
+}
+@media (max-width:991px){
+.trip_map {
+    min-height: 350px;
+    margin: 30px 0 30px;
+}
+}
