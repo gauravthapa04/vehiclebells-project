@@ -12,6 +12,7 @@ export const db = {
     OwnTracking : ownTrackingModel(),
     TeamTracking : teamTrackingModel(),
     UserVehicleInfo: userVehicleModel(),
+    UserTripInfo: userTripModel(),
 };
 
 // mongoose models with schema definitions
@@ -124,5 +125,38 @@ function userVehicleModel(){
     });
 
     return mongoose.models.UserVehicleInfo || mongoose.model('UserVehicleInfo', userVehiclechema);
+
+}
+
+function userTripModel(){
+
+    const userTripsechema = new Schema({
+        userId: { type: String, required: false },
+        tripStartDate: { type: String, required: false },
+        tripEndDate: { type: String, required: false },
+        tripStartTime: { type:   String, required: false },
+        tripEndTime: { type: String, required: false },
+        startAddress: { type: String, required: false },
+        endAddress: {type: String, required: false},
+        chooseVehicle: {type: String, required: false},
+        tripType: {type: String, required: false},
+        tripNote: {type: String, required: false},
+        tripTags: {type: String, required: false},
+        RoundTrip: {type: String, required: false}
+    }, {
+        
+        // add createdAt and updatedAt timestamps
+        timestamps: true
+    });
+
+    userTripsechema.set('toJSON', {
+        virtuals: true,
+        versionKey: false,
+        transform: function (doc, ret) {
+            delete ret._id;
+        }
+    });
+
+    return mongoose.models.UserTripInfo || mongoose.model('UserTripInfo', userTripsechema);
 
 }

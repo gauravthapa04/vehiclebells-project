@@ -11,6 +11,7 @@ import { faGear,faGauge, faRightFromBracket, faSearch, faBell} from '@fortawesom
 import { useSession, signOut } from "next-auth/react"
 import { userService } from 'services';
 
+
 export default function AdminHeader(){
     const [user, setUser] = useState(null);
     const { data: session } = useSession(); 
@@ -25,7 +26,6 @@ export default function AdminHeader(){
 
     return(
         <>
-
 <header className='d_header'>
       <Container fluid>
           <Nav className="navbar navbar-expand-xl">

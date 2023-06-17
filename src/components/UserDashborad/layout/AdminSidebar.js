@@ -33,6 +33,9 @@ return(
                           src={user_thumb}
                           className=""
                           alt="user"
+                          width={300}
+                          height={200}
+
                           />
                         </>): (<>
                         

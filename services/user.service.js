@@ -29,6 +29,7 @@ export const userService = {
     delete: _delete,
     editprofile,
     Useraddvehicle,
+    Useraddtrip,
 };
 async function login(email, password) {
     
@@ -159,4 +160,8 @@ async function TeamTracking(FormData){
 
 async function Useraddvehicle(info){
     return await fetchWrapper.post(`${baseUrl}/add-vehicle`, info);
+}
+
+async function Useraddtrip(info){
+    return await fetchWrapper.post(`${baseUrl}/add-trip`, info);
 }

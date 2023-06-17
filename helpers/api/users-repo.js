@@ -11,6 +11,7 @@ const User = db.User;
 const OwnTracking = db.OwnTracking
 const TeamTracking = db.TeamTracking
 const UserVehicleInfo = db.UserVehicleInfo
+const UserTripInfo = db.UserTripInfo
 
 export const usersRepo = {
     authenticate,
@@ -26,6 +27,7 @@ export const usersRepo = {
     delete: _delete,
     editprofile,
     useraddvehicle,
+    useraddtrip,
 };
 
 async function authenticate({ email, password }) {
@@ -159,6 +161,18 @@ async function userteamtracking(params){
 }
 
 async function useraddvehicle(params){
+    if(params.vehicleDefault == true || params.vehicleDefault == 'true')
+    {
+        await UserVehicleInfo.updateOne(
+            { userId: params.userId },
+            { $set: { vehicleDefault: 'false' } }
+        );       
+    }
     const UserAddVehicle = new UserVehicleInfo(params);
     await UserAddVehicle.save();
+}
+
+async function useraddtrip(params){
+    const UserTrip = new UserTripInfo(params);
+    await UserTrip.save();
 }
