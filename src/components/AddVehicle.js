@@ -76,6 +76,8 @@ export default function UserAddVehicle() {
                       <option value="petrol">Petrol</option>
                       <option value="diesel">Diesel</option>
                       <option value="cng">CNG</option>
+                      <option value="Petrol-CNG">Petrol/CNG</option>
+                      <option value="Diesel-CNG">Diesel/CNG</option>
                     </select>
                   </div>
                   <div className="form-group">
