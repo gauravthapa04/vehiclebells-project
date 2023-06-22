@@ -38,6 +38,26 @@ export default function UserAddVehicle() {
     .catch(alertService.error);     
    }
 
+   const vehicletypearray = [
+    "Motorcycle",
+    "Scooty",
+    "Electric Scooter",
+    "Electric Bike",
+    "Truck",
+    "Car",
+    "Van",
+    "Bus",
+    "SUV",
+    "Sedan"
+  ];
+  const fuletypearray = [
+    "Petrol",
+    "Diesel",
+    "CNG",
+    "Petrol/CNG",
+    "Diesel/CNG"
+  ];
+
   return (
     <>
       <AdminLayout />
@@ -59,11 +79,12 @@ export default function UserAddVehicle() {
                   <div className="form-group">
                     <label>Vehicle type</label>
                     <select className={errors.vehicleType ? 'form-control  input_error' : 'form-control '} name="vehicleType" {...register('vehicleType')}>
-                      <option value="Bike">Bike</option>
-                      <option value="Scooty">Scooty</option>
-                      <option value="Car">Car</option>
-                      <option value="Van">Van</option>
-                      <option value="Jeep">Jeep</option>
+
+                      {vehicletypearray.map((option, index) => (
+                              <option key={index} value={option}>
+                                {option}
+                              </option>
+                            ))}                      
                     </select>
                   </div>
                   <div className="form-group">
@@ -73,11 +94,13 @@ export default function UserAddVehicle() {
                   <div className="form-group">
                     <label>Fuel type</label>
                     <select className={errors.fuelType ? 'form-control  input_error' : 'form-control'} name="fuelType" {...register('fuelType')}>
-                      <option value="petrol">Petrol</option>
-                      <option value="diesel">Diesel</option>
-                      <option value="cng">CNG</option>
-                      <option value="Petrol-CNG">Petrol/CNG</option>
-                      <option value="Diesel-CNG">Diesel/CNG</option>
+
+                      {fuletypearray.map((option, index) => (
+                              <option key={index} value={option}>
+                                {option}
+                              </option>
+                            ))}
+
                     </select>
                   </div>
                   <div className="form-group">
