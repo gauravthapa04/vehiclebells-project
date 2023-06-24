@@ -110,7 +110,7 @@ return(
                           autoClose={false}
                         >
                         <Link data-rr-ui-dropdown-item href="/add-trip" className='dropdown-item'>Add New Trip</Link>
-                        <Link data-rr-ui-dropdown-item href="/all-trip" className='dropdown-item'>Trips List</Link>
+                        <Link data-rr-ui-dropdown-item href="/all-trips" className='dropdown-item'>Trips List</Link>
                         </NavDropdown>
                     </li>
 

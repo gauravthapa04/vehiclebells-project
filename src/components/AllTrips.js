@@ -10,11 +10,9 @@ import { userService } from "services";
 import AdminLayout from "./UserDashborad/layout/AdminLayout";
 import AdminSidebar from "./UserDashborad/layout/AdminSidebar";
 
-export default function UserAllVehicle() {
+export default function UserAllTrips() {
   const { data: session } = useSession();
   const [data, setData] = useState(null);
-  const [currentuser, setCurrentuser] = useState('');
-  console.log(session);
   useEffect(() => {
      
     if(session != 'undefined' || session != null)
@@ -22,7 +20,7 @@ export default function UserAllVehicle() {
       const userId = session.user.id;
       const fetchData = async () => {
         try {
-          const response = await fetch(`/api/AllVehicle?id=${userId}`);
+          const response = await fetch(`/api/AllTrips?id=${userId}`);
           const data = await response.json();
           console.log('data', data)
           setData(data);
@@ -42,15 +40,15 @@ export default function UserAllVehicle() {
           <AdminSidebar />
           <div className="main_content">
             <div className="d_page_header">
-              <h2>All Vehicle</h2>
+              <h2>All Trips</h2>
             </div>
             <div className="d_page_content">
             <div className="d_block">
               <div className="d_head d-flex justify-content-between align-items-start">
-                  <h4>Vehicles list</h4>
-                    <Link className="btn small_btn" href="/add-vehicle">
+                  <h4>Trips list</h4>
+                    <Link className="btn small_btn" href="/add-trip">
                     <svg height='14px' width='12px' aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" className="svg-inline--fa fa-plus f_icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path></svg>
-                    Add Vehicle
+                    Add Trip
                     </Link>
                 </div>
 
@@ -58,26 +56,26 @@ export default function UserAllVehicle() {
                     <table className="dataTable table table-hover table-striped">
                         <thead>
                         <tr>
+                            <th>Trip Start</th>
+                            <th>Trip End</th>
+                            <th>Trip Start Address</th>
+                            <th>Trip End Address</th>
                             <th>Vehicle Type</th>
-                            <th>Manufacturer Company</th>
-                            <th>Fuel Type</th>
-                            <th>Model</th>
-                            <th>Average</th>
-                            <th>Odometer Reading</th>
-                            <th>Vehicle Average</th>
+                            <th>Trip Type</th>
+                            <th>RoundTrip</th>
                         </tr>
                         </thead>
                         <tbody>
                         { data
                           ? data.map((item) => (
                           <tr key={item.id}>
-                              <td>{item.vehicleType}</td>
-                              <td>{item.ManufacturerCompany}</td>
-                              <td>{item.fuelType}</td>
-                              <td>{item.vehicleModel}</td>
-                              <td>{item.OdometerReading}</td>
-                              <td>{item.vehicleAverage}</td>
-                              { item.vehicleDefault == 'true' ? (<><td><span className="table_btn_sm"><FontAwesomeIcon icon={faCheck} /></span></td></>) : (<><td></td></>)}
+                              <td>{item.tripStartDate}</td>  
+                              <td>{item.tripEndDate}</td>
+                              <td>{item.startAddress}</td>
+                              <td>{item.endAddress}</td>
+                              <td>{item.chooseVehicle}</td>
+                              <td>{item.tripType}</td>
+                              <td>{item.RoundTrip}</td>
                             
                           </tr>
                         )): null}       

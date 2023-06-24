@@ -21,12 +21,13 @@ import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { userService, alertService } from 'services';
 import { Alert } from './Alert';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
-import Autocomplete from "react-google-autocomplete";
+import Autocomplete, { geocodeByAddress, getLatLng } from "react-google-autocomplete";
 
 
 export default function UserAddTrip() {
-
+  const [selectedPlace, setSelectedPlace] = useState(null);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [startTime, setStartTime] = useState("10:00");
@@ -90,6 +91,17 @@ export default function UserAddTrip() {
   })
   .catch(alertService.error);     
  }
+
+
+ const containerStyle = {
+  width: '100%',
+  height: '400px',
+};
+
+const center = {
+  lat: 37.7749, // Replace with your desired latitude
+  lng: -122.4194, // Replace with your desired longitude
+};
 
   return (
     <>
@@ -193,8 +205,12 @@ export default function UserAddTrip() {
                               className="form-control"
                               placeholder="Search for Start Address"
                               apiKey='AIzaSyCmq_w4Yo_NR8ZzoUOAB3G7kaEexaUTEXE'
+                              types={['geocode']}
+                              fields={['formatted_address', 'geometry']}
                               onPlaceSelected={(place) => {
+                                console.log(place)
                                 setStartTrip(place.formatted_address);
+                                setSelectedPlace(place.geometry.location)
                               }}
                             />
                           <input
@@ -330,13 +346,23 @@ export default function UserAddTrip() {
                   </Col>
                   <Col lg={6}>
                     <div className="trip_map">
-                      <iframe
+    <LoadScript googleMapsApiKey="AIzaSyCmq_w4Yo_NR8ZzoUOAB3G7kaEexaUTEXE">
+      <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={selectedPlace}
+    >
+      {selectedPlace && <Marker position={selectedPlace} />}
+    </GoogleMap>
+
+    </LoadScript>
+                      
+                      {/* <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d54870.46555202257!2d76.72232943188325!3d30.73514871927828!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fed0be66ec96b%3A0xa5ff67f9527319fe!2sChandigarh!5e0!3m2!1sen!2sin!4v1686851932634!5m2!1sen!2sin"
                         style={{ border: 0 }}
                         allowFullScreen=""
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
-                      />
+                      /> */}
                     </div>
                   </Col>
                 </Row>
