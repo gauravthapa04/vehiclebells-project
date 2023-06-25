@@ -4,8 +4,12 @@ html {
 body{
   min-height: 100%;
 }
-
-
+.c_green{
+  color: #029666;
+}
+.c_red{
+  color: red;
+}
 header.d_header {
   position: fixed;
   top: 0;
@@ -453,3 +457,73 @@ ul.menu_list li .dropdown-menu.show {
       padding: 20px 20px;
   }
 }
+
+
+span.exp_indicator, span.rev_indicator {
+  height: 8px;
+  width: 8px;
+  min-width: 8px;
+  background: red;
+  display: block;
+  border-radius: 50px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 0 0px 0px 3px rgb(236 60 63 / 20%),0 0px 0px 6px rgb(236 60 63 / 10%);
+}
+span.rev_indicator {
+  background: #029666;
+  box-shadow: 0 0px 0px 3px rgb(2 150 102 / 20%), 0 0px 0px 7px rgb(2 150 102 / 10%);
+}
+.btn.icon_btn {
+  padding: 2px 0;
+  text-align: center;
+  min-width: 24px;
+  height: 24px;
+  color: #fff;
+}
+.icon_btn.bg_blue{
+  background-color: #0162E8;
+  border-color: #0162E8;
+}
+.icon_btn.bg_blue:hover {
+  background: #0A1C31;
+  border-color: #0A1C31;
+}
+.add_t_dropdown .small_btn{
+  border:0px;
+}
+.add_t_dropdown  .dropdown-menu {
+  width: auto;
+}
+.add_t_dropdown  .dropdown-menu .dropdown-item svg {
+  min-width: 20px;
+  color: #ef3d44;
+}
+label.fileUpload input[type="file"] {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+label.fileUpload {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+  margin: 25px 0 0;
+}
+label.fileUpload > span {
+  display: flex;
+  height: 165px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed #aaa;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  flex-direction: column;
+}
+label.fileUpload > span svg {font-size: 30px;margin: 0 0 12px;}

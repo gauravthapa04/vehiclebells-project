@@ -115,11 +115,11 @@ return(
                     </li>
 
                     <li>
-                      <Link href='/your-expenses'>
+                      <Link href='/your-transactions'>
                         <span className='m_i_icon'> 
                           <FontAwesomeIcon icon={faDollarSign} />
                         </span>
-                        <span>Your Expenses</span>
+                        <span>Your Transactions</span>
                         {/* <span className='m_i_arrow'> 
                           <FontAwesomeIcon icon={faChevronRight} />
                         </span> */}
