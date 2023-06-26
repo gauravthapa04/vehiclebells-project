@@ -52,12 +52,12 @@ export default function UserRegister(){
             })
             .catch(alertService.error);
     }
-      const { data: session } = useSession();
+    const { data: session } = useSession();
       
-      if(typeof session != 'undefined' && session != null)
-      {
-        router.push('/dashboard')
-      }
+    //   if(typeof session != 'undefined' && session != null)
+    //   {
+    //     router.push('/dashboard')
+    //   }
 
       return(
         <>
