@@ -7,8 +7,8 @@ body{
 .c_green{
   color: #029666;
 }
-.c_red{
-  color: red;
+.c_red {
+  color: #ec3c3f;
 }
 header.d_header {
   position: fixed;
@@ -458,7 +458,8 @@ ul.menu_list li .dropdown-menu.show {
   }
 }
 
-
+/* Transaction page style
+------------------------------------------------- */
 span.exp_indicator, span.rev_indicator {
   height: 8px;
   width: 8px;
@@ -466,7 +467,7 @@ span.exp_indicator, span.rev_indicator {
   background: red;
   display: block;
   border-radius: 50px;
-  margin: 0 auto;
+  margin: 0;
   position: relative;
   box-shadow: 0 0px 0px 3px rgb(236 60 63 / 20%),0 0px 0px 6px rgb(236 60 63 / 10%);
 }
@@ -526,4 +527,39 @@ label.fileUpload > span {
   cursor: pointer;
   flex-direction: column;
 }
-label.fileUpload > span svg {font-size: 30px;margin: 0 0 12px;}
+label.fileUpload > span svg {
+  font-size: 30px;
+  margin: 0 0 12px;
+}
+.exp_rev_block {
+  display: flex;
+  justify-content: space-evenly;
+  margin:0 -10px;
+}
+.exp_rev_item {
+  background: #eaedf7;
+  padding: 15px 10px;
+  flex: 0 0 calc(50% - 20px);
+  max-width: calc(50% - 20px);
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 6px;
+  margin: 0 10px;
+  font-weight: 500;
+}
+.exp_rev_item br {
+  display: none;
+}
+.exp_rev_item strong {
+  font-size: 30px;
+  display: block;
+}
+.exp_rev_item.rev_item {
+  background: rgb(0 128 0 / 10%);
+}
+
+.exp_rev_item.exp_item {
+  background: rgb(236 60 63 / 10%);
+}

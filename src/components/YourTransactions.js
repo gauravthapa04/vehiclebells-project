@@ -35,7 +35,18 @@ export default function YourTransactions() {
 
             <div className="d_block">
               <div className="d_head d-flex justify-content-between align-items-start">
-                  <h4>This Year</h4>
+                  <h4>This Year Total</h4>
+                </div>
+                <div className="exp_rev_block">
+                  <div className="exp_rev_item rev_item">
+                      <strong className="c_green"><FontAwesomeIcon icon={faDollar} /> 400</strong><br />
+                      <span>REVENUE</span>
+                  </div>
+
+                  <div className="exp_rev_item exp_item">
+                      <strong  className="c_red"><FontAwesomeIcon icon={faDollar} /> 1630</strong><br />
+                      <span>EXPENSES</span>
+                  </div>
                 </div>
             </div>
 
@@ -65,8 +76,8 @@ export default function YourTransactions() {
                         <tbody>
                           <tr>
                               <td>
-                                <div className="d-flex align-items-center">
-                                    <span className="rev_indicator me-2"></span>
+                                <div className="d-flex align-items-center justify-content-center">
+                                    <span className="rev_indicator me-3"></span>
                                     <b className="c_green">$200</b>
                                 </div>
                               </td>
@@ -89,8 +100,8 @@ export default function YourTransactions() {
                             </tr>
                           <tr>
                               <td>
-                                <div className="d-flex align-items-center">
-                                    <span className="exp_indicator me-2"></span>
+                                <div className="d-flex align-items-center justify-content-center">
+                                    <span className="exp_indicator me-3"></span>
                                     <b className="c_red">$100</b>
                                 </div>
                               </td>
@@ -113,8 +124,8 @@ export default function YourTransactions() {
                           </tr>
                           <tr>
                               <td>
-                                <div className="d-flex align-items-center">
-                                    <span className="exp_indicator me-2"></span>
+                                <div className="d-flex align-items-center justify-content-center">
+                                    <span className="exp_indicator me-3"></span>
                                     <b className="c_red">$300</b>
                                 </div>
                               </td>
@@ -137,8 +148,8 @@ export default function YourTransactions() {
                           </tr>
                           <tr>
                               <td>
-                                <div className="d-flex align-items-center">
-                                    <span className="rev_indicator me-2"></span>
+                                <div className="d-flex align-items-center justify-content-center">
+                                    <span className="rev_indicator me-3"></span>
                                     <b className="c_green">$100</b>
                                 </div>
                               </td>
@@ -161,8 +172,8 @@ export default function YourTransactions() {
                           </tr>
                           <tr>
                             <td>
-                                <div className="d-flex align-items-center">
-                                    <span className="exp_indicator me-2"></span>
+                                <div className="d-flex align-items-center justify-content-center">
+                                    <span className="exp_indicator me-3"></span>
                                     <b className="c_red">$200</b>
                                 </div>
                             </td>
@@ -185,8 +196,8 @@ export default function YourTransactions() {
                           </tr>
                           <tr>
                             <td>
-                                <div className="d-flex align-items-center">
-                                    <span className="exp_indicator me-2"></span>
+                                <div className="d-flex align-items-center justify-content-center">
+                                    <span className="exp_indicator me-3"></span>
                                     <b className="c_red">$280</b>
                                 </div>
                               </td>
@@ -209,8 +220,8 @@ export default function YourTransactions() {
                           </tr>
                           <tr>
                             <td>
-                                <div className="d-flex align-items-center">
-                                    <span className="exp_indicator me-2"></span>
+                                <div className="d-flex align-items-center justify-content-center">
+                                    <span className="exp_indicator me-3"></span>
                                     <b className="c_red">$250</b>
                                 </div>
                               </td>
@@ -233,8 +244,8 @@ export default function YourTransactions() {
                           </tr>
                           <tr>
                             <td>
-                                <div className="d-flex align-items-center">
-                                    <span className="rev_indicator me-2"></span>
+                                <div className="d-flex align-items-center justify-content-center">
+                                    <span className="rev_indicator me-3"></span>
                                     <b className="c_green">$100</b>
                                 </div>
                               </td>
@@ -257,8 +268,8 @@ export default function YourTransactions() {
                           </tr>
                           <tr>
                             <td>
-                                <div className="d-flex align-items-center">
-                                    <span className="exp_indicator me-2"></span>
+                                <div className="d-flex align-items-center justify-content-center">
+                                    <span className="exp_indicator me-3"></span>
                                     <b className="c_red">$500</b>
                                 </div>
                               </td>
