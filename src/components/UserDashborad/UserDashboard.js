@@ -36,7 +36,7 @@ export default function UserDashboard() {
                       <div className="d_card bg_blue">
                         <div className='d_card_head d-flex justify-content-between'>
                           <h5>Total Trips</h5>
-                          <Link href='#'><FontAwesomeIcon icon={faPlus} /></Link>
+                          <Link href='/all-trips'><FontAwesomeIcon icon={faPlus} /></Link>
                         </div>
                         <div className='d_card_content'>
                           <div className='card_value'>2000 MI</div>
@@ -55,7 +55,7 @@ export default function UserDashboard() {
                       <div className="d_card bg_orange">
                         <div className='d_card_head d-flex justify-content-between'>
                           <h5>Total Expenses</h5>
-                          <Link href='#'><FontAwesomeIcon icon={faPlus} /></Link>
+                          <Link href='/add-expenses'><FontAwesomeIcon icon={faPlus} /></Link>
                         </div>
                         <div className='d_card_content'>
                           <div className='card_value'>$ 5000</div>
@@ -114,7 +114,7 @@ export default function UserDashboard() {
                             </Link>
                           </li>
                           <li>
-                            <Link href='#'>
+                            <Link href='/add-expenses'>
                               <span><FontAwesomeIcon icon={faMoneyBillTransfer} /></span>
                               <strong>Add Expense</strong>
                             </Link>
@@ -136,7 +136,7 @@ export default function UserDashboard() {
                       </div>
                       <div className='no_data_block'>
                         <span>There is no trip yet.</span>
-                        <Link href='#' className='btn small_btn mt-3'><FontAwesomeIcon className='f_icon' icon={faPlus} />Add Trip</Link>
+                        <Link href='/add-trip' className='btn small_btn mt-3'><FontAwesomeIcon className='f_icon' icon={faPlus} />Add Trip</Link>
                       </div>
                     </div>
                   </Col>
@@ -147,7 +147,7 @@ export default function UserDashboard() {
                       </div>
                       <div className='no_data_block'>
                         <span>There is no Transaction yet.</span>
-                        <Link href='#' className='btn small_btn mt-3'><FontAwesomeIcon className='f_icon' icon={faPlus} />Add Transaction</Link>
+                        <Link href='/your-transactions' className='btn small_btn mt-3'><FontAwesomeIcon className='f_icon' icon={faPlus} />Add Transaction</Link>
                       </div>
                     </div>
                   </Col>

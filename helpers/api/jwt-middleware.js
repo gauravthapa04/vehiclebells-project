@@ -19,7 +19,8 @@ function jwtMiddleware(req, res) {
             '/api/users/team-tracking',
             '/api/users/edit-profile',
             '/api/users/add-vehicle',
-            '/api/users/add-trip'
+            '/api/users/add-trip',
+            '/api/users/add-expense'
         ]
     });
 

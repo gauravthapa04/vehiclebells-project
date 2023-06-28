@@ -14,11 +14,14 @@ import "react-datepicker/dist/react-datepicker.css";
 import 'react-time-picker/dist/TimePicker.css';
 import 'react-clock/dist/Clock.css';
 import { SessionProvider } from "next-auth/react"
+import { alertService } from '@/services';
 
+alertService.clear();
 export default function App({
   Component, pageProps: { session, ...pageProps }
 }) {
   return (
+    
     <SessionProvider session={session}>
         <Component {...pageProps}/>
     </SessionProvider>

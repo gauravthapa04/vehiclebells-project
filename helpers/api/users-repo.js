@@ -12,7 +12,7 @@ const OwnTracking = db.OwnTracking
 const TeamTracking = db.TeamTracking
 const UserVehicleInfo = db.UserVehicleInfo
 const UserTripInfo = db.UserTripInfo
-
+const UserExpenseInfo = db.UserExpenseInfo
 export const usersRepo = {
     authenticate,
     getAll,
@@ -28,6 +28,7 @@ export const usersRepo = {
     editprofile,
     useraddvehicle,
     useraddtrip,
+    useraddexpense,
 };
 
 async function authenticate({ email, password }) {
@@ -175,4 +176,9 @@ async function useraddvehicle(params){
 async function useraddtrip(params){
     const UserTrip = new UserTripInfo(params);
     await UserTrip.save();
+}
+
+async function useraddexpense(params){
+    const UserExpense = new UserExpenseInfo(params);
+    await UserExpense.save();
 }

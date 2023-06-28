@@ -1,11 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AdminLayout from "./UserDashborad/layout/AdminLayout";
 import AdminSidebar from "./UserDashborad/layout/AdminSidebar";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollar, faDollarSign, faFileExport, faPencil, faSackDollar, faTrash, faTrashAlt,} from "@fortawesome/free-solid-svg-icons";
 import Dropdown from 'react-bootstrap/Dropdown';
+import { useSession } from "next-auth/react";
+import { userService } from "services";
 export default function YourTransactions() {
+  const { data: session } = useSession();
+  const [data, setData] = useState(null);
+  useEffect(() => {
+     
+  if(session != 'undefined' || session != null)
+    {
+      const userId = session.user.id;
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`/api/YourTransaction?id=${userId}`);
+          const data = await response.json();
+          console.log('data', data)
+          setData(data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+      fetchData();
+    }
+  }, []);
+
+
  return(
     <>
     
@@ -67,28 +91,30 @@ export default function YourTransactions() {
                             <th>Date</th>
                             <th>Merchant Name</th>
                             <th>Transaction type</th>
-                            <th>Notes</th>
                             <th>Report</th>
-                            <th>Tags</th>
+                            <th>Notes</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
-                          <tr>
+
+                        { data
+                          ? data.map((item) => (
+                          <tr key={item.id}>
                               <td>
-                                <div className="d-flex align-items-center justify-content-center">
+                              <div className="d-flex align-items-center justify-content-center">
                                     <span className="rev_indicator me-3"></span>
-                                    <b className="c_green">$200</b>
+                                    <b className="c_green">{item.expenseAmount}</b>
                                 </div>
-                              </td>
-                              <td>25-6-2023</td>  
-                              <td>Pooja Stationary</td>
-                              <td>Personal</td>
-                              <td>Purchased Some Books</td>
+                                
+                              </td>  
+                              <td>{item.expenseDate}</td>
+                              <td>{item.merchantName}</td>
+                              <td>{item.expenseType}</td>
                               <td>no report</td>
-                              <td>Expenses, books , stationary</td>
+                              <td>{item.Notes}</td>
                               <td>
-                                <div className="d-flex">
+                              <div className="d-flex">
                                     <Link className="btn icon_btn bg_blue mx-1" href="#">
                                         <FontAwesomeIcon icon={faPencil} />
                                     </Link>
@@ -96,200 +122,11 @@ export default function YourTransactions() {
                                         <FontAwesomeIcon icon={faTrashAlt} />
                                     </Link>
                                 </div>
-                            </td>                       
-                            </tr>
-                          <tr>
-                              <td>
-                                <div className="d-flex align-items-center justify-content-center">
-                                    <span className="exp_indicator me-3"></span>
-                                    <b className="c_red">$100</b>
-                                </div>
                               </td>
-                              <td>25-6-2023</td>  
-                              <td>Pooja Stationary</td>
-                              <td>Personal</td>
-                              <td>Purchased Some Books</td>
-                              <td>no report</td>
-                              <td>Expenses, books , stationary</td>
-                              <td>
-                                <div className="d-flex">
-                                    <Link className="btn icon_btn bg_blue mx-1" href="/add-expenses">
-                                        <FontAwesomeIcon icon={faPencil} />
-                                    </Link>
-                                    <Link className="btn icon_btn  mx-1" href="#">
-                                        <FontAwesomeIcon icon={faTrashAlt} />
-                                    </Link>
-                                </div>
-                            </td>                         
+                            
                           </tr>
-                          <tr>
-                              <td>
-                                <div className="d-flex align-items-center justify-content-center">
-                                    <span className="exp_indicator me-3"></span>
-                                    <b className="c_red">$300</b>
-                                </div>
-                              </td>
-                              <td>25-6-2023</td>  
-                              <td>Pooja Stationary</td>
-                              <td>Personal</td>
-                              <td>Purchased Some Books</td>
-                              <td>no report</td>
-                              <td>Expenses, books , stationary</td>
-                              <td>
-                                <div className="d-flex">
-                                    <Link className="btn icon_btn bg_blue mx-1" href="/add-expenses">
-                                        <FontAwesomeIcon icon={faPencil} />
-                                    </Link>
-                                    <Link className="btn icon_btn  mx-1" href="#">
-                                        <FontAwesomeIcon icon={faTrashAlt} />
-                                    </Link>
-                                </div>
-                            </td>                           
-                          </tr>
-                          <tr>
-                              <td>
-                                <div className="d-flex align-items-center justify-content-center">
-                                    <span className="rev_indicator me-3"></span>
-                                    <b className="c_green">$100</b>
-                                </div>
-                              </td>
-                              <td>25-6-2023</td>  
-                              <td>Pooja Stationary</td>
-                              <td>Personal</td>
-                              <td>Purchased Some Books</td>
-                              <td>no report</td>
-                              <td>Expenses, books , stationary</td>
-                              <td>
-                                <div className="d-flex">
-                                    <Link className="btn icon_btn bg_blue mx-1" href="#">
-                                        <FontAwesomeIcon icon={faPencil} />
-                                    </Link>
-                                    <Link className="btn icon_btn  mx-1" href="#">
-                                        <FontAwesomeIcon icon={faTrashAlt} />
-                                    </Link>
-                                </div>
-                            </td>                          
-                          </tr>
-                          <tr>
-                            <td>
-                                <div className="d-flex align-items-center justify-content-center">
-                                    <span className="exp_indicator me-3"></span>
-                                    <b className="c_red">$200</b>
-                                </div>
-                            </td>
-                              <td>25-6-2023</td>  
-                              <td>Pooja Stationary</td>
-                              <td>Personal</td>
-                              <td>Purchased Some Books</td>
-                              <td>no report</td>
-                              <td>Expenses, books , stationary</td>
-                              <td>
-                                <div className="d-flex">
-                                    <Link className="btn icon_btn bg_blue mx-1" href="/add-expenses">
-                                        <FontAwesomeIcon icon={faPencil} />
-                                    </Link>
-                                    <Link className="btn icon_btn  mx-1" href="#">
-                                        <FontAwesomeIcon icon={faTrashAlt} />
-                                    </Link>
-                                </div>
-                            </td>                         
-                          </tr>
-                          <tr>
-                            <td>
-                                <div className="d-flex align-items-center justify-content-center">
-                                    <span className="exp_indicator me-3"></span>
-                                    <b className="c_red">$280</b>
-                                </div>
-                              </td>
-                              <td>25-6-2023</td>  
-                              <td>Pooja Stationary</td>
-                              <td>Personal</td>
-                              <td>Purchased Some Books</td>
-                              <td>no report</td>
-                              <td>Expenses, books , stationary</td>
-                              <td>
-                                <div className="d-flex">
-                                    <Link className="btn icon_btn bg_blue mx-1" href="/add-expenses">
-                                        <FontAwesomeIcon icon={faPencil} />
-                                    </Link>
-                                    <Link className="btn icon_btn  mx-1" href="#">
-                                        <FontAwesomeIcon icon={faTrashAlt} />
-                                    </Link>
-                                </div>
-                            </td>                         
-                          </tr>
-                          <tr>
-                            <td>
-                                <div className="d-flex align-items-center justify-content-center">
-                                    <span className="exp_indicator me-3"></span>
-                                    <b className="c_red">$250</b>
-                                </div>
-                              </td>
-                              <td>25-6-2023</td>  
-                              <td>Pooja Stationary</td>
-                              <td>Personal</td>
-                              <td>Purchased Some Books</td>
-                              <td>no report</td>
-                              <td>Expenses, books , stationary</td>
-                              <td>
-                                <div className="d-flex">
-                                    <Link className="btn icon_btn bg_blue mx-1" href="/add-expenses">
-                                        <FontAwesomeIcon icon={faPencil} />
-                                    </Link>
-                                    <Link className="btn icon_btn  mx-1" href="#">
-                                        <FontAwesomeIcon icon={faTrashAlt} />
-                                    </Link>
-                                </div>
-                            </td>                           
-                          </tr>
-                          <tr>
-                            <td>
-                                <div className="d-flex align-items-center justify-content-center">
-                                    <span className="rev_indicator me-3"></span>
-                                    <b className="c_green">$100</b>
-                                </div>
-                              </td>
-                              <td>25-6-2023</td>  
-                              <td>Pooja Stationary</td>
-                              <td>Personal</td>
-                              <td>Purchased Some Books</td>
-                              <td>no report</td>
-                              <td>Expenses, books , stationary</td>
-                              <td>
-                                <div className="d-flex">
-                                    <Link className="btn icon_btn bg_blue mx-1" href="#">
-                                        <FontAwesomeIcon icon={faPencil} />
-                                    </Link>
-                                    <Link className="btn icon_btn  mx-1" href="#">
-                                        <FontAwesomeIcon icon={faTrashAlt} />
-                                    </Link>
-                                </div>
-                            </td>                          
-                          </tr>
-                          <tr>
-                            <td>
-                                <div className="d-flex align-items-center justify-content-center">
-                                    <span className="exp_indicator me-3"></span>
-                                    <b className="c_red">$500</b>
-                                </div>
-                              </td>
-                              <td>25-6-2023</td>  
-                              <td>Pooja Stationary</td>
-                              <td>Personal</td>
-                              <td>Purchased Some Books</td>
-                              <td>no report</td>
-                              <td>Expenses, books , stationary</td>
-                              <td>
-                                <div className="d-flex">
-                                    <Link className="btn icon_btn bg_blue mx-1" href="/add-expenses">
-                                        <FontAwesomeIcon icon={faPencil} />
-                                    </Link>
-                                    <Link className="btn icon_btn  mx-1" href="#">
-                                        <FontAwesomeIcon icon={faTrashAlt} />
-                                    </Link>
-                                </div>
-                            </td>                         
-                          </tr>
+                        )): null} 
+
                         </tbody>
                     </table>
               </div>

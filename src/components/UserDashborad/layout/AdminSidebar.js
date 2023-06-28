@@ -6,11 +6,21 @@ import Link from 'next/link';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome,faCar,faMoneyCheckDollar,faChartPie,faFileExport, faGear,faGauge, faRightFromBracket,faCarSide,faMapLocationDot,faMoneyBillTransfer,faPlus,faDollarSign, faLocationDot, faCircleInfo, faChevronRight, faUser, faUsers, faSquareCaretUp } from '@fortawesome/free-solid-svg-icons';
-
+import { useRouter } from 'next/router';
 
 import { useSession } from "next-auth/react"
 export default function AdminSidebar(){
+  const router = useRouter();
   const { data: session } = useSession();
+  const [pathname, setPathname] = useState('');
+  useEffect(() => {
+    console.log(router.pathname.substring(1));
+    setPathname(router.pathname.substring(1));
+    // Cleanup function
+    return () => {
+      // Perform any cleanup if needed
+    };
+  }, [router.pathname]);  
 return(
     <>
 <div className="sidebar_menu">
@@ -63,7 +73,7 @@ return(
                     </div>
                   <ul className='menu_list'>
                     <li>
-                      <Link className='active' href='/dashboard'>
+                      <Link className={ pathname == 'dashboard' ? 'active' : ''} href='/dashboard'>
                         <span className='m_i_icon'> 
                           <FontAwesomeIcon icon={faHome} />
                         </span>
@@ -72,7 +82,9 @@ return(
                     </li>
                     <li>
                         <NavDropdown
-                          id="nav-dropdown-dark-example"
+                        
+                          id="nav-dropdown-dark-your-vehicles"
+                          //show={pathname == 'add-vehicle' || pathname == 'all-vehicle' ? 'true' :'false'}
                           title={
                             <>
                               <span className='m_i_icon'> 
@@ -87,14 +99,15 @@ return(
                           menuVariant="dark"
                           autoClose={false}
                         >
-                          <Link data-rr-ui-dropdown-item href="/add-vehicle" className='dropdown-item'>Add New Vehicle</Link>
-                          <Link data-rr-ui-dropdown-item href="/all-vehicle" className='dropdown-item'>Vehicles List</Link>
+                          <Link data-rr-ui-dropdown-item href="/add-vehicle" className={ pathname == 'add-vehicle' ? 'dropdown-item active' : 'dropdown-item'}>Add New Vehicle</Link>
+                          <Link data-rr-ui-dropdown-item href="/all-vehicle" className={ pathname == 'all-vehicle' ? 'dropdown-item active' : 'dropdown-item'}>Vehicles List</Link>
                         </NavDropdown>
                     </li>
 
                     <li>
                         <NavDropdown
-                          id="nav-dropdown-dark-example"
+                          id="nav-dropdown-dark-your-trips"
+                          //show={pathname == 'add-trip' || pathname == 'all-trips' ? 'true' :'false'}
                           title={
                             <>
                               <span className='m_i_icon'> 
@@ -108,14 +121,15 @@ return(
                           }
                           menuVariant="dark"
                           autoClose={false}
+                          
                         >
-                        <Link data-rr-ui-dropdown-item href="/add-trip" className='dropdown-item'>Add New Trip</Link>
-                        <Link data-rr-ui-dropdown-item href="/all-trips" className='dropdown-item'>Trips List</Link>
+                        <Link data-rr-ui-dropdown-item href="/add-trip" className={ pathname == 'add-trip' ? 'dropdown-item active' : 'dropdown-item'}>Add New Trip</Link>
+                        <Link data-rr-ui-dropdown-item href="/all-trips" className={ pathname == 'all-trips' ? 'dropdown-item active' : 'dropdown-item'}>Trips List</Link>
                         </NavDropdown>
                     </li>
 
                     <li>
-                      <Link href='/your-transactions'>
+                      <Link className={ pathname == 'your-transactions' ? 'active' : ''} href='/your-transactions'>
                         <span className='m_i_icon'> 
                           <FontAwesomeIcon icon={faDollarSign} />
                         </span>
@@ -126,7 +140,7 @@ return(
                       </Link>
                     </li>
                     <li>
-                      <Link href='/reports'>
+                      <Link className={ pathname == 'reports' ? 'active' : ''} href='/reports'>
                         <span className='m_i_icon'> 
                           <FontAwesomeIcon icon={faChartPie} />
                         </span>
@@ -137,7 +151,7 @@ return(
                       </Link>
                     </li>
                     <li>
-                      <Link href='/maps'>
+                      <Link className={ pathname == 'maps' ? 'active' : ''} href='/maps'>
                         <span className='m_i_icon'> 
                           <FontAwesomeIcon icon={faLocationDot} />
                         </span>
@@ -148,7 +162,7 @@ return(
                       </Link>
                     </li>
                     <li>
-                      <Link href='/information'>
+                      <Link className={ pathname == 'information' ? 'active' : ''} href='/information'>
                         <span className='m_i_icon'> 
                           <FontAwesomeIcon icon={faCircleInfo} />
                         </span>

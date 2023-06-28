@@ -30,6 +30,7 @@ export const userService = {
     editprofile,
     Useraddvehicle,
     Useraddtrip,
+    Useraddexpense,
 };
 async function login(email, password) {
     
@@ -164,4 +165,7 @@ async function Useraddvehicle(info){
 
 async function Useraddtrip(info){
     return await fetchWrapper.post(`${baseUrl}/add-trip`, info);
+}
+async function Useraddexpense(info){
+    return await fetchWrapper.post(`${baseUrl}/add-expense`, info);
 }

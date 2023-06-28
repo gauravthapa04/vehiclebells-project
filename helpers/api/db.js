@@ -13,6 +13,7 @@ export const db = {
     TeamTracking : teamTrackingModel(),
     UserVehicleInfo: userVehicleModel(),
     UserTripInfo: userTripModel(),
+    UserExpenseInfo: userExpenseModel(),
 };
 
 // mongoose models with schema definitions
@@ -158,5 +159,32 @@ function userTripModel(){
     });
 
     return mongoose.models.UserTripInfo || mongoose.model('UserTripInfo', userTripsechema);
+
+}
+
+function userExpenseModel(){
+
+    const userExpensesechema = new Schema({
+        userId: { type: String, required: false },
+        expenseAmount: { type: String, required: false },
+        expenseDate: { type: String, required: false },
+        merchantName: { type:   String, required: false },
+        expenseType: { type: String, required: false },
+        Notes: { type: String, required: false }
+    }, {
+        
+        // add createdAt and updatedAt timestamps
+        timestamps: true
+    });
+
+    userExpensesechema.set('toJSON', {
+        virtuals: true,
+        versionKey: false,
+        transform: function (doc, ret) {
+            delete ret._id;
+        }
+    });
+
+    return mongoose.models.UserExpenseInfo || mongoose.model('UserExpenseInfo', userExpensesechema);
 
 }
