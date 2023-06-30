@@ -38,7 +38,7 @@ class Footer extends React.Component {
             <Row>
               <Col lg={4}>
                 <div className="footer_block wow fadeInUp">
-                        <Link href="#" className="footer_logo">
+                        <Link href="/" className="footer_logo">
                             <Image
                                 src={whitelogo}
                                 alt="vehicle bells"
@@ -53,12 +53,12 @@ class Footer extends React.Component {
                     <div className="footer_block wow fadeInUp">
                         <h4>Company</h4>
                         <ul>
-                            <li><a href="">About Us</a></li>
+                            <li><a href="/about">About Us</a></li>
                             <li><a href="">Help Center</a></li>
                             <li><a href="">Resource Hub</a></li>
                             <li><a href="">Jobs</a></li>
-                            <li><a href="">Terms of Service</a></li>
-                            <li><a href="">Privacy Policy</a></li>
+                            <li><a href="/terms-of-service">Terms of Service</a></li>
+                            <li><a href="/privacy-policy">Privacy Policy</a></li>
                         </ul>
                     </div>                    
                   </Col>

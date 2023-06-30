@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 class HomeWelcome extends React.Component {
     constructor(props) {
       super(props);
@@ -25,9 +26,9 @@ class HomeWelcome extends React.Component {
                     tracking and hello to streamlined, efficient mileage
                     management with our service.
                   </p>
-                  <a href="register.html" className="btn">
+                  <Link href="/register" className="btn">
                     Get started with FREE NOW
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="col-lg-5 col-md-12">

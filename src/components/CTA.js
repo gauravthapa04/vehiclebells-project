@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/dist/client/link';
 class CTA extends React.Component {
     constructor(props) {
       super(props);
@@ -16,7 +17,7 @@ class CTA extends React.Component {
                     <h3 className="wow fadeInUp">Make your life easier with Vehicle Bells!</h3>
                 </div>
                 <div className="col-md-4 text-end">
-                    <a href="#" className="btn btn_white wow fadeInUp">Sign up now for free</a>
+                    <Link href="/register" className="btn btn_white wow fadeInUp">Sign up now for free</Link>
                 </div>
             </div>
         </div>

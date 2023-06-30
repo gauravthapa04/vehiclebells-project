@@ -1288,3 +1288,83 @@ span.input-group-text {
     margin: 30px 0 30px;
 }
 }
+.div-40tb-60lr {
+    z-index: 1;
+    width: 100%;
+    max-width: none;
+    text-align: left;
+    background-color: transparent;
+    border: 1px solid transparent;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 40px 60px;
+    display: flex;
+    position: static;
+}
+
+/* About US PAge */
+
+.hero_2.hero-height {
+    padding-bottom: 20px;
+}
+.hero_2 {
+    background-image: linear-gradient(rgba(255,255,255,0) 71%,#fff),url(https://assets.website-files.com/6019e7e5c68507850121a341/638f97203417b712b7eb3218_Group%201217.svg);
+    background-position: 0 0,100% 100%;
+    background-repeat: repeat,no-repeat;
+    background-size: auto,cover;
+    padding-top: 100px;
+    padding-bottom: 60px;
+    position: relative;
+}
+.hero_content.hero-height {
+    padding: 2rem 5rem;
+}
+.hero_content {
+    max-width: 750px;
+    background-color: #fff;
+    border-radius: 7px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2.813rem 5.625rem;
+    box-shadow: 0 1px 8px 1px rgba(111,119,148,.23);
+}
+.div-block-2 {
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+    grid-template-rows: auto auto;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-columns: 1fr;
+    display: block;
+}
+.hero-heading.about-us-hero-title.text-color-black.custom-margin.hero-height {
+    margin-bottom: 24px;
+    line-height: 52px;
+    font-size: 44px;
+    font-weight: normal;
+}
+.hero-heading.about-us-hero-title.text-color-black.custom-margin {
+    max-width: 500px;
+    margin-bottom: 48px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.hero-heading.about-us-hero-title.text-color-black {
+    color: #333;
+    text-align: center;
+    margin-top: 0;
+}
+.bodytext-16px.text-color-black {
+    color: #000;
+}
+.bodytext-16px {
+    color: #333;
+    text-align: center;
+    padding-left: 0;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+}
