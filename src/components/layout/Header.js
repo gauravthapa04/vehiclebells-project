@@ -48,11 +48,7 @@ export default function Header(){
                     <Link href='/about'>About Us</Link>
                 </li>
                 <li>
-                <NavDropdown title="Product">
-                <NavDropdown.Item><Link href='/'>Product one</Link></NavDropdown.Item>
-                <NavDropdown.Item><Link href='/'>Product two</Link></NavDropdown.Item>
-                <NavDropdown.Item><Link href='/'>Product three</Link></NavDropdown.Item>
-                </NavDropdown>
+                    <Link href='/contact'>Contact Us</Link>
                 </li>
                 <li>
                 <Link href='/pricing'>Pricing</Link>
