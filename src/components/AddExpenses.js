@@ -33,7 +33,12 @@ export default function AddExpenses() {
    const { register, handleSubmit, formState } = useForm(formOptions);
    const { errors } = formState;
 
+    const handleFileChange = (event) => {
+        setSelectedFile(event.target.files[0]);
+    };   
+
    async function onSubmit(req) {
+    //alertService.clear();
     const mergeData = {userId: session.user.id, ...req}
 
      return userService.Useraddexpense(mergeData)
@@ -130,7 +135,7 @@ export default function AddExpenses() {
                     <Col lg={5}>
                        <div className="form-group">
                          <label className="fileUpload">
-                            <input type="file" name="file-upload" className="file_field" />
+                            <input type="file" name="file-upload" className="file_field" onChange={handleFileChange} />
                             <span>
                                 <FontAwesomeIcon icon={faFileAlt} />
                                 Upload Report</span>

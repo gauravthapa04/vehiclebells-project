@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Row, Col } from "react-bootstrap";
 import Link from 'next/link';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCar,faChartPie,faCarSide,faMapLocationDot,faMoneyBillTransfer,faPlus,faDollarSign, faLocationDot, faCircleInfo, faChevronRight, faUser, faUsers, faSquareCaretUp } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faPencil, faCar,faChartPie,faCarSide,faMapLocationDot,faMoneyBillTransfer,faPlus,faDollarSign, faLocationDot, faCircleInfo, faChevronRight, faUser, faUsers, faSquareCaretUp } from '@fortawesome/free-solid-svg-icons';
 import { useSession } from "next-auth/react"
 import { userService } from 'services';
 import AdminLayout from './layout/AdminLayout';
@@ -12,11 +12,47 @@ export default function UserDashboard() {
 
   //const [user, setUser] = useState(null);
   const { data: session } = useSession();
-  useEffect(() => {
+  const [trips, setTrips] = useState(null);
+  const [count, setCount] = useState(null);
 
+  const [transaction, setTransaction] = useState(null);
+  const [transactioncount, setTransactioncount] = useState(null);
+  useEffect(() => {
+    if(session != 'undefined' || session != null)
+    {
+      const userId = session.user.id;
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`/api/AllTrips?id=${userId}`);
+          const data = await response.json();
+          setTrips(data);
+          setCount(data.length)
+          console.log(data.length)
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+      fetchData();
+    }
   }, []);
 
-  console.log(session)
+  useEffect(() => {
+    if(session != 'undefined' || session != null)
+    {
+      const userId = session.user.id;
+      const fetchTransaction = async () => {
+        try {
+          const response = await fetch(`/api/YourTransaction?id=${userId}`);
+          const data1 = await response.json();
+          setTransaction(data1);
+          setTransactioncount(data1.length)
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+      fetchTransaction();
+    }
+  }, []);
 
     return (
     <>
@@ -135,7 +171,38 @@ export default function UserDashboard() {
                         <h4>Your Trips</h4>
                       </div>
                       <div className='no_data_block'>
+                      {count > 0 ? (
+                      <table className="dataTable table table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th>Trip Start</th>
+                            <th>Trip End</th>
+                            <th>Trip Start Address</th>
+                            <th>Trip End Address</th>
+                            <th>Vehicle Type</th>
+                            <th>Trip Type</th>
+                            <th>RoundTrip</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        { trips
+                          ? trips.map((item) => (
+                          <tr key={item.id}>
+                              <td>{item.tripStartDate}</td>  
+                              <td>{item.tripEndDate}</td>
+                              <td>{item.startAddress}</td>
+                              <td>{item.endAddress}</td>
+                              <td>{item.chooseVehicle}</td>
+                              <td>{item.tripType}</td>
+                              <td>{item.RoundTrip}</td>
+                            
+                          </tr>
+                        )): null}       
+                        </tbody>                                                
+                      </table>
+                      ):(
                         <span>There is no trip yet.</span>
+                      )}
                         <Link href='/add-trip' className='btn small_btn mt-3'><FontAwesomeIcon className='f_icon' icon={faPlus} />Add Trip</Link>
                       </div>
                     </div>
@@ -146,8 +213,55 @@ export default function UserDashboard() {
                         <h4>Your Transactions</h4>
                       </div>
                       <div className='no_data_block'>
+                      {transactioncount > 0 ? (
+                        <div className="table-responsive">
+                            <table className="dataTable table table-hover table-striped">
+                              <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Date</th>
+                                    <th>Merchant Name</th>
+                                    <th>Transaction type</th>
+                                    <th>Report</th>
+                                    <th>Notes</th>
+                                    <th>Actions</th>
+                                </tr>
+                              </thead>   
+                              { transaction
+                          ? transaction.map((item) => (
+                          <tr key={item.id}>
+                              <td>
+                              <div className="d-flex align-items-center justify-content-center">
+                                    <span className="rev_indicator me-3"></span>
+                                    <b className="c_green">{item.expenseAmount}</b>
+                                </div>
+                                
+                              </td>  
+                              <td>{item.expenseDate}</td>
+                              <td>{item.merchantName}</td>
+                              <td>{item.expenseType}</td>
+                              <td>no report</td>
+                              <td>{item.Notes}</td>
+                              <td>
+                              <div className="d-flex">
+                                    <Link className="btn icon_btn bg_blue mx-1" href="#">
+                                        <FontAwesomeIcon icon={faPencil} />
+                                    </Link>
+                                    <Link className="btn icon_btn  mx-1" href="#">
+                                        <FontAwesomeIcon icon={faTrashAlt} />
+                                    </Link>
+                                </div>
+                              </td>
+                            
+                          </tr>
+                        )): null}                                                         
+                            </table>
+                        </div>
+                      ):(
                         <span>There is no Transaction yet.</span>
-                        <Link href='/your-transactions' className='btn small_btn mt-3'><FontAwesomeIcon className='f_icon' icon={faPlus} />Add Transaction</Link>
+                      )}
+                        
+                        <Link href='/add-expenses' className='btn small_btn mt-3'><FontAwesomeIcon className='f_icon' icon={faPlus} />Add Transaction</Link>
                       </div>
                     </div>
                   </Col>

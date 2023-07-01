@@ -21,12 +21,18 @@ import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { userService, alertService } from 'services';
 import { Alert } from './Alert';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker, DirectionsRenderer } from '@react-google-maps/api';
 
 import Autocomplete, { geocodeByAddress, getLatLng } from "react-google-autocomplete";
 
+const center = {
+  lat: 37.7749, // Replace with your desired latitude
+  lng: -122.4194, // Replace with your desired longitude
+};
 
 export default function UserAddTrip() {
+
+
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -36,6 +42,8 @@ export default function UserAddTrip() {
   const [endTrip, setEndTrip] = useState();
   const { data: session } = useSession();
   const [data, setData] = useState(null);
+
+
   useEffect(() => {
     const fetchData = async () => {
       const userId = session.user.id;
@@ -91,17 +99,6 @@ export default function UserAddTrip() {
   })
   .catch(alertService.error);     
  }
-
-
- const containerStyle = {
-  width: '100%',
-  height: '400px',
-};
-
-const center = {
-  lat: 37.7749, // Replace with your desired latitude
-  lng: -122.4194, // Replace with your desired longitude
-};
 
   return (
     <>
@@ -209,6 +206,7 @@ const center = {
                               fields={['formatted_address', 'geometry']}
                               onPlaceSelected={(place) => {
                                 console.log(place)
+                                
                                 setStartTrip(place.formatted_address);
                                 setSelectedPlace(place.geometry.location)
                               }}
@@ -235,6 +233,7 @@ const center = {
                               apiKey='AIzaSyCmq_w4Yo_NR8ZzoUOAB3G7kaEexaUTEXE'
                               onPlaceSelected={(place) => {
                                 setEndTrip(place.formatted_address);
+                               
                               }}
                             />                          
                           <input
@@ -347,13 +346,13 @@ const center = {
                   <Col lg={6}>
                     <div className="trip_map">
     <LoadScript googleMapsApiKey="AIzaSyCmq_w4Yo_NR8ZzoUOAB3G7kaEexaUTEXE">
-      <GoogleMap
-      mapContainerStyle={containerStyle}
-      center={selectedPlace}
-    >
-      {selectedPlace && <Marker position={selectedPlace} />}
-    </GoogleMap>
-
+        <GoogleMap
+        mapContainerStyle={{ width: '100%', height: '100%' }}
+        zoom={15}
+        center={center}
+      >
+      <Marker position={center} />
+      </GoogleMap>
     </LoadScript>
                       
                       {/* <iframe

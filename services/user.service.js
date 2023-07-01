@@ -81,9 +81,9 @@ async function forgotpassword(email) {
 }
 
 async function editprofile(data){
-    console.log(data);
-    let users = JSON.parse(localStorage.getItem('user')) || [];
-    let id = users.id;
+    //console.log(data);
+    //let users = JSON.parse(localStorage.getItem('user')) || [];
+    let id = data.id;
     let firstName = data.firstName;
     let lastName = data.lastName;
     let companyName = data.companyName;

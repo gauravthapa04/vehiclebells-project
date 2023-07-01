@@ -13,17 +13,16 @@ import { userService } from 'services';
 
 
 export default function AdminHeader(){
-    const [user, setUser] = useState(null);
     const { data: session } = useSession(); 
+    const [profileimage, setProfileImage] = useState(null);
     useEffect(() => {
-        const subscription = userService.user.subscribe(x => setUser(x));
-        return () => subscription.unsubscribe();
+      setProfileImage(session.user.profileImage)
       }, []);   
 
       const ToggleClass = () => {
         document.body.classList.toggle('menu_collapsed');
       };
-
+      console.log(session);
     return(
         <>
 <header className='d_header'>
@@ -58,11 +57,23 @@ export default function AdminHeader(){
                           <Dropdown className="user_dropdown">
                             <Dropdown.Toggle  id="dropdown-basic">
                             <span className='user_thumb'>
-                              <Image
+                            { session && session.user.profileImage ? (
+                                <Image
+                                src={'/assets/user-profile/'+profileimage}
+                                className=""
+                                alt="user"
+                                width={200}
+                                height={100}
+                              />                             
+                              ):(
+                                <Image
                                 src={user_thumb}
                                 className=""
                                 alt="user"
+                                width={200}
+                                height={100}
                                 /> 
+                              )}
                             </span>
                               {session ? session.name : user ? user.firstName+' '+user.lastName : null}
                             </Dropdown.Toggle>

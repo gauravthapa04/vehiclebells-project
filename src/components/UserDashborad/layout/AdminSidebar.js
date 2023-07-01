@@ -13,6 +13,7 @@ export default function AdminSidebar(){
   const router = useRouter();
   const { data: session } = useSession();
   const [pathname, setPathname] = useState('');
+  const [profileimage, setProfileImage] = useState(null);
   useEffect(() => {
     console.log(router.pathname.substring(1));
     setPathname(router.pathname.substring(1));
@@ -21,6 +22,12 @@ export default function AdminSidebar(){
       // Perform any cleanup if needed
     };
   }, [router.pathname]);  
+
+  useEffect(() => {
+    setProfileImage(session.user.profileImage)
+    }, []); 
+
+
 return(
     <>
 <div className="sidebar_menu">
@@ -40,7 +47,7 @@ return(
                         (<>
                         
                         <Image
-                          src={user_thumb}
+                          src={'/assets/user-profile/'+profileimage}
                           className=""
                           alt="user"
                           width={300}

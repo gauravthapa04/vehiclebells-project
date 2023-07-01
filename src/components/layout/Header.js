@@ -45,11 +45,7 @@ export default function Header(){
                     <Link href='/'>Home</Link>
                 </li>
                 <li>
-                <NavDropdown title="Solutions">
-                <NavDropdown.Item><Link href='/'>Solutions one</Link></NavDropdown.Item>
-                <NavDropdown.Item><Link href='/'>Solutions two</Link></NavDropdown.Item>
-                <NavDropdown.Item><Link href='/'>Solutions three</Link></NavDropdown.Item>
-                </NavDropdown>
+                    <Link href='/about'>About Us</Link>
                 </li>
                 <li>
                 <NavDropdown title="Product">
@@ -75,6 +71,7 @@ export default function Header(){
                 </>
                     ) :(
                     <>
+                        <li><Link href='/dashboard'>Dashboard</Link></li>
                          <li><a className="register_btn btn" onClick={() => signOut()}>Logout</a></li>
                     </>
                 )}

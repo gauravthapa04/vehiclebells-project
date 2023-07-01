@@ -23,8 +23,6 @@ export default function EditProfile(){
       }, []);
 
        console.log(session)
-
-
         const handleFileChange = (event) => {
             setSelectedFile(event.target.files[0]);
         };    
@@ -34,7 +32,8 @@ export default function EditProfile(){
             .required('First Name is required'),
         lastName: Yup.string()
             .required('Last Name is required'),
-        companyName: Yup.string()
+        companyName: Yup.string(),
+        id: Yup.string()
     });
 
     const formOptions = { resolver: yupResolver(validationSchema) };
@@ -44,6 +43,8 @@ export default function EditProfile(){
 
    async function onSubmit(data) {
         alertService.clear();
+
+        console.log(data)
         try{
             const formData = new FormData();
             formData.append('file', selectedFile);
@@ -113,6 +114,12 @@ export default function EditProfile(){
                            >
                              <Alert />
                              <div className="mb-4">
+                              <input type='hidden'
+                              defaultValue={session.user.id} 
+                              {...register('id')} 
+                              name="id"
+                              />
+                               
                                <input
                                  type="text"
                                  name="firstName"
