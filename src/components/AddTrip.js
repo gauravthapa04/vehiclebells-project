@@ -308,9 +308,9 @@ export default function UserAddTrip() {
                       <div className="form-group">
                         <label>Tags</label>
                         <div className="input-group">
-                          <span className="input-group-text">
+                          {/* <span className="input-group-text">
                             <FontAwesomeIcon icon={faTag} />
-                          </span>
+                          </span> */}
                           <input
                             type="text"
                             className="form-control"

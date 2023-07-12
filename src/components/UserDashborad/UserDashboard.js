@@ -94,7 +94,7 @@ export default function UserDashboard() {
                           <Link href='/add-expenses'><FontAwesomeIcon icon={faPlus} /></Link>
                         </div>
                         <div className='d_card_content'>
-                          <div className='card_value'>$ 5000</div>
+                          <div className='card_value'>INR 5000</div>
                           <div className='card_icon'><FontAwesomeIcon icon={faDollarSign} /></div>
                         </div>
                         <div className='d_card_footer d-flex'>
@@ -113,7 +113,7 @@ export default function UserDashboard() {
                           <Link href='#'><FontAwesomeIcon icon={faPlus} /></Link>
                         </div>
                         <div className='d_card_content'>
-                          <div className='card_value'>$ 1000</div>
+                          <div className='card_value'>INR 1000</div>
                           <div className='card_icon'><FontAwesomeIcon icon={faChartPie} /></div>
                         </div>
                         <div className='d_card_footer d-flex'>

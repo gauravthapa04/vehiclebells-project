@@ -112,12 +112,7 @@ export default function AddExpenses() {
                                 </span>
                                 <select className="form-control" name="expenseType" {...register('expenseType')}>
                                     <option value="Personal">Personal</option>
-                                    <option value="Uber">Uber</option>
-                                    <option value="Other">Other</option>
-                                    <option value="Charity">Charity</option>
-                                    <option value="Medical">Medical</option>
-                                    <option value="Moving">Moving</option>
-                                    <option value="Commute">Commute</option>
+                                    <option value="Business">Business</option>
                                 </select>
                             </div>
                         </div>
